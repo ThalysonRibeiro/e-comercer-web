@@ -57,7 +57,7 @@ export function LoginEmail() {
     <div className="border border-gray-400 rounded-lg p-18 space-y-4">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex max-w-125 w-full gap-6 flex-col items-center justify-center text-center"
+        className="flex max-w-125 w-full gap-3 flex-col items-center justify-center text-center"
       >
         <h1 className="text-2xl font-bold mb-8">Faça login para continuar</h1>
 

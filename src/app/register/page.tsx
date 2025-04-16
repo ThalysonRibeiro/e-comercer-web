@@ -25,7 +25,7 @@ export default async function Register() {
     <div className="flex w-full min-h-screen flex-col items-center justify-center p-2">
       <main className="max-w-125 md:max-w-230 w-full flex flex-col items-center justify-center gap-6 px-10 py-10 text-center border border-gray-400 rounded-lg">
         <h1 className="text-2xl font-bold">Faça o cadastro</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-6 my-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-3 my-6">
           <Input type="text" placeholder="Nome completo" />
           <Input type="text" placeholder="CPF ou CNPJ" />
           <Input type="text" placeholder="Genero" />
