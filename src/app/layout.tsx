@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto, Montserrat } from "next/font/google";
 import "./globals.css";
+import { ModalCartItemsAdded } from "@/components/modalCartItemsAdded";
+import AuthProvider from "@/providers/auth";
+import ProviderContext from "@/context/Context";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-montserrat'
+});;
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const roboto = Roboto({
+  variable: "--font-roboto",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -23,9 +27,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+    <html lang="en" className={`${montserrat.variable} ${roboto.variable}`}>
+      <body
+        className="bg-gray-700 text-gray-200 "
+      >
+        <AuthProvider>
+          <ProviderContext>
+            <ModalCartItemsAdded />
+            {children}
+          </ProviderContext>
+        </AuthProvider>
       </body>
     </html>
   );
