@@ -10,6 +10,7 @@ import { ProductsProps } from "@/types/product";
 import { useContext } from "react";
 import { Context, ContextType } from "@/context/Context";
 import Link from "next/link";
+import { formatCurrency } from "@/utils/formatCurrency";
 
 export interface LimitedTimeOfferProps {
   products: ProductsProps[];
@@ -63,8 +64,8 @@ export function LimitedTimeOffer({ products }: LimitedTimeOfferProps) {
                 <p className="text-sm line-clamp-4">{item.description}</p>
 
                 <div className="flex gap-6  my-1">
-                  <span className="text-3xl text-green font-semibold">R$ {item.price}</span>
-                  <span className="text-xl line-through text-gray-300">R$ {item.old_price}</span>
+                  <span className="text-3xl text-green font-semibold">{formatCurrency((item.price / 100))}</span>
+                  <span className="text-xl line-through text-gray-300">{formatCurrency((item.old_price / 100))}</span>
                 </div>
 
                 <div className="mb-2">

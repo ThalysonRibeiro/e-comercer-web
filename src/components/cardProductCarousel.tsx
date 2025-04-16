@@ -30,7 +30,7 @@ export function CardProductCarousel({ products }: CardProductsProps) {
           delay: 2500,
           disableOnInteraction: false,
         }}
-        className='w-7xl'
+        className='w-[1250]'
       >
         {products.map(product => (
           <SwiperSlide key={product.id} className="relative overflow-hidden flex flex-col items-center justify-between border border-gray-400 w-[300px] h-[500px] bg-gray-600 rounded-lg p-4">
@@ -42,7 +42,7 @@ export function CardProductCarousel({ products }: CardProductsProps) {
                 <StarRating rating={product.rating} />
                 <p className="text-xs ml-1">({product.products_sold})</p>
               </Flex>
-              <div className='relative w-65 h-65'>
+              <div className='relative w-65 h-65 border'>
                 <Image
                   src={product.images[0].image}
                   alt={product.title}

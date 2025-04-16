@@ -3,7 +3,7 @@ import Image from "next/image";
 import logo from "@/assets/logo-pg.png";
 import { LayoutGrid, ChevronRight, ChevronDown, Heart, User, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
-import { InputSearch } from "../inputSearch";
+import { InputSearch } from "./inputSearch";
 import Link from "next/link";
 import { Flex } from "../ui/flex";
 import DropdownMenu, { MenuProps } from "./dropdown";
@@ -16,7 +16,7 @@ export function Header({ category }: MenuProps) {
   const { userData, openCloseModal, cartAmount } = useContext(Context) as ContextType;
 
   return (
-    <header className="w-full min-h-40 flex items-center justify-center border-b border-b-gray-500">
+    <header className="w-full min-h-40 px-6 flex items-center justify-center border-b border-b-gray-500">
       <div className="max-w-7xl w-full">
         <div className="flex gap-3 justify-between">
           <Link href="/">

@@ -47,9 +47,9 @@ function ProviderContext({ children }: ProviderProps) {
       try {
         setLoading(true);
         const response = await fetch('/api/session');
+
         const data: UserProps = await response.json();
         setUserData(data.user);
-
 
         if (!data.user) {
           setUserData(null);

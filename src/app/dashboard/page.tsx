@@ -6,6 +6,7 @@ import { CreateProduct } from "@/components/test-crfeate-products";
 export default async function Dashboard() {
   const session = await getServerAuthSession();
 
+
   if (!session) {
     redirect("/login");
   }

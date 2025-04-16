@@ -34,11 +34,11 @@ export default async function Home() {
         </Flex>
       </section>
 
-      {/* <section className="w-full flex flex-col gap-6 items-center justify-center mt-6">
+      <section className="w-full flex flex-col gap-6  items-center justify-center mt-6">
+        {/* <CardProductCarousel products={response.data} />
         <CardProductCarousel products={response.data} />
-        <CardProductCarousel products={response.data} />
-        <CardProductCarousel products={response.data} />
-      </section> */}
+        <CardProductCarousel products={response.data} /> */}
+      </section>
 
     </div>
   );

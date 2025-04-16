@@ -90,20 +90,7 @@ export const authOptions: NextAuthOptions = {
           // Garantir que o retorno seja compatível com o tipo User do NextAuth
           return {
             userData,
-            id: userData.id,
-            name: userData.name,
-            email: userData.email,
-            image: userData.avatar,
-            status: userData.status,
-            type: userData.type,
-
-            cpf_or_cnpj: userData.cpf_or_cnpj,
-            genero: userData.genero,
-            dateOfBirth: userData.dateOfBirth,
-            phone: userData.phone,
-            // // Adicione propriedades adicionais dentro do campo userData 
-            // // para não interferir com o tipo User do NextAuth
-            access_token: userData.accessToken
+            accessToken: userData.accessToken
           } as any;  // Usando 'as any' como solução temporária para o erro de tipagem
         } catch (error) {
           if (axios.isAxiosError(error) && error.response) {
