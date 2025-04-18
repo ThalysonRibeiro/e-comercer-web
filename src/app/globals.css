@@ -115,3 +115,9 @@ h6 {
 .h-custom-calc {
   height: calc(100% - 165px);
 }
+
+.input-date::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 1;
+  cursor: pointer;
+}

@@ -1,15 +1,16 @@
 "use client"
 import { useState, type ComponentProps } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
 interface InputProps extends ComponentProps<'input'> {
   error?: boolean;
 }
-export function Input({ error = false, ...props }: InputProps) {
+export function Input({ error = false, className, ...props }: InputProps) {
   return (
     <input
       data-error={error}
-      className="px-2 outline-0 bg-transparent backdrop-blur-sm border border-gray-400 focus-within:border-primary data-[error=true]:border-danger w-full h-10 rounded-lg"
+      className={twMerge("px-2 outline-0 bg-transparent backdrop-blur-sm border border-gray-400 focus-within:border-primary data-[error=true]:border-danger w-full h-10 rounded-lg input-date", className)}
       {...props}
     />
   )
@@ -18,7 +19,7 @@ export function Input({ error = false, ...props }: InputProps) {
 interface InputButtonPasswordProps extends ComponentProps<'input'> {
   error?: boolean
 }
-export function InputPassword({ error, value, onChange, ...props }: InputButtonPasswordProps) {
+export function InputPassword({ error, value, onChange, className, ...props }: InputButtonPasswordProps) {
   const [showPassword, setShowpassword] = useState(false);
 
   function togglePassword() {
@@ -28,7 +29,7 @@ export function InputPassword({ error, value, onChange, ...props }: InputButtonP
   return (
     <div
       data-error={error}
-      className="flex outline-0 bg-transparent backdrop-blur-sm border border-gray-400 focus-within:border-primary data-[error=true]:border-danger w-full rounded-lg"
+      className={twMerge("flex outline-0 bg-transparent backdrop-blur-sm border border-gray-400 focus-within:border-primary data-[error=true]:border-danger w-full rounded-lg", className)}
     >
       <input
         type={showPassword ? 'text' : 'password'}
