@@ -4,7 +4,7 @@ import { Input, InputPassword } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
-import { any, z } from "zod";
+import { z } from "zod";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CPForCNPJ } from "@/app/register/components/select-cpf-cnpj";
@@ -15,8 +15,9 @@ import { extractPhoneNumber, formatPhone } from "@/utils/formatPhone";
 import { Label } from "@/components/ui/label";
 import api from "@/lib/axios";
 import { useRouter } from "next/navigation";
-import { Bounce, toast } from "react-toastify";
-import { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import { validateCPF } from "@/utils/validateCNPJ";
+import { validateCNPJ } from "@/utils/validateCPF";
 
 const passwordSchema = z
   .string()
@@ -26,27 +27,20 @@ const passwordSchema = z
   .regex(/[0-9]/, "A senha deve conter pelo menos um número")
   .regex(/[\W_]/, "A senha deve conter pelo menos um caractere especial");
 
-const schema = z.object({
-  name: z.string().min(5, 'O nome completo é obrigatório'),
-  documentType: z.enum(['cpf', 'cnpj']),
-  document: z.string().min(1, 'O documento é obrigatório'),
-  email: z.string().email('Email inválido'),
-  country: z.string().min(1, 'País é obrigatório'),
-  phone: z.string().min(1, 'Telefone é obrigatório'),
-  dateOfBirth: z.string().min(1, 'Data de nascimento é obrigatória'),
-  gender: z.enum(['masculino', 'feminino', 'outro', 'prefiro_nao_dizer']),
-  password: passwordSchema,
-  confirmPassword: z.string().min(1, 'Confirmação de senha é obrigatória'),
-  acceptOffers: z.boolean(),
-  acceptTerms: z.boolean().refine(val => val === true, {
-    message: "Você precisa aceitar os termos e políticas para continuar"
-  }),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "As senhas não coincidem",
-  path: ["confirmPassword"],
-});
-
-type FormData = z.infer<typeof schema>;
+type FormData = {
+  name: string;
+  documentType: 'cpf' | 'cnpj';
+  document: string;
+  email: string;
+  country: string;
+  phone: string;
+  dateOfBirth: string;
+  gender: 'masculino' | 'feminino' | 'outro' | 'prefiro_nao_dizer';
+  password: string;
+  confirmPassword: string;
+  acceptOffers: boolean;
+  acceptTerms: boolean;
+};
 
 export function FormeRegister() {
   const router = useRouter();
@@ -55,6 +49,40 @@ export function FormeRegister() {
   const [country, setCountry] = useState<string>("BR");
   const [valuePhone, setValuePhone] = useState<string>("");
   const [responseError, setResponseError] = useState("");
+  const [isDocumentValid, setIsDocumentValid] = useState<boolean>(false);
+
+  // Definir o esquema dentro do componente para acesso ao estado typeValue
+  const formSchema = z.object({
+    name: z.string().min(5, 'O nome completo é obrigatório'),
+    documentType: z.enum(['cpf', 'cnpj']),
+    document: z.string()
+      .min(1, 'O documento é obrigatório')
+      .refine((val) => {
+        const clearValue = val.replace(/\D/g, '');
+        if (clearValue.length === 0) return false;
+
+        if (typeValue === 'cpf') {
+          return validateCPF(clearValue);
+        } else if (typeValue === 'cnpj') {
+          return validateCNPJ(clearValue);
+        }
+        return false;
+      }, "Documento inválido. Verifique os números informados."),
+    email: z.string().email('Email inválido'),
+    country: z.string().min(1, 'País é obrigatório'),
+    phone: z.string().min(1, 'Telefone é obrigatório'),
+    dateOfBirth: z.string().min(1, 'Data de nascimento é obrigatória'),
+    gender: z.enum(['masculino', 'feminino', 'outro', 'prefiro_nao_dizer']),
+    password: passwordSchema,
+    confirmPassword: z.string().min(1, 'Confirmação de senha é obrigatória'),
+    acceptOffers: z.boolean(),
+    acceptTerms: z.boolean().refine(val => val === true, {
+      message: "Você precisa aceitar os termos e políticas para continuar"
+    }),
+  }).refine((data) => data.password === data.confirmPassword, {
+    message: "As senhas não coincidem",
+    path: ["confirmPassword"],
+  });
 
   const {
     register,
@@ -64,10 +92,11 @@ export function FormeRegister() {
     formState: { errors, isSubmitting },
     watch
   } = useForm<FormData>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "", // Default empty string
+      name: "",
       documentType: "cpf",
+      document: "",
       country: "BR",
       gender: "prefiro_nao_dizer",
       acceptOffers: false,
@@ -79,9 +108,10 @@ export function FormeRegister() {
       confirmPassword: "",
     }
   });
+
   useEffect(() => {
     setResponseError("");
-  }, [watch('email')])
+  }, [watch('email')]);
 
   useEffect(() => {
     setValue('document', cpfOCnpj);
@@ -101,6 +131,7 @@ export function FormeRegister() {
 
   useEffect(() => {
     setCpfOCnpj("");
+    setIsDocumentValid(false);
   }, [typeValue]);
 
   const handleInputChange = (value: string) => {
@@ -108,10 +139,17 @@ export function FormeRegister() {
 
     if (typeValue.toLowerCase() === "cpf") {
       setCpfOCnpj(formatCPF(onlyNumbers));
+      // Validação em tempo real
+      const isValid = onlyNumbers.length === 11 ? validateCPF(onlyNumbers) : false;
+      setIsDocumentValid(isValid);
     } else if (typeValue.toLowerCase() === "cnpj") {
       setCpfOCnpj(formatCNPJ(onlyNumbers));
+      // Validação em tempo real
+      const isValid = onlyNumbers.length === 14 ? validateCNPJ(onlyNumbers) : false;
+      setIsDocumentValid(isValid);
     } else {
       setCpfOCnpj(onlyNumbers);
+      setIsDocumentValid(false);
     }
   };
 
@@ -131,7 +169,6 @@ export function FormeRegister() {
     };
 
     try {
-
       const response = await api.post('/auth/register', {
         email: formData.email,
         name: formData.name,
@@ -145,15 +182,14 @@ export function FormeRegister() {
         documentType: formData.documentType
       });
 
-      const responseData = await response.data
-      // console.log('Cadastro realizado com sucesso:', responseData);
+      const responseData = await response.data;
 
-      toast.success('Registro realizado com suceaao!');
+      toast.success('Registro realizado com sucesso!');
       router.push('/login');
 
     } catch (error: any) {
-      setResponseError(error.response.data.message)
-      toast.error(`Error ao realizar registro! ${error.response.data.message}`);
+      setResponseError(error.response?.data?.message || "Ocorreu um erro no registro");
+      toast.error(`Erro ao realizar registro! ${error.response?.data?.message || "Tente novamente mais tarde"}`);
     }
   };
 
@@ -173,7 +209,7 @@ export function FormeRegister() {
               <Input
                 type="text"
                 placeholder="Nome completo"
-                {...register('name') || ""}
+                {...register('name')}
                 className={errors.name ? "border-danger" : ""}
               />
               {errors.name && <span className="text-danger text-xs mt-1 text-left">{errors.name.message}</span>}
@@ -194,6 +230,11 @@ export function FormeRegister() {
                 className={errors.document ? "border-danger" : ""}
               />
               {errors.document && <span className="text-danger text-xs mt-1 text-left">{errors.document.message}</span>}
+              {cpfOCnpj && !errors.document && (
+                <span className={`text-xs mt-1 text-left ${isDocumentValid ? "text-green-500" : "text-amber-500"}`}>
+                  {isDocumentValid ? "Documento válido" : "Verificando documento..."}
+                </span>
+              )}
             </div>
 
             {/* Email */}
@@ -299,7 +340,7 @@ export function FormeRegister() {
                 render={({ field }) => (
                   <InputPassword
                     placeholder="Confirmar senha"
-                    value={field.value}
+                    value={field.value || ''}
                     onChange={field.onChange}
                     className={errors.confirmPassword ? "border-danger" : ""}
                   />
@@ -309,7 +350,7 @@ export function FormeRegister() {
             </div>
           </div>
 
-          <p>{responseError && (<p className="text-danger">{responseError}</p>)}</p>
+          {responseError && (<p className="text-danger">{responseError}</p>)}
 
           <div className="w-full space-y-4">
             <div className="space-y-4 w-full">
