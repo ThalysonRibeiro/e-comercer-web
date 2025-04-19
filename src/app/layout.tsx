@@ -5,6 +5,8 @@ import { ModalCartItemsAdded } from "@/components/modalCartItemsAdded";
 import AuthProvider from "@/providers/auth";
 import ProviderContext from "@/context/Context";
 import { Flip, ToastContainer } from 'react-toastify';
+import { LoginModal } from "@/components/loginModal";
+import { FormeRegisterModal } from "@/components/registerModal/formeRegister";
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -35,6 +37,8 @@ export default function RootLayout({
         <AuthProvider>
           <ProviderContext>
             <ModalCartItemsAdded />
+            <FormeRegisterModal />
+            <LoginModal />
             <ToastContainer
               position="top-right"
               autoClose={5000}

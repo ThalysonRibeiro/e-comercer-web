@@ -13,7 +13,7 @@ import { UserData } from "@/app/api/auth/[...nextauth]/route";
 
 
 export function Header({ category }: MenuProps) {
-  const { userData, openCloseModal, cartAmount } = useContext(Context) as ContextType;
+  const { userData, openCloseModalCart, openCloseModalLogin, openCloseModalRegister, cartAmount } = useContext(Context) as ContextType;
 
   return (
     <header className="w-full min-h-40 px-6 flex items-center justify-center border-b border-b-gray-500">
@@ -37,8 +37,10 @@ export function Header({ category }: MenuProps) {
           <div className="flex items-center justify-center gap-4 text-gray-100">
             {userData === null ? (
               <>
-                <Link href="/login" className="transition duration-300 hover:text-hover">Login</Link>
-                <Link href="/register" className="transition duration-300 hover:text-hover">Register</Link>
+                {/* <Link href="/login" className="transition duration-300 hover:text-hover">Login</Link> */}
+                {/* <Link href="/register" className="transition duration-300 hover:text-hover">Register</Link> */}
+                <button onClick={openCloseModalLogin} className="transition duration-300 hover:text-hover">Login</button>
+                <button onClick={openCloseModalRegister} className="transition duration-300 hover:text-hover">Register</button>
               </>
             ) : (
               <>
@@ -60,7 +62,7 @@ export function Header({ category }: MenuProps) {
               </>
             )}
 
-            <button onClick={openCloseModal} className="transition duration-300 hover:text-hover">
+            <button onClick={openCloseModalCart} className="transition duration-300 hover:text-hover">
               {cartAmount === 0 ? (
                 <ShoppingCart className="size-6" />
               ) : (

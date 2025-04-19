@@ -11,11 +11,18 @@ export interface ContextType {
   total: string;
   addItemCart: (newItem: ProductsProps) => void;
   removeItemCart: (pruduct: CartProps) => void;
-  openCloseModal: () => void;
-  isOpen: boolean;
+  openCloseModalCart: () => void;
+  openCloseModalLogin: () => void;
+  openCloseModalRegister: () => void;
+  isOpenModalCart: boolean;
+  isOpenModalLogin: boolean;
+  isOpenModalRegister: boolean;
+  closeModalRegisterScrollY: () => void;
   userData: UserData | null; // Pode ser null quando não há usuário logado
   loading: boolean;
-  openModalRef: React.RefObject<HTMLDivElement | null>;
+  openModalCartRef: React.RefObject<HTMLDivElement | null>;
+  openModalLoginRef: React.RefObject<HTMLDivElement | null>;
+  openModalRegisterRef: React.RefObject<HTMLDivElement | null>;
 }
 
 interface CartProps extends ProductsProps {
@@ -36,8 +43,12 @@ export const Context = createContext({} as ContextType);
 function ProviderContext({ children }: ProviderProps) {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const openModalRef = useRef<HTMLDivElement>(null);
+  const [isOpenModalCart, setIsOpenModalCart] = useState<boolean>(false);
+  const [isOpenModalLogin, setIsOpenModalLogin] = useState<boolean>(false);
+  const [isOpenModalRegister, setIsOpenModalRegister] = useState<boolean>(false);
+  const openModalCartRef = useRef<HTMLDivElement>(null);
+  const openModalLoginRef = useRef<HTMLDivElement>(null);
+  const openModalRegisterRef = useRef<HTMLDivElement>(null);
 
   const [cart, setCart] = useState<CartProps[]>([]);
   const [total, setTotal] = useState("");
@@ -93,8 +104,8 @@ function ProviderContext({ children }: ProviderProps) {
   function removeItemCart(product: CartProps) {
     const indexItem = cart.findIndex(item => item.id == product.id);
 
-    if (cart[indexItem]?.amount === 0 && isOpen === true) {
-      return setIsOpen(false);
+    if (cart[indexItem]?.amount === 0 && isOpenModalCart === true) {
+      return setIsOpenModalCart(false);
     }
 
     if (cart[indexItem]?.amount > 1) {
@@ -123,30 +134,78 @@ function ProviderContext({ children }: ProviderProps) {
     setTotal(resultFomated);
   }
 
-  function openCloseModal() {
-    setIsOpen(!isOpen);
+  function openCloseModalCart() {
+    setIsOpenModalCart(!isOpenModalCart);
   }
 
   useEffect(() => {
     if (cart.length === 0) {
-      return setIsOpen(false);
+      return setIsOpenModalCart(false);
     }
   }, [cart]);
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (openModalRef.current && !openModalRef.current.contains(event.target as Node) && isOpen) {
-        setIsOpen(false);
+    function handleClickOutsideCart(event: MouseEvent) {
+      if (openModalCartRef.current && !openModalCartRef.current.contains(event.target as Node) && isOpenModalCart) {
+        setIsOpenModalCart(false);
       }
     }
 
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+    if (isOpenModalCart) {
+      document.addEventListener("mousedown", handleClickOutsideCart);
     }
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutsideCart);
     };
-  }, [isOpen]);
+  }, [isOpenModalCart]);
+
+  //modal login e register
+  function openCloseModalLogin() {
+    setIsOpenModalLogin(!isOpenModalLogin);
+  }
+  useEffect(() => {
+    function handleClickOutsideLogin(event: MouseEvent) {
+      if (openModalLoginRef.current && !openModalLoginRef.current.contains(event.target as Node) && isOpenModalLogin) {
+        setIsOpenModalLogin(false);
+      }
+    }
+
+    if (isOpenModalLogin) {
+      document.addEventListener("mousedown", handleClickOutsideLogin);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideLogin);
+    };
+  }, [isOpenModalLogin]);
+
+  function openCloseModalRegister() {
+    setIsOpenModalRegister(!isOpenModalRegister);
+  }
+  useEffect(() => {
+    function handleClickOutsideRegister(event: MouseEvent) {
+      if (openModalRegisterRef.current && !openModalRegisterRef.current.contains(event.target as Node) && isOpenModalRegister) {
+        setIsOpenModalRegister(false);
+
+      }
+    }
+
+    if (isOpenModalRegister) {
+      document.addEventListener("mousedown", handleClickOutsideRegister);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideRegister);
+    };
+
+  }, [isOpenModalRegister]);
+
+  function closeModalRegisterScrollY() {
+    setIsOpenModalRegister(false);
+  }
+
+
+
+
 
   return (
     <Context
@@ -156,11 +215,18 @@ function ProviderContext({ children }: ProviderProps) {
         addItemCart,
         removeItemCart,
         cartAmount: cart.length,
-        openCloseModal,
-        isOpen,
+        openCloseModalCart,
+        isOpenModalCart,
         userData, // Usando o userData do state
         loading, // Adicionando loading ao contexto
-        openModalRef
+        openModalCartRef,
+        openModalLoginRef,
+        openModalRegisterRef,
+        openCloseModalLogin,
+        openCloseModalRegister,
+        isOpenModalLogin,
+        isOpenModalRegister,
+        closeModalRegisterScrollY
       }}
     >
       {children}

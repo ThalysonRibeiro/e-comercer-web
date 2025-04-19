@@ -12,22 +12,22 @@ export function ModalCartItemsAdded() {
     cartAmount,
     addItemCart,
     removeItemCart,
-    openCloseModal,
-    isOpen,
-    openModalRef
+    openCloseModalCart,
+    isOpenModalCart,
+    openModalCartRef
   } = useContext(Context) as ContextType;
 
 
   return (
     <>
-      {isOpen && (
-        <div ref={openModalRef} className="fixed right-0 z-99 max-w-120 w-full max-h-screen h-full bg-gray-600/95 border-l border-l-gray-400 ">
+      {isOpenModalCart && (
+        <div ref={openModalCartRef} className="fixed right-0 z-99 max-w-120 w-full max-h-screen h-full bg-gray-600/95 border-l border-l-gray-400 ">
           <div className="flex items-center justify-between p-1">
             <h1 className="text-primary font-semibold text-2xl">
               Carrinho de compras
             </h1>
             <button
-              onClick={openCloseModal}
+              onClick={openCloseModalCart}
               className="text-primary hover:text-hover">
               <X />
             </button>

@@ -5,7 +5,7 @@ import { Context, ContextType } from '@/context/Context';
 
 
 export function ButtonCart() {
-  const { openCloseModal, cartAmount } = useContext(Context) as ContextType;
+  const { openCloseModalCart, cartAmount } = useContext(Context) as ContextType;
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export function ButtonCart() {
   return (
     <div>
 
-      <div className="relative z-10  flex justify-center cartFixed" onClick={openCloseModal}>
+      <div className="relative z-10  flex justify-center cartFixed" onClick={openCloseModalCart}>
         <div
           className={`absolute -top-30 w-5 h-5 rounded-full bg-hover shadow-md flex items-center justify-center
                       ${isAnimating ? 'animate-bounce-to-cart' : 'opacity-0'}`}
