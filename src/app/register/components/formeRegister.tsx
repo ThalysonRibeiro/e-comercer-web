@@ -46,7 +46,7 @@ export function FormeRegister() {
   const router = useRouter();
   const [typeValue, setTypeValue] = useState<string>("cpf");
   const [cpfOCnpj, setCpfOCnpj] = useState<string>("");
-  const [country, setCountry] = useState<string>("BR");
+  const [country, setCountry] = useState<string>("+55");
   const [valuePhone, setValuePhone] = useState<string>("");
   const [responseError, setResponseError] = useState("");
   const [isDocumentValid, setIsDocumentValid] = useState<boolean>(false);
@@ -97,7 +97,7 @@ export function FormeRegister() {
       name: "",
       documentType: "cpf",
       document: "",
-      country: "BR",
+      country: "",
       gender: "prefiro_nao_dizer",
       acceptOffers: false,
       acceptTerms: false,
