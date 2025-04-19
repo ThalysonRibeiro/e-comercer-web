@@ -182,8 +182,6 @@ export function FormeRegister() {
         documentType: formData.documentType
       });
 
-      const responseData = await response.data;
-
       toast.success('Registro realizado com sucesso!');
       router.push('/login');
 
