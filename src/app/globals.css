@@ -104,12 +104,12 @@ h6 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #6F9DE2;
+  background: #c01a40;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #5196FF;
+  background: #AF5EFF;
 }
 
 .h-custom-calc {

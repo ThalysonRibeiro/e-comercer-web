@@ -81,7 +81,6 @@ export function LoginModal() {
           ? "Email ou senha inválidos"
           : "Telefone ou senha inválidos");
       } else {
-        router.push("/dashboard");
         router.refresh();
       }
     } catch (error) {

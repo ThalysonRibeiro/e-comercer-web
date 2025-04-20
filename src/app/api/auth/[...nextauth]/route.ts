@@ -140,8 +140,8 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: "/login",  // Página de login customizada
-    error: "/login",   // Página de erro personalizada
+    signIn: "/",  // Página de login customizada
+    error: "/",   // Página de erro personalizada
   },
 };
 

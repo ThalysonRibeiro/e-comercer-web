@@ -19,6 +19,7 @@ import { validateCNPJ } from "@/utils/validateCPF";
 import { CPForCNPJ } from "./select-cpf-cnpj";
 import { Context, ContextType } from "@/context/Context";
 import { X } from "lucide-react";
+import { LoadingButton } from "../ui/loadingButton";
 
 const passwordSchema = z
   .string()
@@ -418,7 +419,9 @@ export function FormeRegisterModal() {
                   disabled={isSubmitting}
                   className={isSubmitting ? "opacity-70 cursor-not-allowed" : ""}
                 >
-                  {isSubmitting ? "Processando..." : "Cadastrar"}
+                  {isSubmitting ?
+                    <LoadingButton />
+                    : "Cadastrar"}
                 </Button>
               </div>
             </form>

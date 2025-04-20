@@ -4,6 +4,8 @@ import { getServerAuthSession } from "@/lib/auth";
 import { ProductsProps } from "@/types/product";
 import { createContext, ReactNode, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
+import api from "@/lib/axios";
+import { ProfileProps, WishlistProps } from "@/types/user";
 
 export interface ContextType {
   cart: CartProps[];
@@ -23,6 +25,7 @@ export interface ContextType {
   openModalCartRef: React.RefObject<HTMLDivElement | null>;
   openModalLoginRef: React.RefObject<HTMLDivElement | null>;
   openModalRegisterRef: React.RefObject<HTMLDivElement | null>;
+  profileDetail: ProfileProps | null;
 }
 
 interface CartProps extends ProductsProps {
@@ -49,6 +52,8 @@ function ProviderContext({ children }: ProviderProps) {
   const openModalCartRef = useRef<HTMLDivElement>(null);
   const openModalLoginRef = useRef<HTMLDivElement>(null);
   const openModalRegisterRef = useRef<HTMLDivElement>(null);
+  const [profileDetail, setProfileDetail] = useState<ProfileProps | null>(null);
+
 
   const [cart, setCart] = useState<CartProps[]>([]);
   const [total, setTotal] = useState("");
@@ -204,6 +209,23 @@ function ProviderContext({ children }: ProviderProps) {
   }
 
 
+  useEffect(() => {
+    async function getFullUserDetails() {
+
+      if (!userData?.id) return; // evita request desnecessário
+
+      try {
+        const response = await api.get(`/auth/profile/${userData.id}`);
+        setProfileDetail(response.data);
+
+      } catch (error) {
+        console.error('Erro ao buscar dados do usuário:', error);
+      }
+
+    }
+    getFullUserDetails();
+  }, [userData?.id])
+
 
 
 
@@ -226,7 +248,8 @@ function ProviderContext({ children }: ProviderProps) {
         openCloseModalRegister,
         isOpenModalLogin,
         isOpenModalRegister,
-        closeModalRegisterScrollY
+        closeModalRegisterScrollY,
+        profileDetail
       }}
     >
       {children}

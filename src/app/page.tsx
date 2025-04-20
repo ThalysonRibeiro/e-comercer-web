@@ -9,12 +9,14 @@ import { serverApi } from "./api/api";
 
 
 
+
 export const revalidate = 120; //renderizar dinamincamente
 
 
 export default async function Home() {
   const response = await serverApi.get(`/products`);
-  const categoryMenu = await serverApi.get(`/category?hasChildren=true&limit=5&offset=0`);
+  const categoryMenu = await serverApi.get(`/category?hasChildren=true&limit=6&offset=0`);
+  const { data: siteContent } = await serverApi.get('/site-content/admin')
   // const session = await getSession();
 
   // if (!session) {
@@ -23,7 +25,10 @@ export default async function Home() {
 
   return (
     <div className="w-full">
-      <Header category={categoryMenu.data} />
+      <Header
+        category={categoryMenu.data}
+        siteContent={siteContent}
+      />
       <ButtonCart />
       {/* <Hero data={promotion} /> */}
 
@@ -35,9 +40,9 @@ export default async function Home() {
       </section>
 
       <section className="w-full flex flex-col gap-6  items-center justify-center mt-6">
+        {/* <CardProductCarousel products={response.data} />
         <CardProductCarousel products={response.data} />
-        <CardProductCarousel products={response.data} />
-        <CardProductCarousel products={response.data} />
+        <CardProductCarousel products={response.data} /> */}
       </section>
 
     </div>

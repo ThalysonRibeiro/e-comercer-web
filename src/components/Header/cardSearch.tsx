@@ -22,15 +22,16 @@ export function CardSearch({ products }: CardSearchProps) {
           <Link
             href={`/products/${item.id}`}
             key={item.id}
-            className="w-full flex justify-between p-2 rounded-lg border border-gray-500 hover:bg-gray-700 transition-colors"
+            className="w-full h-40 flex justify-between p-2 rounded-lg border border-gray-500 hover:bg-gray-700 transition-colors"
           >
-            <div className="max-w-40 w-full">
+            <div className="max-h-40 max-w-32 w-full relative rounded-lg overflow-hidden">
               <Image
                 src={item.images[0].image}
                 alt={`Image of ${item.title}`}
-                width={150}
-                height={150}
-                className="object-cover rounded-lg"
+                // width={150}
+                // height={150}
+                fill
+                className="object-cover"
               />
             </div>
             <div className="w-full flex flex-col justify-between ml-2">
