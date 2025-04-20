@@ -1,5 +1,6 @@
 "use client"
 import { Category } from '@/types/category';
+import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
 
@@ -87,19 +88,13 @@ function DropdownMenu({ category }: MenuProps) {
       <div className="lg:hidden">
         <button
           onClick={toggleMobileMenu}
-          className="text-gray-100 hover:text-hover focus:outline-none border"
+          className="text-gray-100 hover:text-hover focus:outline-none border rounded-sm w-9 h-9 flex items-center justify-center"
           aria-label="Menu"
         >
           {isMobileMenuOpen ? (
-            // Ícone X quando o menu está aberto
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <X size={30} />
           ) : (
-            // Ícone de hambúrguer quando o menu está fechado
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+            <Menu size={30} />
           )}
         </button>
       </div>
