@@ -24,7 +24,7 @@ const roboto = Roboto({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const response = await serverApi.get("/site-content/admin");
+  const response = await serverApi.get("/site-content");
   const data: SiteContentProps = response.data[0];
 
   return {

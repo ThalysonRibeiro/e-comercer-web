@@ -1,5 +1,6 @@
 "use client"
 
+import { LogOut, Settings, ShoppingBag, User } from "lucide-react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -64,31 +65,35 @@ export function UserDropdown({ avatar }: { avatar: string }) {
             <div className="absolute z-10 -top-3 right-28 w-0 h-0 border-textButton border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-black animate-bounce" />
             <div className="py-1">
               <Link
-                href={`/`}
-                className="block w-full px-4 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
+                href={`/profile`}
+                className="inline-flex items-center gap-2.5 w-full px-4 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
                 role="menuitem"
               >
+                <User size={22} />
                 Perfil
               </Link>
               <Link
                 href={`/`}
-                className="block w-full px-4 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
+                className="inline-flex items-center gap-2.5 w-full px-4 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
                 role="menuitem"
               >
+                <Settings size={22} />
                 Configuraões
               </Link>
               <Link
                 href={`/`}
-                className="block w-full px-4 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
+                className="inline-flex items-center gap-2.5 w-full px-4 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
                 role="menuitem"
               >
+                <ShoppingBag size={22} />
                 Compras
               </Link>
               <button
                 onClick={() => signOut()}
-                className="block w-full px-4 py-2 text-xs text-start text-textColor hover:bg-hover hover:text-textButton cursor-pointer"
+                className="inline-flex items-center gap-2.5 w-full px-4 py-2 text-xs text-start text-textColor hover:bg-hover hover:text-textButton cursor-pointer"
                 role="menuitem"
               >
+                <LogOut size={22} />
                 Sair
               </button>
             </div>
