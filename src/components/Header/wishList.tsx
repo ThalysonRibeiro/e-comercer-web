@@ -92,21 +92,21 @@ export function WishList({ userid, addItem }: ListProps) {
       </button>
       {openWishList && (
         <div className="absolute top-15 -right-15 z-10">
-          <div className="absolute z-10 -top-2.5 right-16 w-0 h-0 border-gray-500 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-black animate-bounce" />
-          <div className="w-90 max-h-120 overflow-auto space-y-4 p-3 bg-gray-600 border border-gray-500 rounded-lg relative">
+          <div className="absolute z-10 -top-2.5 right-16 w-0 h-0 border-textButton border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-black animate-bounce" />
+          <div className="w-90 max-h-120 overflow-auto space-y-4 p-3 bg-bgCard border border-textButton rounded-lg relative">
             <div className="inline-flex justify-between w-full">
               <h1 className="text-lg font-semibold">
                 Lista de desejos
               </h1>
               <Link
                 href="/"
-                className="text-primary transition-colors duration-300 hover:text-hover"
+                className="text-primaryColor transition-colors duration-300 hover:text-hover"
               >
                 Lista completa
               </Link>
             </div>
             {(!wishList?.items || wishList.items.length === 0) ? (
-              <div className="text-center py-4 text-gray-300">
+              <div className="text-center py-4 text-oldPrice">
                 <p> Sua lista de desejos está vazia</p>
                 <p> Adicione produtos!</p>
               </div>
@@ -114,7 +114,7 @@ export function WishList({ userid, addItem }: ListProps) {
               wishList.items.map(item => (
                 <div
                   key={item.id}
-                  className="w-full h-25 flex justify-between p-2 rounded-lg border border-gray-500 hover:bg-gray-700 transition-colors"
+                  className="w-full h-25 flex justify-between p-2 rounded-lg border border-textButton hover:bg-themeColor transition-colors"
                 >
                   <div className="max-h-25 max-w-24 w-full relative rounded-lg overflow-hidden">
                     <Image
@@ -124,9 +124,9 @@ export function WishList({ userid, addItem }: ListProps) {
                       className="object-cover"
                     />
                   </div>
-                  <div className="w-full flex flex-col justify-between ml-2 pl-2 border-l border-l-gray-500">
+                  <div className="w-full flex flex-col justify-between ml-2 pl-2 border-l border-l-textButton">
                     <p className="line-clamp-1 text-sm font-medium">{item.product.title}</p>
-                    <p className="text-green font-semibold">
+                    <p className="text-price font-semibold">
                       {formatCurrency((item.product.price / 100))}
                     </p>
                     <div className="flex justify-between text-sm ">

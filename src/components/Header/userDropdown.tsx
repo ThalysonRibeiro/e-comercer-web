@@ -57,36 +57,36 @@ export function UserDropdown({ avatar }: { avatar: string }) {
         <div className="absolute top-18 left-0 z-10 transition-all duration-200 ease-out">
 
           <div
-            className="absolute z-10 -top-2.5 -left-5 min-w-40 mt-2 bg-gray-600 rounded-md shadow-lg ring-1 ring-gray-400 ring-opacity-5 focus:outline-none"
+            className="absolute z-10 -top-2.5 -left-5 min-w-40 mt-2 bg-bgCard rounded-md shadow-lg ring-1 ring-borderColor ring-opacity-5 focus:outline-none"
             role="menu"
             aria-hidden={!openUserSettings}
           >
-            <div className="absolute z-10 -top-3 right-28 w-0 h-0 border-gray-500 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-black animate-bounce" />
+            <div className="absolute z-10 -top-3 right-28 w-0 h-0 border-textButton border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-black animate-bounce" />
             <div className="py-1">
               <Link
                 href={`/`}
-                className="block w-full px-4 py-2 text-xs text-gray-200 hover:bg-hover hover:text-gray-500"
+                className="block w-full px-4 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
                 role="menuitem"
               >
                 Perfil
               </Link>
               <Link
                 href={`/`}
-                className="block w-full px-4 py-2 text-xs text-gray-200 hover:bg-hover hover:text-gray-500"
+                className="block w-full px-4 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
                 role="menuitem"
               >
                 Configuraões
               </Link>
               <Link
                 href={`/`}
-                className="block w-full px-4 py-2 text-xs text-gray-200 hover:bg-hover hover:text-gray-500"
+                className="block w-full px-4 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
                 role="menuitem"
               >
                 Compras
               </Link>
               <button
                 onClick={() => signOut()}
-                className="block w-full px-4 py-2 text-xs text-start text-gray-200 hover:bg-hover hover:text-gray-500 cursor-pointer"
+                className="block w-full px-4 py-2 text-xs text-start text-textColor hover:bg-hover hover:text-textButton cursor-pointer"
                 role="menuitem"
               >
                 Sair

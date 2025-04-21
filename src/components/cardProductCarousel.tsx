@@ -33,9 +33,9 @@ export function CardProductCarousel({ products }: CardProductsProps) {
         className='w-[1250]'
       >
         {products.map(product => (
-          <SwiperSlide key={product.id} className="relative overflow-hidden flex flex-col items-center justify-between border border-gray-400 w-[300px] h-[500px] bg-gray-600 rounded-lg p-4">
+          <SwiperSlide key={product.id} className="relative overflow-hidden flex flex-col items-center justify-between border border-borderColor w-[300px] h-[500px] bg-bgCard rounded-lg p-4">
             {product.bigsale && (
-              <div className="bg-primary text-gray-500 font-semibold w-35 text-center absolute rotate-45 -right-8 top-7">Big sale</div>
+              <div className="bg-primaryColor text-textButton font-semibold w-35 text-center absolute rotate-45 -right-8 top-7">Big sale</div>
             )}
             <Link href={`/products/${product.id}`}>
               <Flex>
@@ -50,18 +50,18 @@ export function CardProductCarousel({ products }: CardProductsProps) {
                   className="object-cover rounded-lg"
                 />
               </div>
-              <h1 className="text-gray-100 font-semibold text-sm line-clamp-2 mb-2">
+              <h1 className="text-title font-semibold text-sm line-clamp-2 mb-2">
                 {product.title}
               </h1>
-              <span className="text-sm line-through text-gray-300">
+              <span className="text-sm line-through text-oldPrice">
                 R$  {product.old_price}
               </span>
-              <span className="text-xl text-green font-semibold">
+              <span className="text-xl text-price font-semibold">
                 R$  {product.price}
               </span>
               <div className="mb-2">
-                <p className="text-gray-300 text-sm">À vista no PIX</p>
-                <p className="text-gray-300 text-sm">ou até <span className="font-semibold">10x de R$ {(Number(product.price) / 10).toFixed(2)}</span></p>
+                <p className="text-oldPrice text-sm">À vista no PIX</p>
+                <p className="text-oldPrice text-sm">ou até <span className="font-semibold">10x de R$ {(Number(product.price) / 10).toFixed(2)}</span></p>
               </div>
             </Link>
             <Button

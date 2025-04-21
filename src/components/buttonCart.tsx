@@ -47,14 +47,14 @@ export function ButtonCart() {
             animation: isAnimating ? 'moveToCart 0.8s forwards' : 'none',
           }}
         >
-          <Plus size={16} className="text-gray-500" />
+          <Plus size={16} className="text-textButton" />
         </div>
 
         <div className="absolute bottom-0 flex flex-col items-center">
           <div className={`relative ${isAnimating ? 'animate-cart-shake' : ''}`}>
             <ShoppingCart size={35} className="hover:text-hover" />
-            <div className={`absolute -top-1 right-0 w-4 h-4 rounded-full bg-primary
-              flex items-center justify-center text-gray-500 text-xs font-bold
+            <div className={`absolute -top-1 right-0 w-4 h-4 rounded-full bg-primaryColor
+              flex items-center justify-center text-textButton text-xs font-bold
               ${isAnimating ? 'animate-counter-pop' : ''}`}>
               {cartAmount}
             </div>

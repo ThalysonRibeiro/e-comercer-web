@@ -99,10 +99,10 @@ export function LoginModal() {
   return (
     <>
       {isOpenModalLogin && (
-        <div ref={openModalLoginRef} className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-99 bg-gray-600 border border-gray-400 rounded-lg p-15 space-y-4">
+        <div ref={openModalLoginRef} className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-99 bg-bgCard border border-borderColor rounded-lg p-15 space-y-4">
           <button
             onClick={openCloseModalLogin}
-            className="text-primary hover:text-hover absolute top-2 right-2">
+            className="text-primaryColor hover:text-hover absolute top-2 right-2">
             <X />
           </button>
           <form
@@ -115,7 +115,7 @@ export function LoginModal() {
               <select
                 value={loginMethod}
                 onChange={(e) => setLoginMethod(e.target.value as "email" | "phone")}
-                className="border border-gray-400 rounded-lg p-2"
+                className="border border-borderColor rounded-lg p-2"
               >
                 <option value="email">Email</option>
                 <option value="phone">Telefone</option>
@@ -164,16 +164,16 @@ export function LoginModal() {
             {error && <p className="text-danger">{error}</p>}
 
             <div className="w-full flex items-center gap-3 my-2">
-              <hr className="border border-gray-300 w-full" />
+              <hr className="border border-borderColor w-full" />
               <span>ou</span>
-              <hr className="border border-gray-300 w-full" />
+              <hr className="border border-borderColor w-full" />
             </div>
 
           </form>
           <GoogleLoginButton name="Entrar com Google" />
           <p className="text-center">
             Não tem uma conta?{' '}
-            <button onClick={openRegister} className="text-primary hover:text-hover">
+            <button onClick={openRegister} className="text-primaryColor hover:text-hover">
               Cadastre-se.
             </button>
           </p>

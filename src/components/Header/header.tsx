@@ -25,7 +25,7 @@ export function Header({ category, siteContent }: HeaderProps) {
 
 
   return (
-    <header className="w-full min-h-40 px-6 flex items-center justify-center border-b border-b-gray-500">
+    <header className="w-full min-h-40 px-6 flex items-center justify-center border-b border-b-borderColor">
       <div className="max-w-7xl w-full">
         <div className="flex gap-3 justify-between items-center">
           <Link href="/">
@@ -40,7 +40,7 @@ export function Header({ category, siteContent }: HeaderProps) {
                   />
                 </div>
                 )
-                : (<p className="font-semibold text-xl text-gray-100 capitalize">
+                : (<p className="font-semibold text-xl text-title capitalize">
                   {siteContent[0].title}
                 </p>
                 )
@@ -49,7 +49,7 @@ export function Header({ category, siteContent }: HeaderProps) {
           </Link>
           <InputSearch />
 
-          <div className="flex items-center justify-center gap-4 text-gray-100">
+          <div className="flex items-center justify-center gap-4 text-title">
             {userData === null ? (
               <>
                 <button onClick={openCloseModalLogin} className="transition duration-300 hover:text-hover">Login</button>
@@ -66,7 +66,7 @@ export function Header({ category, siteContent }: HeaderProps) {
                     <ShoppingCart className="size-6" />
                   ) : (
                     <div className="flex flex-col items-center justify-center relative">
-                      <div className="text-xs text-gray-500 font-semibold bg-primary rounded-full w-4 absolute -top-1 left-4.5">{cartAmount}
+                      <div className="text-xs text-textButton font-semibold bg-primaryColor rounded-full w-4 absolute -top-1 left-4.5">{cartAmount}
                       </div>
                       <ShoppingCart className="size-6" />
                     </div>

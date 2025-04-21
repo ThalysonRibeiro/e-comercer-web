@@ -74,8 +74,8 @@ export function InputSearch() {
 
   return (
     <section className="max-w-2xl w-full flex flex-col items-center relative" ref={searchRef}>
-      <div className="flex h-10 w-full justify-center items-center outline-0 bg-transparent backdrop-blur-sm border border-gray-400 focus-within:border-primary rounded-lg">
-        <div className="border-r border-r-gray-500 px-2 text-gray-400">
+      <div className="flex h-10 w-full justify-center items-center outline-0 bg-transparent backdrop-blur-sm border border-borderColor focus-within:border-primaryColor rounded-lg">
+        <div className="border-r border-r-borderColor px-2 text-borderColor">
           <Search className="size-8" />
         </div>
         <input

@@ -10,7 +10,7 @@ export function Input({ error = false, className, ...props }: InputProps) {
   return (
     <input
       data-error={error}
-      className={twMerge("px-2 outline-0 bg-transparent backdrop-blur-sm border border-gray-400 focus-within:border-primary data-[error=true]:border-danger w-full h-10 rounded-lg input-date", className)}
+      className={twMerge("px-2 outline-0 bg-transparent backdrop-blur-sm border border-borderColor focus-within:border-primaryColor data-[error=true]:border-danger w-full h-10 rounded-lg input-date", className)}
       {...props}
     />
   )
@@ -29,7 +29,7 @@ export function InputPassword({ error, value, onChange, className, ...props }: I
   return (
     <div
       data-error={error}
-      className={twMerge("flex outline-0 bg-transparent backdrop-blur-sm border border-gray-400 focus-within:border-primary data-[error=true]:border-danger w-full rounded-lg", className)}
+      className={twMerge("flex outline-0 bg-transparent backdrop-blur-sm border border-borderColor focus-within:border-primaryColor data-[error=true]:border-danger w-full rounded-lg", className)}
     >
       <input
         type={showPassword ? 'text' : 'password'}

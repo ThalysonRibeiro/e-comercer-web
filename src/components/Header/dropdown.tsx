@@ -51,7 +51,7 @@ function DropdownMenu({ category }: MenuProps) {
           <div key={item.name} className="relative">
             <button
               onClick={() => toggleDropdown(index)}
-              className="cursor-pointer text-sm text-gray-100 transition duration-300 hover:text-hover flex items-center justify-between px-1 py-1 rounded-md focus:outline-none focus:ring-1 focus:ring-hover"
+              className="cursor-pointer text-sm text-title transition duration-300 hover:text-hover flex items-center justify-between px-1 py-1 rounded-md focus:outline-none focus:ring-1 focus:ring-hover"
             >
               <span>{item.name}</span>
               <svg
@@ -65,14 +65,14 @@ function DropdownMenu({ category }: MenuProps) {
             </button>
 
             {item.children && item.children.length > 0 && openMenuIndex === index && (
-              <div className="absolute -left-10 min-w-40 mt-2 origin-top-left bg-gray-600 rounded-md shadow-lg ring-1 ring-gray-400 ring-opacity-5 focus:outline-none z-10">
+              <div className="absolute -left-10 min-w-40 mt-2 origin-top-left bg-bgCard rounded-md shadow-lg ring-1 ring-borderColor ring-opacity-5 focus:outline-none z-10">
                 <div className="py-1">
                   {item.children.map(subItem => (
                     <Link
                       key={subItem.id}
                       href={`/categoria/${subItem.id}`}
                       onClick={() => setOpenMenuIndex(null)}
-                      className="block w-full px-4 py-2 text-xs text-gray-200 hover:bg-hover hover:text-gray-500"
+                      className="block w-full px-4 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
                     >
                       {subItem.name}
                     </Link>
@@ -88,7 +88,7 @@ function DropdownMenu({ category }: MenuProps) {
       <div className="lg:hidden">
         <button
           onClick={toggleMobileMenu}
-          className="text-gray-100 hover:text-hover focus:outline-none border rounded-sm w-9 h-9 flex items-center justify-center"
+          className="text-title hover:text-hover focus:outline-none border rounded-sm w-9 h-9 flex items-center justify-center"
           aria-label="Menu"
         >
           {isMobileMenuOpen ? (
@@ -101,13 +101,13 @@ function DropdownMenu({ category }: MenuProps) {
 
       {/* Menu Mobile - aparece quando clica no hambúrguer */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-10 -left-34 bg-gray-600 rounded-lg shadow-lg z-20">
+        <div className="lg:hidden absolute top-10 -left-34 bg-bgCard rounded-lg shadow-lg z-20">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {category.map((item, index) => (
               <div key={item.name} className="block">
                 <button
                   onClick={() => toggleDropdown(index)}
-                  className="w-full text-left text-gray-100 hover:bg-gray-600 px-3 py-2 rounded-md text-base font-medium flex justify-between items-center"
+                  className="w-full text-left text-title hover:bg-bgCard px-3 py-2 rounded-md text-base font-medium flex justify-between items-center"
                 >
                   <span>{item.name}</span>
                   {item.children && item.children.length > 0 && (
@@ -124,7 +124,7 @@ function DropdownMenu({ category }: MenuProps) {
 
                 {/* Submenu para mobile */}
                 {item.children && item.children.length > 0 && openMenuIndex === index && (
-                  <div className="pl-4 bg-gray-600 rounded-md mt-1">
+                  <div className="pl-4 bg-bgCard rounded-md mt-1">
                     {item.children.map(subItem => (
                       <Link
                         key={subItem.id}
@@ -133,7 +133,7 @@ function DropdownMenu({ category }: MenuProps) {
                           setOpenMenuIndex(null);
                           setIsMobileMenuOpen(false);
                         }}
-                        className="block w-full px-3 py-2 text-sm text-gray-200 hover:bg-gray-500"
+                        className="block w-full px-3 py-2 text-sm text-textColor hover:bg-textButton"
                       >
                         {subItem.name}
                       </Link>

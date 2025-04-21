@@ -12,9 +12,9 @@ interface CardSearchProps {
 
 export function CardSearch({ products }: CardSearchProps) {
   return (
-    <div className="w-full max-h-150 overflow-auto space-y-4 p-3 bg-gray-600 border border-gray-500 rounded-lg relative">
+    <div className="w-full max-h-150 overflow-auto space-y-4 p-3 bg-bgCard border border-textButton rounded-lg relative">
       {(!products || products.length === 0) ? (
-        <div className="text-center py-4 text-gray-300">
+        <div className="text-center py-4 text-oldPrice">
           No products found
         </div>
       ) : (
@@ -22,7 +22,7 @@ export function CardSearch({ products }: CardSearchProps) {
           <Link
             href={`/products/${item.id}`}
             key={item.id}
-            className="w-full h-40 flex justify-between p-2 rounded-lg border border-gray-500 hover:bg-gray-700 transition-colors"
+            className="w-full h-40 flex justify-between p-2 rounded-lg border border-textButton hover:bg-themeColor transition-colors"
           >
             <div className="max-h-40 max-w-32 w-full relative rounded-lg overflow-hidden">
               <Image
@@ -37,7 +37,7 @@ export function CardSearch({ products }: CardSearchProps) {
             <div className="w-full flex flex-col justify-between ml-2">
               <StarRating rating={item.rating} />
               <p className="line-clamp-2 font-medium">{item.title}</p>
-              <p className="text-xl text-green font-semibold">
+              <p className="text-xl text-price font-semibold">
                 {formatCurrency((item.price / 100))}
               </p>
             </div>

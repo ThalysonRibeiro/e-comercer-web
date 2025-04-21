@@ -41,7 +41,7 @@ const optionsArray: OptionsType[] = [
 
 export function InputPhone({ onChangeCountry, selectCountry, phone, setPhone, className, ...props }: InputPhoneProps) {
   return (
-    <div className={twMerge("flex items-center w-full h-10 border border-gray-400 rounded-lg px-1 gap-2.5", className)}{...props}>
+    <div className={twMerge("flex items-center w-full h-10 border border-borderColor rounded-lg px-1 gap-2.5", className)}{...props}>
       <select
         value={selectCountry}
         onChange={(e) => onChangeCountry(e.target.value)}

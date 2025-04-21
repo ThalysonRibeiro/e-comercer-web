@@ -4,27 +4,19 @@
   --color-*: initial;
 
 
-  --color-primary: #c01a40;
-  --color-primary2: #ff0055;
+  --color-primaryColor: #C01A40;
+  --color-secondaryColor: #ff0055;
   --color-hover: #AF5EFF;
-  --color-purple: #190c2b;
-  --color-yellow: #FFD900;
+  --color-star: #FFD900;
   --color-danger: #F05D6C;
-  --color-green: #00AE2E;
-  --color-gray-100: #C8D0DA;
-  /*title*/
-  --color-gray-200: #95A1B1;
-  /*text-secundary*/
-  --color-gray-300: #6F7D90;
-  /*price 2*/
-  --color-gray-400: #555E70;
-  /*border*/
-  --color-gray-500: #2A313C;
-  /*text-button*/
-  --color-gray-600: #221F2F;
-  /*bg-card*/
-  --color-gray-700: #0e0c1d;
-  /*bg*/
+  --color-price: #00AE2E;
+  --color-title: #C8D0DA;
+  --color-textColor: #95A1B1;
+  --color-oldPrice: #6F7D90;
+  --color-borderColor: #555E70;
+  --color-textButton: #2A313C;
+  --color-bgCard: #221F2F;
+  --color-themeColor: #0e0c1d;
 
   --font-sans: var(--font-roboto);
 }
@@ -104,12 +96,12 @@ h6 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c01a40;
+  background: var(--color-primaryColor);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #AF5EFF;
+  background: var(--color-hover);
 }
 
 .h-custom-calc {

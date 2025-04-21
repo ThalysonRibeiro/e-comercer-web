@@ -46,7 +46,7 @@ export function LimitedTimeOffer({ products }: LimitedTimeOfferProps) {
       >
         {products.map(item => (
           <SwiperSlide key={item.id}>
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-gray-400 w-full h-full bg-gray-600 rounded-lg overflow-hidden">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-borderColor w-full h-full bg-bgCard rounded-lg overflow-hidden">
               <Link href={`/products/${item.id}`} className="w-100 md:h-full h-100 relative p-0">
                 <Image
                   src={item.images[0]?.image}
@@ -58,19 +58,19 @@ export function LimitedTimeOffer({ products }: LimitedTimeOfferProps) {
 
               <div className="flex-1 flex flex-col justify-between h-full p-4">
                 <StarRating rating={item.rating} />
-                <h1 className="text-gray-100 font-semibold text-xl line-clamp-2 mb-2">
+                <h1 className="text-title font-semibold text-xl line-clamp-2 mb-2">
                   {item.title}
                 </h1>
                 <p className="text-sm line-clamp-4">{item.description}</p>
 
                 <div className="flex gap-6  my-1">
-                  <span className="text-3xl text-green font-semibold">{formatCurrency((item.price / 100))}</span>
-                  <span className="text-xl line-through text-gray-300">{formatCurrency((item.old_price / 100))}</span>
+                  <span className="text-3xl text-price font-semibold">{formatCurrency((item.price / 100))}</span>
+                  <span className="text-xl line-through text-oldPrice">{formatCurrency((item.old_price / 100))}</span>
                 </div>
 
                 <div className="mb-2">
-                  <p className="text-gray-300 text-sm">À vista no PIX</p>
-                  <p className="text-gray-300 text-sm">
+                  <p className="text-oldPrice text-sm">À vista no PIX</p>
+                  <p className="text-oldPrice text-sm">
                     ou até <span className="font-semibold">10x de R$ {(Number(item.price) / 10).toFixed(2)}</span>
                   </p>
                 </div>

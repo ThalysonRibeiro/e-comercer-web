@@ -37,7 +37,7 @@ export function ProductSuggestion() {
         {products?.map(item => (
           <SwiperSlide key={item.id}>
             <Link href={`/products/${item.id}`}>
-              <div className="text-center border border-gray-400 flex flex-col items-center justify-center w-full rounded-lg p-2">
+              <div className="text-center border border-borderColor flex flex-col items-center justify-center w-full rounded-lg p-2">
                 <Image
                   src={item?.images[0]?.image}
                   alt={item?.title}
@@ -45,7 +45,7 @@ export function ProductSuggestion() {
                   height={200}
                   className="bg-cover bg-no-repeat bg-center  rounded-lg"
                 />
-                <span className="text-2xl text-green font-semibold">
+                <span className="text-2xl text-price font-semibold">
                   R$  {item?.price}
                 </span>
               </div>

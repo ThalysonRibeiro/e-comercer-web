@@ -11,7 +11,7 @@ interface CPForCNPJProps extends ComponentProps<'div'> {
 }
 export function CPForCNPJ({ selectedType, onChangeType, cpfCnpj, setCpfCnpj, className, ...props }: CPForCNPJProps) {
   return (
-    <div className={twMerge("h-10 w-full border border-gray-400 rounded-lg flex items-center px-1 gap-2.5", className)}{...props}>
+    <div className={twMerge("h-10 w-full border border-borderColor rounded-lg flex items-center px-1 gap-2.5", className)}{...props}>
       <select
         value={selectedType}
         onChange={(e) => onChangeType(e.target.value)}

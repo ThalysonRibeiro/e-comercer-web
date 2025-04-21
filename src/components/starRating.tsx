@@ -7,7 +7,7 @@ export function StarRating({ rating }: { rating: number }) {
       {[...Array(5)].map((_, index) => (
         <StarIcon
           key={index}
-          className={index < numericRating ? "text-yellow" : "text-text-secundary"}
+          className={index < numericRating ? "text-star" : "text-text-secundary"}
         />
       ))}
     </div>

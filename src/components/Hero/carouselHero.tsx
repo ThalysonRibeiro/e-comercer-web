@@ -25,11 +25,11 @@ export function CarouselHero({ data }: { data: HeroPromotioProps }) {
 
         {data.promotionHero.map(item => (
           <SwiperSlide key={item.id}>
-            <Flex className="w-full h-110 backdrop-blur-lg bg-transparent rounded-lg overflow-auto border border-gray-500">
+            <Flex className="w-full h-110 backdrop-blur-lg bg-transparent rounded-lg overflow-auto border border-textButton">
               <Flex className="flex-col w-2/5 gap-3 p-5 justify-center">
-                <h1 className="font-semibold text-4xl text-gray-100">{item.title}</h1>
-                <h2 className="font-semibold text-3xl text-primary">{item.subTitle}</h2>
-                <h3 className="font-semibold text-xl text-gray-100">{item.sale}</h3>
+                <h1 className="font-semibold text-4xl text-title">{item.title}</h1>
+                <h2 className="font-semibold text-3xl text-primaryColor">{item.subTitle}</h2>
+                <h3 className="font-semibold text-xl text-title">{item.sale}</h3>
                 <p>{item.description}</p>
               </Flex>
 

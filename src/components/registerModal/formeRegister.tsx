@@ -219,10 +219,10 @@ export function FormeRegisterModal() {
     <>
       {isOpenModalRegister && (
         <div className="flex items-center w-full justify-center absolute">
-          <main ref={openModalRegisterRef} className="z-99 relative bg-gray-600 max-w-125 md:max-w-230 w-full flex flex-col items-center justify-center space-y-2 px-10 py-5 text-center border border-gray-400 rounded-lg overflow-auto">
+          <main ref={openModalRegisterRef} className="z-99 relative bg-bgCard max-w-125 md:max-w-230 w-full flex flex-col items-center justify-center space-y-2 px-10 py-5 text-center border border-borderColor rounded-lg overflow-auto">
             <button
               onClick={openCloseModalRegister}
-              className="text-primary hover:text-hover absolute top-2 right-2">
+              className="text-primaryColor hover:text-hover absolute top-2 right-2">
               <X />
             </button>
             <h1 className="text-2xl font-bold">Faça o cadastro</h1>
@@ -260,7 +260,7 @@ export function FormeRegisterModal() {
                   />
                   {errors.document && <span className="text-danger text-xs mt-1 text-left">{errors.document.message}</span>}
                   {cpfOCnpj && !errors.document && (
-                    <span className={`text-xs mt-1 text-left ${isDocumentValid ? "text-green-500" : "text-amber-500"}`}>
+                    <span className={`text-xs mt-1 text-left ${isDocumentValid ? "text-price" : "text-amber-500"}`}>
                       {isDocumentValid ? "Documento válido" : "Verificando documento..."}
                     </span>
                   )}
@@ -324,7 +324,7 @@ export function FormeRegisterModal() {
                   </Label>
                   <select
                     {...register('gender')}
-                    className={`outline-0 border border-gray-400 rounded-lg px-1 w-full h-10 ${errors.gender ? "border-danger" : ""}`}
+                    className={`outline-0 border border-borderColor rounded-lg px-1 w-full h-10 ${errors.gender ? "border-danger" : ""}`}
                   >
                     <option value="masculino">Masculino</option>
                     <option value="feminino">Feminino</option>
@@ -388,7 +388,7 @@ export function FormeRegisterModal() {
                     <input
                       type="checkbox"
                       {...register('acceptOffers')}
-                      className="p-2 appearance-none border border-primary checked:bg-primary checked:border-gray-500 focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain cursor-pointer"
+                      className="p-2 appearance-none border border-primaryColor checked:bg-primaryColor checked:border-borderColor focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain cursor-pointer"
                     />
                     <p className="text-sm">Quero receber ofertas e novidades por e-mail, SMS, WhatsApp ou mensagens nos App's POWERGADGET!</p>
                   </div>
@@ -398,14 +398,14 @@ export function FormeRegisterModal() {
                     <input
                       type="checkbox"
                       {...register('acceptTerms')}
-                      className={`p-2 appearance-none border ${errors.acceptTerms ? "border-danger" : "border-primary"} checked:bg-primary checked:border-gray-500 focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain cursor-pointer`}
+                      className={`p-2 appearance-none border ${errors.acceptTerms ? "border-danger" : "border-primaryColor"} checked:bg-primaryColor checked:border-borderColor focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain cursor-pointer`}
                     />
                     <span className="text-sm">Li e estou de acordo com as{' '}
-                      <Link href="/terms" className="text-primary underline">
+                      <Link href="/terms" className="text-primaryColor underline">
                         políticas da empresa
                       </Link>
                       {' e '}
-                      <Link href="/policies" className="text-primary underline">
+                      <Link href="/policies" className="text-primaryColor underline">
                         políticas de privacidade
                       </Link>.
                     </span>
@@ -427,16 +427,16 @@ export function FormeRegisterModal() {
             </form>
 
             <div className="w-full flex items-center gap-3">
-              <hr className="border border-gray-300 w-full" />
+              <hr className="border border-oldPrice w-full" />
               <span>ou</span>
-              <hr className="border border-gray-300 w-full" />
+              <hr className="border border-oldPrice w-full" />
             </div>
 
             <GoogleLoginButton name="Cadastrar-se com Google" />
 
             <p className="text-center">
               Já tem uma conta?{' '}
-              <button onClick={openLogin} className="text-primary hover:text-hover">
+              <button onClick={openLogin} className="text-primaryColor hover:text-hover">
                 Conecte-se.
               </button>
             </p>

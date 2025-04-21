@@ -9,6 +9,8 @@ import { LoginModal } from "@/components/loginModal";
 import { FormeRegisterModal } from "@/components/registerModal/formeRegister";
 import { serverApi } from "./api/api";
 import { SiteContentProps } from "@/types/siteContent";
+import useThemeColors from "./hooks/useThemeColors";
+import ThemeLoader from "./ThemeLoader";
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -60,9 +62,10 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`${montserrat.variable} ${roboto.variable}`}>
-      <body className="bg-gray-700 text-gray-200 ">
+      <body className="bg-themeColor text-textColor ">
         <AuthProvider>
           <ProviderContext>
+            <ThemeLoader />
             <ModalCartItemsAdded />
             <FormeRegisterModal />
             <LoginModal />

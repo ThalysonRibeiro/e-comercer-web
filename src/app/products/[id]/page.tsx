@@ -93,21 +93,21 @@ export default function ProductId() {
             </div>
 
             <div className="w-1/2 p-3 flex flex-col">
-              <h1 className="mb-6 text-gray-100 text-2xl font-semibold">{product?.title}</h1>
+              <h1 className="mb-6 text-title text-2xl font-semibold">{product?.title}</h1>
 
               <p className="line-clamp-3">{product?.description}</p>
 
               <div className="flex w-full mt-6">
 
                 <div className="flex flex-col gap-2 w-full">
-                  <span className="text-sm line-through text-gray-300">
+                  <span className="text-sm line-through text-oldPrice">
                     R$  {product?.old_price}
                   </span>
-                  <span className="text-3xl text-green font-semibold">
+                  <span className="text-3xl text-price font-semibold">
                     R$  {product?.price}
                   </span>
-                  <p className="text-gray-300 text-sm">À vista no PIX</p>
-                  <p className="text-gray-300 text-sm">ou até <span className="font-semibold">10x de R$ {(Number(product?.price) / 10).toFixed(2)}</span></p>
+                  <p className="text-oldPrice text-sm">À vista no PIX</p>
+                  <p className="text-oldPrice text-sm">ou até <span className="font-semibold">10x de R$ {(Number(product?.price) / 10).toFixed(2)}</span></p>
                 </div>
 
                 <div className="flex w-full gap-3">

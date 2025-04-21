@@ -10,6 +10,7 @@ import { serverApi } from "./api/api";
 
 
 
+
 export const revalidate = 120; //renderizar dinamincamente
 
 
