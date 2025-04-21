@@ -17,7 +17,7 @@ export const revalidate = 120; //renderizar dinamincamente
 export default async function Home() {
   const response = await serverApi.get(`/products`);
   const categoryMenu = await serverApi.get(`/category?hasChildren=true&limit=6&offset=0`);
-  const { data: siteContent } = await serverApi.get('/site-content/admin')
+  const { data: siteContent } = await serverApi.get('/site-content')
   // const session = await getSession();
 
   // if (!session) {

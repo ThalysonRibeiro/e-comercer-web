@@ -1,3 +1,5 @@
+import { ThemeColorsProps } from "./themeColors";
+
 export interface SiteContentProps {
   id: string;
   banner: string;
@@ -18,6 +20,7 @@ export interface SiteContentProps {
   promotionHero: PromotionHeroProps[];
   socialMedia: SocialMediaProps[];
   contactInfo: ContactInfoProps[];
+  themeColors: ThemeColorsProps[];
 }
 
 interface PromotionsProps {
