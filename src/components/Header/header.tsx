@@ -12,6 +12,7 @@ import { UserDropdown } from "./userDropdown";
 import api from "@/lib/axios";
 import { WishList } from "./wishList";
 import { WishlistProps } from "@/types/user";
+import { SiteContentProps } from "@/types/siteContent";
 
 interface HeaderProps extends MenuProps {
   siteContent: SiteContentProps[];

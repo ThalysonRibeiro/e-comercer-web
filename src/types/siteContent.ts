@@ -1,4 +1,4 @@
-interface SiteContentProps {
+export interface SiteContentProps {
   id: string;
   banner: string;
   video: string;
@@ -8,6 +8,7 @@ interface SiteContentProps {
   metaTitle: string;
   metaDescription: string;
   keywords: string[];
+  image_openGraph: string;
   favicon: string;
   footerText: string;
   themeColor: string;
