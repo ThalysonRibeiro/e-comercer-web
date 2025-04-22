@@ -48,7 +48,7 @@ export function InputPhone({ onChangeCountry, selectCountry, phone, setPhone, cl
         className="text-sm outline-0 bg-transparent backdrop-blur-sm rounded-lg"
       >
         {optionsArray.map(option => (
-          <option key={option.name} value={option.value}>{option.name} {option.value}</option>
+          <option className="bg-bgCard" key={option.name} value={option.value}>{option.name} {option.value}</option>
         ))}
       </select>
 

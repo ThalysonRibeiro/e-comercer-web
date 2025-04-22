@@ -117,8 +117,8 @@ export function LoginModal() {
                 onChange={(e) => setLoginMethod(e.target.value as "email" | "phone")}
                 className=" border border-borderColor rounded-lg p-2"
               >
-                <option value="email">Email</option>
-                <option value="phone">Telefone</option>
+                <option className="bg-bgCard" value="email">Email</option>
+                <option className="bg-bgCard" value="phone">Telefone</option>
               </select>
 
               {loginMethod === "email" ? (

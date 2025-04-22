@@ -9,7 +9,6 @@ import { LoginModal } from "@/components/loginModal";
 import { FormeRegisterModal } from "@/components/registerModal/formeRegister";
 import { serverApi } from "./api/api";
 import { SiteContentProps } from "@/types/siteContent";
-import useThemeColors from "./hooks/useThemeColors";
 import ThemeLoader from "./ThemeLoader";
 
 const montserrat = Montserrat({

@@ -15,7 +15,7 @@ import { WishlistProps } from "@/types/user";
 import { SiteContentProps } from "@/types/siteContent";
 
 interface HeaderProps extends MenuProps {
-  siteContent: SiteContentProps[];
+  siteContent: SiteContentProps;
 }
 
 
@@ -30,18 +30,18 @@ export function Header({ category, siteContent }: HeaderProps) {
         <div className="flex gap-3 justify-between items-center">
           <Link href="/">
             <Flex className="items-center gap-3">
-              {siteContent[0].image_logo !== ""
+              {siteContent.image_logo !== ""
                 ? (<div className="w-15 h-15 bg-cover">
                   <Image
                     width={320}
                     height={100}
-                    src={siteContent[0].image_logo}
+                    src={siteContent.image_logo}
                     alt="logo do site"
                   />
                 </div>
                 )
                 : (<p className="font-semibold text-xl text-title capitalize">
-                  {siteContent[0].title}
+                  {siteContent.title}
                 </p>
                 )
               }

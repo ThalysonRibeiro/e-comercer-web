@@ -6,6 +6,8 @@ import { CardAnnouncement } from "@/components/LimitedTimeOffer/cardAnnouncement
 import { LimitedTimeOffer } from "@/components/LimitedTimeOffer/limitedTimeOffer";
 import { Flex } from "@/components/ui/flex";
 import { serverApi } from "./api/api";
+import { BgVideo } from "@/components/bgVideo";
+import { SiteContentProps } from "@/types/siteContent";
 
 
 
@@ -17,7 +19,8 @@ export const revalidate = 120; //renderizar dinamincamente
 export default async function Home() {
   const { data: featuredProducts } = await serverApi.get(`/products?endDate=true&isActive=true&featured=true&stock=true&emphasis=true`);
   const { data: categoryMenu } = await serverApi.get(`/category?hasChildren=true&limit=6&offset=0`);
-  const { data: siteContent } = await serverApi.get('/site-content')
+  const response = await serverApi.get('/site-content');
+  const siteContent: SiteContentProps = response.data[0];
   // const session = await getSession();
 
   // if (!session) {
@@ -26,6 +29,10 @@ export default async function Home() {
 
   return (
     <div className="w-full">
+      {siteContent.bg_video && (
+        <BgVideo videoUrl={siteContent.bg_video} />
+      )}
+
       <Header
         category={categoryMenu}
         siteContent={siteContent}

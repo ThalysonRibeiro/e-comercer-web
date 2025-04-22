@@ -324,12 +324,12 @@ export function FormeRegisterModal() {
                   </Label>
                   <select
                     {...register('gender')}
-                    className={`outline-0 border border-borderColor rounded-lg px-1 w-full h-10 ${errors.gender ? "border-danger" : ""}`}
+                    className={`outline-0 border border-borderColor rounded-lg px-1 w-full h-10 ${errors.gender ? "border-danger" : ""} focus-within:border-primaryColor`}
                   >
-                    <option value="masculino">Masculino</option>
-                    <option value="feminino">Feminino</option>
-                    <option value="outro">Outro</option>
-                    <option value="prefiro_nao_dizer">Prefiro não dizer</option>
+                    <option className="bg-bgCard" value="masculino">Masculino</option>
+                    <option className="bg-bgCard" value="feminino">Feminino</option>
+                    <option className="bg-bgCard" value="outro">Outro</option>
+                    <option className="bg-bgCard" value="prefiro_nao_dizer">Prefiro não dizer</option>
                   </select>
                   {errors.gender && <span className="text-danger text-xs mt-1 text-left">{errors.gender.message}</span>}
                 </div>
