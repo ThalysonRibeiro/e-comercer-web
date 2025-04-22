@@ -6,6 +6,8 @@ import { createContext, ReactNode, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import api from "@/lib/axios";
 import { ProfileProps, WishlistProps } from "@/types/user";
+import { useToastState } from "@/app/hooks/toast/toast";
+import { ToastItem, ToastType } from "@/app/hooks/toast/toastItem";
 
 export interface ContextType {
   cart: CartProps[];
@@ -26,6 +28,8 @@ export interface ContextType {
   openModalLoginRef: React.RefObject<HTMLDivElement | null>;
   openModalRegisterRef: React.RefObject<HTMLDivElement | null>;
   profileDetail: ProfileProps | null;
+  addToast: (type: ToastType, message: string, duration?: number) => string;
+  removeToast: (id: string) => void;
 }
 
 interface CartProps extends ProductsProps {
@@ -53,6 +57,7 @@ function ProviderContext({ children }: ProviderProps) {
   const openModalLoginRef = useRef<HTMLDivElement>(null);
   const openModalRegisterRef = useRef<HTMLDivElement>(null);
   const [profileDetail, setProfileDetail] = useState<ProfileProps | null>(null);
+  const { toasts, addToast, removeToast } = useToastState();
 
 
   const [cart, setCart] = useState<CartProps[]>([]);
@@ -249,10 +254,24 @@ function ProviderContext({ children }: ProviderProps) {
         isOpenModalLogin,
         isOpenModalRegister,
         closeModalRegisterScrollY,
-        profileDetail
+        profileDetail,
+        addToast,
+        removeToast
       }}
     >
       {children}
+      <div className="fixed top-4 right-4 w-64 z-50">
+        {toasts.map((toast) => (
+          <ToastItem
+            key={toast.id}
+            id={toast.id}
+            type={toast.type}
+            message={toast.message}
+            duration={toast.duration}
+            onClose={removeToast}
+          />
+        ))}
+      </div>
     </Context>
   )
 }
