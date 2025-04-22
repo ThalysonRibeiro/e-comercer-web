@@ -15,8 +15,8 @@ export const revalidate = 120; //renderizar dinamincamente
 
 
 export default async function Home() {
-  const response = await serverApi.get(`/products`);
-  const categoryMenu = await serverApi.get(`/category?hasChildren=true&limit=6&offset=0`);
+  const { data: featuredProducts } = await serverApi.get(`/products?endDate=true&isActive=true&featured=true&stock=true&emphasis=true`);
+  const { data: categoryMenu } = await serverApi.get(`/category?hasChildren=true&limit=6&offset=0`);
   const { data: siteContent } = await serverApi.get('/site-content')
   // const session = await getSession();
 
@@ -27,7 +27,7 @@ export default async function Home() {
   return (
     <div className="w-full">
       <Header
-        category={categoryMenu.data}
+        category={categoryMenu}
         siteContent={siteContent}
       />
       <ButtonCart />
@@ -36,7 +36,7 @@ export default async function Home() {
       <section className="w-full flex items-center justify-center mt-6 px-6">
         <Flex className=" justify-around flex-row max-w-7xl w-full gap-2">
           <CardAnnouncement />
-          <LimitedTimeOffer products={response.data} />
+          <LimitedTimeOffer products={featuredProducts} />
         </Flex>
       </section>
 
