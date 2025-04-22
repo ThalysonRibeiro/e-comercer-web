@@ -6,6 +6,9 @@ export interface ThemeColorsProps {
   hover: string;
   star: string;
   danger: string;
+  success: string;
+  warning: string;
+  shadowColor: string;
   price: string;
   title: string;
   textColor: string;

@@ -1,58 +1,65 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import api from '@/lib/axios'
 import { ThemeColorsProps } from '@/types/themeColors'
 
-export default function useThemeColors() {
-  useEffect(() => {
-    async function fetchColors() {
-      const response = await api.get('/theme-color')
-      const data: ThemeColorsProps = response.data;
+export default function useThemeColors({ isDarkTheme }: { isDarkTheme: boolean }) {
+  const [themes, setThemes] = useState<ThemeColorsProps[]>([]);
+  const [currentTheme, setCurrentTheme] = useState<ThemeColorsProps | null>(null);
 
-      if (data?.primaryColor) {
-        document.documentElement.style.setProperty('--color-primaryColor', data?.primaryColor)
-      }
-      if (data?.secondaryColor) {
-        document.documentElement.style.setProperty('--color-secondaryColor', data?.secondaryColor)
-      }
-      if (data?.hover) {
-        document.documentElement.style.setProperty('--color-hover', data?.hover)
-      }
-      if (data?.star) {
-        document.documentElement.style.setProperty('--color-star', data?.star)
-      }
-      if (data?.danger) {
-        document.documentElement.style.setProperty('--color-danger', data?.danger)
-      }
-      if (data?.price) {
-        document.documentElement.style.setProperty('--color-price', data?.price)
-      }
-      if (data?.title) {
-        document.documentElement.style.setProperty('--color-title', data?.title)
-      }
-      if (data?.textColor) {
-        document.documentElement.style.setProperty('--color-textColor', data?.textColor)
-      }
-      if (data?.textHover) {
-        document.documentElement.style.setProperty('--color-textHover', data?.textHover)
-      }
-      if (data?.oldPrice) {
-        document.documentElement.style.setProperty('--color-oldPrice', data?.oldPrice)
-      }
-      if (data?.borderColor) {
-        document.documentElement.style.setProperty('--color-borderColor', data?.borderColor)
-      }
-      if (data?.textButton) {
-        document.documentElement.style.setProperty('--color-textButton', data?.textButton)
-      }
-      if (data?.bgCard) {
-        document.documentElement.style.setProperty('--color-bgCard', data?.bgCard)
-      }
-      if (data?.themeColor) {
-        document.documentElement.style.setProperty('--color-themeColor', data?.themeColor)
+  // Busca os temas apenas uma vez quando o componente montar
+  useEffect(() => {
+    async function fetchThemes() {
+      try {
+        const response = await api.get(`/theme-color`);
+        setThemes(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar temas:", error);
       }
     }
-    fetchColors()
-  }, [])
+
+    fetchThemes();
+  }, []);
+
+  // Alterna entre os temas quando isDarkTheme ou themes mudar
+  useEffect(() => {
+    if (themes.length > 0) {
+      const index = isDarkTheme ? 0 : 1;
+      setCurrentTheme(themes[index]);
+    }
+  }, [isDarkTheme, themes]);
+
+  // Aplica as propriedades CSS quando o tema atual mudar
+  useEffect(() => {
+    if (!currentTheme) return;
+
+    const cssProperties = [
+      { name: '--color-primaryColor', value: currentTheme.primaryColor },
+      { name: '--color-secondaryColor', value: currentTheme.secondaryColor },
+      { name: '--color-hover', value: currentTheme.hover },
+      { name: '--color-star', value: currentTheme.star },
+      { name: '--color-danger', value: currentTheme.danger },
+      { name: '--color-success', value: currentTheme.success },
+      { name: '--color-warning', value: currentTheme.warning },
+      { name: '--color-shadowColor', value: currentTheme.shadowColor },
+      { name: '--color-price', value: currentTheme.price },
+      { name: '--color-title', value: currentTheme.title },
+      { name: '--color-textColor', value: currentTheme.textColor },
+      { name: '--color-textHover', value: currentTheme.textHover },
+      { name: '--color-oldPrice', value: currentTheme.oldPrice },
+      { name: '--color-borderColor', value: currentTheme.borderColor },
+      { name: '--color-textButton', value: currentTheme.textButton },
+      { name: '--color-bgCard', value: currentTheme.bgCard },
+      { name: '--color-themeColor', value: currentTheme.themeColor }
+    ];
+
+    cssProperties.forEach(property => {
+      if (property.value) {
+        document.documentElement.style.setProperty(property.name, property.value);
+      }
+    });
+  }, [currentTheme]);
+
+  return currentTheme;
 }

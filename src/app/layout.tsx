@@ -64,7 +64,7 @@ export default function RootLayout({
       <body className="bg-themeColor text-textColor ">
         <AuthProvider>
           <ProviderContext>
-            <ThemeLoader />
+            {/* <ThemeLoader /> */}
             <ModalCartItemsAdded />
             <FormeRegisterModal />
             <LoginModal />
@@ -78,7 +78,7 @@ export default function RootLayout({
               pauseOnFocusLoss
               draggable
               pauseOnHover
-              theme="dark"
+              theme="light"
               transition={Flip}
             />
             {children}

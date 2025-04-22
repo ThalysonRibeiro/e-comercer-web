@@ -9,6 +9,9 @@
   --color-hover: #AF5EFF;
   --color-star: #FFD900;
   --color-danger: #F05D6C;
+  --color-success: #00FF08;
+  --color-warning: #000;
+  --color-shadowColor: rgba(0, 0, 0, 0.092);
   --color-price: #00AE2E;
   --color-title: #C8D0DA;
   --color-textColor: #95A1B1;
@@ -18,6 +21,10 @@
   --color-textButton: #2A313C;
   --color-bgCard: #221F2F;
   --color-themeColor: #0e0c1d;
+  --color-green: green;
+  --color-red: red;
+  --color-yellow: yellow;
+  --color-blue: blue;
 
   --font-sans: var(--font-roboto);
 }

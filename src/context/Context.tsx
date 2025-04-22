@@ -8,6 +8,7 @@ import api from "@/lib/axios";
 import { ProfileProps, WishlistProps } from "@/types/user";
 import { useToastState } from "@/app/hooks/toast/toast";
 import { ToastItem, ToastType } from "@/app/hooks/toast/toastItem";
+import ThemeLoader from "@/app/ThemeLoader";
 
 export interface ContextType {
   cart: CartProps[];
@@ -30,6 +31,7 @@ export interface ContextType {
   profileDetail: ProfileProps | null;
   addToast: (type: ToastType, message: string, duration?: number) => string;
   removeToast: (id: string) => void;
+  IsActiveTheme: () => void;
 }
 
 interface CartProps extends ProductsProps {
@@ -58,6 +60,7 @@ function ProviderContext({ children }: ProviderProps) {
   const openModalRegisterRef = useRef<HTMLDivElement>(null);
   const [profileDetail, setProfileDetail] = useState<ProfileProps | null>(null);
   const { toasts, addToast, removeToast } = useToastState();
+  const [activeTheme, setActiveTheme] = useState<boolean>(true);
 
 
   const [cart, setCart] = useState<CartProps[]>([]);
@@ -231,7 +234,9 @@ function ProviderContext({ children }: ProviderProps) {
     getFullUserDetails();
   }, [userData?.id])
 
-
+  function IsActiveTheme() {
+    setActiveTheme(!activeTheme);
+  }
 
 
   return (
@@ -256,9 +261,11 @@ function ProviderContext({ children }: ProviderProps) {
         closeModalRegisterScrollY,
         profileDetail,
         addToast,
-        removeToast
+        removeToast,
+        IsActiveTheme
       }}
     >
+      <ThemeLoader isDarkTheme={activeTheme} />
       {children}
       <div className="fixed top-4 right-4 w-64 z-50">
         {toasts.map((toast) => (
