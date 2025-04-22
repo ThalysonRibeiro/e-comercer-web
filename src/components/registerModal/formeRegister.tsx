@@ -9,7 +9,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formatCPF } from "@/utils/formatCPF";
 import { formatCNPJ } from "@/utils/formatCNPJ";
-import { InputPhone } from "./input-phone";
+import { InputPhone } from "../ui/input-phone";
 import { extractPhoneNumber, formatPhone } from "@/utils/formatPhone";
 import { Label } from "@/components/ui/label";
 import api from "@/lib/axios";

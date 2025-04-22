@@ -12,7 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { extractPhoneNumber, formatPhone } from "@/utils/formatPhone";
 import { Context, ContextType } from "@/context/Context";
 import { X } from "lucide-react";
-import { InputPhone } from "./registerModal/input-phone";
+import { InputPhone } from "./ui/input-phone";
 
 export function LoginModal() {
   const {
@@ -111,11 +111,11 @@ export function LoginModal() {
           >
             <h1 className="text-2xl font-bold mb-8">Faça login para continuar</h1>
 
-            <div className="w-full flex space-x-2">
+            <div className="w-full flex flex-col space-y-2">
               <select
                 value={loginMethod}
                 onChange={(e) => setLoginMethod(e.target.value as "email" | "phone")}
-                className="border border-borderColor rounded-lg p-2"
+                className=" border border-borderColor rounded-lg p-2"
               >
                 <option value="email">Email</option>
                 <option value="phone">Telefone</option>
