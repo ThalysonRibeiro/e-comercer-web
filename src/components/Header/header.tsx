@@ -52,8 +52,8 @@ export function Header({ category, siteContent }: HeaderProps) {
           <div className="flex items-center justify-center gap-4 text-title">
             {userData === null ? (
               <>
-                <button onClick={openCloseModalLogin} className="transition duration-300 hover:text-hover">Login</button>
-                <button onClick={openCloseModalRegister} className="transition duration-300 hover:text-hover">Register</button>
+                <button onClick={openCloseModalLogin} className="transition duration-300 hover:text-hover cursor-pointer">Login</button>
+                <button onClick={openCloseModalRegister} className="transition duration-300 hover:text-hover cursor-pointer">Register</button>
               </>
             ) : (
               <>
@@ -61,12 +61,13 @@ export function Header({ category, siteContent }: HeaderProps) {
                 <WishList userid={userData.id} addItem={addItemCart} />
 
 
-                <button onClick={openCloseModalCart} className="transition duration-300 hover:text-hover">
+                <button onClick={openCloseModalCart} className="transition duration-300 hover:text-hover cursor-pointer">
                   {cartAmount === 0 ? (
                     <ShoppingCart className="size-6" />
                   ) : (
                     <div className="flex flex-col items-center justify-center relative">
-                      <div className="text-xs text-textButton font-semibold bg-primaryColor rounded-full w-4 absolute -top-1 left-4.5">{cartAmount}
+                      <div className="text-xs text-textButton font-semibold bg-primaryColor rounded-full w-4 absolute -top-1 left-4.5">
+                        {cartAmount}
                       </div>
                       <ShoppingCart className="size-6" />
                     </div>

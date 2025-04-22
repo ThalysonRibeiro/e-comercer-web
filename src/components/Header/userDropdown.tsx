@@ -44,13 +44,13 @@ export function UserDropdown({ avatar }: { avatar: string }) {
         aria-haspopup="true"
         aria-expanded={openUserSettings}
         aria-controls="user-dropdown"
-        className="min-w-10"
+        className="min-w-10 cursor-pointer border-2 rounded-full hover:border-hover"
       >
         <Image
           src={avatar}
           alt="user"
-          width={42}
-          height={42}
+          width={40}
+          height={40}
           className="rounded-full"
         />
       </button>

@@ -82,7 +82,7 @@ export function WishList({ userid, addItem }: ListProps) {
 
     <div ref={wishListRef} className="relative flex items-center">
       <button
-        className="transition duration-300 hover:text-hover"
+        className="transition duration-300 hover:text-hover cursor-pointer"
         onClick={wishToggleDropdown}
         aria-haspopup="true"
         aria-expanded={openWishList}
