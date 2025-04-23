@@ -1,29 +1,40 @@
-import { Car, CreditCard, ShoppingCart, Star } from "lucide-react";
+"use client"
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
 import { Flex } from "../ui/flex";
+import { useIsMobile } from '@/app/hooks/useIsMobile';
+import { useIsTablet } from '@/app/hooks/useITablet';
 
-export function ServiceHero() {
+export function ServiceHero({ service }: { service: string[] }) {
+  const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
+  let responsive;
+  if (isTablet) {
+    responsive = 2
+  }
+  if (isMobile) {
+    responsive = 1
+  }
   return (
-    <Flex className="gap-3 w-full justify-between backdrop-blur-lg bg-transparent rounded-lg border border-b-borderColor p-4 mt-6">
-      <Flex
-        className="items-center justify-center hover:text-title h-8 text-primaryColor border-r border-r-primaryColor flex-1"
+    <Flex className="gap-3 w-full justify-between mt-6">
+      <Swiper
+        spaceBetween={40}
+        slidesPerView={responsive ? responsive : 3}
+        loop={true}
+        modules={[Autoplay]}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        className='w-[1280]'
       >
-        <Car className="mr-3" />SERVICE SHOP
-      </Flex>
-      <Flex
-        className="items-center justify-center hover:text-title h-8 text-primaryColor border-r border-r-primaryColor flex-1"
-      >
-        <CreditCard className="mr-3" />SERVICE SHOP
-      </Flex>
-      <Flex
-        className="items-center justify-center hover:text-title h-8 text-primaryColor border-r border-r-primaryColor flex-1"
-      >
-        <ShoppingCart className="mr-3" />SERVICE SHOP
-      </Flex>
-      <Flex
-        className="items-center justify-center hover:text-title h-8 text-primaryColor flex-1"
-      >
-        <Star className="mr-3" />SERVICE SHOP
-      </Flex>
+        {service.map(item => (
+          <SwiperSlide key={item} className='cursor-default backdrop-blur-lg bg-transparent rounded-lg py-2 border border-borderColor flex items-center justify-center border-r uppercase text-center text-sm text-primaryColor'>
+            {item}
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </Flex>
   )
 }

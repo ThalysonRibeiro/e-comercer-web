@@ -4,9 +4,9 @@ export function CardSpecialPromotion() {
   return (
     <Flex className="w-full mt-6 justify-between">
       <span
-        className="w-1/3 text-title text-3xl font-semibold bg-primaryColor p-3 rounded-l-lg px-6"
+        className="w-2/5 flex justify-center items-center uppercase text-title lg:text-3xl md:text-xl text-sm font-semibold bg-primaryColor h-15  rounded-l-lg pr-3"
       >
-        BLACK FRIDAY SALE!
+        mega promoção!
       </span>
       <div
         className="w-3/4 text-title text-2xl bg-bgCard p-3 rounded-r-lg text-center marquee"
@@ -15,7 +15,9 @@ export function CardSpecialPromotion() {
           marginLeft: "-30px",
         }}
       >
-        <span className="block whitespace-nowrap animate-marquee">ALGUMA COISA SOBRE AS PROMOÇÕES DA BLACK FRIDAY ALGUMA COISA SOBRE AS PROMOÇÕES DA BLACK FRIDAY</span>
+        <span className="block whitespace-nowrap animate-marquee">
+          🎉 Mega Promoção de Eletrônicos! ⚡ 💥 Produtos com até 50% OFF e condições especiais no cartão! 📦 Frete grátis para diversas regiões 🕒 Promoção por tempo limitado ou enquanto durarem os estoques!
+        </span>
       </div>
     </Flex>
   )

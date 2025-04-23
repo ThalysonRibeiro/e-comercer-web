@@ -45,7 +45,7 @@ h6 {
 
 .animate-marquee {
   display: inline-block;
-  animation: marquee 10s linear infinite;
+  animation: marquee 15s linear infinite;
 }
 
 @keyframes marquee {

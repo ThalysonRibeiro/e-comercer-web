@@ -12,6 +12,7 @@ export interface SiteContentProps {
   keywords: string[];
   image_openGraph: string;
   favicon: string;
+  service: string[];
   footerText: string;
   themeColor: string;
   secondaryColor: string;
@@ -23,7 +24,7 @@ export interface SiteContentProps {
   themeColors: ThemeColorsProps[];
 }
 
-interface PromotionsProps {
+export interface PromotionsProps {
   id: string;
   title: string;
   slug: string;
@@ -44,7 +45,7 @@ interface PromotionsProps {
   siteContentId: string;
 }
 
-interface PromotionHeroProps {
+export interface PromotionHeroProps {
   id: string;
   title: string;
   subTitle: string;
@@ -53,8 +54,6 @@ interface PromotionHeroProps {
   image?: string;
   buttonText?: string;
   buttonLink?: string;
-  backgroundColor?: string;
-  textColor?: string;
   position?: string;
   isActive: boolean;
   order: number;
@@ -65,7 +64,7 @@ interface PromotionHeroProps {
   siteContentId: string;
 }
 
-interface SocialMediaProps {
+export interface SocialMediaProps {
   id: string;
   siteContentId: string;
   name: string;
@@ -74,7 +73,7 @@ interface SocialMediaProps {
   updatedAt: Date;
 }
 
-interface ContactInfoProps {
+export interface ContactInfoProps {
   id: string;
   siteContentId: string;
   type: string;

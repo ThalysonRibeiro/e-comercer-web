@@ -39,7 +39,10 @@ export default async function Home() {
         siteContent={siteContent}
       />
       <ButtonCart />
-      {/* <Hero data={promotion} /> */}
+      <Hero
+        hero={siteContent.promotionHero}
+        service={siteContent.service}
+      />
 
       <section className="w-full flex items-center justify-center mt-6 px-6">
         <Flex className=" justify-around flex-row max-w-7xl w-full gap-2">
@@ -47,12 +50,7 @@ export default async function Home() {
           <LimitedTimeOffer products={featuredProducts} />
         </Flex>
       </section>
-      <section className="w-full flex items-center justify-center mt-6 px-6">
-        <Flex className=" justify-around flex-row max-w-7xl w-full gap-2">
-          <CardAnnouncement />
-          <LimitedTimeOffer products={featuredProducts} />
-        </Flex>
-      </section>
+
 
       <section className="w-full flex flex-col gap-6  items-center justify-center mt-6">
         {/* <CardProductCarousel products={response.data} />
