@@ -40,8 +40,13 @@ export default async function Home() {
       />
       <ButtonCart />
       {/* <Hero data={promotion} /> */}
-      {/* <SideBarMenu category={categoryMenu} /> */}
 
+      <section className="w-full flex items-center justify-center mt-6 px-6">
+        <Flex className=" justify-around flex-row max-w-7xl w-full gap-2">
+          <CardAnnouncement />
+          <LimitedTimeOffer products={featuredProducts} />
+        </Flex>
+      </section>
       <section className="w-full flex items-center justify-center mt-6 px-6">
         <Flex className=" justify-around flex-row max-w-7xl w-full gap-2">
           <CardAnnouncement />

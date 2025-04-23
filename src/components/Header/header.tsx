@@ -50,7 +50,7 @@ export function Header({ category, siteContent }: HeaderProps) {
           <InputSearch />
           <SideBarMenu category={category} />
 
-          <div className="flex items-center justify-center gap-4 text-title">
+          <div className=" hidden md:flex items-center justify-center gap-4 text-title">
             <div className="lg:flex hidden">
               <SwitchTheme />
             </div>

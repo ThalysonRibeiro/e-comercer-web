@@ -205,7 +205,7 @@ export function FormeRegisterModal() {
 
   useEffect(() => {
     function toggleVisibility() {
-      if (window.scrollY > 300) {
+      if (window.scrollY > 1000) {
         closeModalRegisterScrollY();
       }
     }
@@ -219,7 +219,7 @@ export function FormeRegisterModal() {
     <>
       {isOpenModalRegister && (
         <div className="flex items-center w-full justify-center absolute">
-          <main ref={openModalRegisterRef} className="z-99 relative bg-bgCard max-w-125 md:max-w-230 w-full flex flex-col items-center justify-center space-y-2 px-10 py-5 text-center border border-borderColor rounded-lg overflow-auto">
+          <main ref={openModalRegisterRef} className="z-99 relative bg-bgCard max-w-125 md:max-w-230 w-full flex flex-col items-center justify-center m-4 space-y-2 px-10 py-5 text-center border border-borderColor rounded-lg overflow-auto">
             <button
               onClick={openCloseModalRegister}
               className="text-primaryColor hover:text-hover absolute top-2 right-2">

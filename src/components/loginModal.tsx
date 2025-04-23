@@ -99,7 +99,7 @@ export function LoginModal() {
   return (
     <>
       {isOpenModalLogin && (
-        <div ref={openModalLoginRef} className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-99 bg-bgCard border border-borderColor rounded-lg p-15 space-y-4">
+        <div ref={openModalLoginRef} className="min-w-115 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-99 bg-bgCard border border-borderColor rounded-lg p-10 space-y-4">
           <button
             onClick={openCloseModalLogin}
             className="text-primaryColor hover:text-hover absolute top-2 right-2">

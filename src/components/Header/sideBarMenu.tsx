@@ -35,10 +35,10 @@ export function SideBarMenu({ category }: MenuProps) {
           <Flex className="mx-1 mt-2 justify-between">
             <SwitchTheme />
             {userData === null ? (
-              <>
+              <div className="flex items-center justify-between gap-4 w-full px-6">
                 <button onClick={openCloseModalLogin} className="transition duration-300 hover:text-hover cursor-pointer">Login</button>
                 <button onClick={openCloseModalRegister} className="transition duration-300 hover:text-hover cursor-pointer">Register</button>
-              </>
+              </div>
             ) : (
               <>
                 <div
@@ -52,52 +52,52 @@ export function SideBarMenu({ category }: MenuProps) {
                     className="rounded-full"
                   />
                 </div>
+
+                <div className="py-1 capitalize">
+                  <Link
+                    href={`/profile`}
+                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
+                    role="menuitem"
+                  >
+                    <User size={22} />
+                    Perfil
+                  </Link>
+                  <Link
+                    href={`/wishlist`}
+                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
+                    role="menuitem"
+                  >
+                    <Heart size={22} />
+                    wishlist
+                  </Link>
+                  <Link
+                    href={`/`}
+                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
+                    role="menuitem"
+                  >
+                    <Settings size={22} />
+                    Configuraões
+                  </Link>
+                  <Link
+                    href={`/`}
+                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
+                    role="menuitem"
+                  >
+                    <ShoppingBag size={22} />
+                    Compras
+                  </Link>
+                  <button
+                    onClick={() => signOut()}
+                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-start text-textColor hover:bg-hover hover:text-textButton cursor-pointer"
+                    role="menuitem"
+                  >
+                    <LogOut size={22} />
+                    Sair
+                  </button>
+                </div>
               </>
             )}
           </Flex>
-          <div className="py-1 capitalize">
-            <Link
-              href={`/profile`}
-              className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
-              role="menuitem"
-            >
-              <User size={22} />
-              Perfil
-            </Link>
-            <Link
-              href={`/wishlist`}
-              className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
-              role="menuitem"
-            >
-              <Heart size={22} />
-              wishlist
-            </Link>
-            <Link
-              href={`/`}
-              className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
-              role="menuitem"
-            >
-              <Settings size={22} />
-              Configuraões
-            </Link>
-            <Link
-              href={`/`}
-              className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
-              role="menuitem"
-            >
-              <ShoppingBag size={22} />
-              Compras
-            </Link>
-            <button
-              onClick={() => signOut()}
-              className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-start text-textColor hover:bg-hover hover:text-textButton cursor-pointer"
-              role="menuitem"
-            >
-              <LogOut size={22} />
-              Sair
-            </button>
-          </div>
-
           <p className="text-textColor/50 ml-1">
             Categorias
           </p>
