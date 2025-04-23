@@ -4,11 +4,11 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { Flex } from "../ui/flex";
 import { useIsMobile } from '@/app/hooks/useIsMobile';
-import { useIsTablet } from '@/app/hooks/useITablet';
+
 
 export function ServiceHero({ service }: { service: string[] }) {
   const isMobile = useIsMobile();
-  const isTablet = useIsTablet();
+  const isTablet = useIsMobile(768);
   let responsive;
   if (isTablet) {
     responsive = 2
