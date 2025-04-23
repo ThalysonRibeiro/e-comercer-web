@@ -1,47 +1,22 @@
 "use client"
+import { Context, ContextType } from '@/context/Context';
 import { Category } from '@/types/category';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 
 export interface MenuProps {
   category: Category[];
 }
 
 function DropdownMenu({ category }: MenuProps) {
-  // Estado para controlar menu mobile aberto/fechado
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // Estado para controlar qual submenu está aberto
+  const { toggleSideBar } = useContext(Context) as ContextType;
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  // Função para alternar um menu específico
   const toggleDropdown = (index: number) => {
     setOpenMenuIndex(openMenuIndex === index ? null : index);
   };
-
-  // Alternar o menu mobile
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    // Fechar os submenus ao fechar o menu principal
-    if (isMobileMenuOpen) {
-      setOpenMenuIndex(null);
-    }
-  };
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setOpenMenuIndex(null);
-        setIsMobileMenuOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -51,7 +26,7 @@ function DropdownMenu({ category }: MenuProps) {
           <div key={item.name} className="relative">
             <button
               onClick={() => toggleDropdown(index)}
-              className="cursor-pointer text-sm text-title transition duration-300 hover:text-hover flex items-center justify-between px-1 py-1 rounded-md focus:outline-none focus:ring-1 focus:ring-hover"
+              className="cursor-pointer capitalize text-sm text-title transition duration-300 hover:text-hover flex items-center justify-between px-1 py-1 rounded-md focus:outline-none focus:ring-1 focus:ring-hover"
             >
               <span>{item.name}</span>
               <svg
@@ -72,7 +47,7 @@ function DropdownMenu({ category }: MenuProps) {
                       key={subItem.id}
                       href={`/categoria/${subItem.id}`}
                       onClick={() => setOpenMenuIndex(null)}
-                      className="block w-full px-4 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
+                      className="block w-full px-4 py-2 capitalize text-xs text-textColor hover:bg-hover hover:text-textButton"
                     >
                       {subItem.name}
                     </Link>
@@ -87,20 +62,16 @@ function DropdownMenu({ category }: MenuProps) {
       {/* Botão do Menu Hambúrguer - visível apenas em mobile */}
       <div className="lg:hidden">
         <button
-          onClick={toggleMobileMenu}
+          onClick={toggleSideBar}
           className="text-title hover:text-hover focus:outline-none border rounded-sm w-9 h-9 flex items-center justify-center"
           aria-label="Menu"
         >
-          {isMobileMenuOpen ? (
-            <X size={30} />
-          ) : (
-            <Menu size={30} />
-          )}
+          <Menu size={30} />
         </button>
       </div>
 
       {/* Menu Mobile - aparece quando clica no hambúrguer */}
-      {isMobileMenuOpen && (
+      {/* {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-10 -left-34 bg-bgCard rounded-lg shadow-lg z-20">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {category.map((item, index) => (
@@ -122,7 +93,6 @@ function DropdownMenu({ category }: MenuProps) {
                   )}
                 </button>
 
-                {/* Submenu para mobile */}
                 {item.children && item.children.length > 0 && openMenuIndex === index && (
                   <div className="pl-4 bg-bgCard rounded-md mt-1">
                     {item.children.map(subItem => (
@@ -144,7 +114,8 @@ function DropdownMenu({ category }: MenuProps) {
             ))}
           </div>
         </div>
-      )}
+      )} */}
+
     </div>
   );
 }

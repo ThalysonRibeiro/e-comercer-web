@@ -43,6 +43,11 @@ h6 {
   white-space: nowrap;
 }
 
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 10s linear infinite;
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(100%);
@@ -73,11 +78,6 @@ h6 {
   100% {
     transform: translatey(calc(4vh - 20px));
   }
-}
-
-.animate-marquee {
-  display: inline-block;
-  animation: marquee 10s linear infinite;
 }
 
 .sombra-interna {

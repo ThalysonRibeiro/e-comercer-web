@@ -8,6 +8,7 @@ import { Flex } from "@/components/ui/flex";
 import { serverApi } from "./api/api";
 import { BgVideo } from "@/components/bgVideo";
 import { SiteContentProps } from "@/types/siteContent";
+import { SideBarMenu } from "@/components/Header/sideBarMenu";
 
 
 
@@ -39,6 +40,7 @@ export default async function Home() {
       />
       <ButtonCart />
       {/* <Hero data={promotion} /> */}
+      {/* <SideBarMenu category={categoryMenu} /> */}
 
       <section className="w-full flex items-center justify-center mt-6 px-6">
         <Flex className=" justify-around flex-row max-w-7xl w-full gap-2">

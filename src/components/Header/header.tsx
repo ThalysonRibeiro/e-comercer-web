@@ -14,6 +14,7 @@ import { WishList } from "./wishList";
 import { WishlistProps } from "@/types/user";
 import { SiteContentProps } from "@/types/siteContent";
 import { SwitchTheme } from "./switchTheme";
+import { SideBarMenu } from "./sideBarMenu";
 
 interface HeaderProps extends MenuProps {
   siteContent: SiteContentProps;
@@ -21,7 +22,7 @@ interface HeaderProps extends MenuProps {
 
 
 export function Header({ category, siteContent }: HeaderProps) {
-  const { userData, addToast, openCloseModalCart, openCloseModalLogin, openCloseModalRegister, cartAmount, addItemCart, IsActiveTheme } = useContext(Context) as ContextType;
+  const { userData, openCloseModalCart, openCloseModalLogin, openCloseModalRegister, cartAmount, addItemCart, openSideBar } = useContext(Context) as ContextType;
 
   return (
     <header className="w-full min-h-40 px-6 flex items-center justify-center border-b border-b-borderColor">
@@ -47,9 +48,12 @@ export function Header({ category, siteContent }: HeaderProps) {
             </Flex>
           </Link>
           <InputSearch />
+          <SideBarMenu category={category} />
 
           <div className="flex items-center justify-center gap-4 text-title">
-            <SwitchTheme />
+            <div className="lg:flex hidden">
+              <SwitchTheme />
+            </div>
             {userData === null ? (
               <>
                 <button onClick={openCloseModalLogin} className="transition duration-300 hover:text-hover cursor-pointer">Login</button>
@@ -57,8 +61,10 @@ export function Header({ category, siteContent }: HeaderProps) {
               </>
             ) : (
               <>
-                <UserDropdown avatar={userData?.avatar as string} />
-                <WishList userid={userData.id} addItem={addItemCart} />
+                <div className="lg:flex gap-4 hidden">
+                  <UserDropdown avatar={userData?.avatar as string} />
+                  <WishList userid={userData.id} addItem={addItemCart} />
+                </div>
 
 
                 <button onClick={openCloseModalCart} className="transition duration-300 hover:text-hover cursor-pointer">

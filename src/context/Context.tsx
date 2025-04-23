@@ -32,6 +32,9 @@ export interface ContextType {
   addToast: (type: ToastType, message: string, duration?: number) => string;
   removeToast: (id: string) => void;
   IsActiveTheme: () => void;
+  toggleSideBar: () => void;
+  openSideBar: boolean;
+  sideBarRef: React.RefObject<HTMLDivElement | null>;
 }
 
 interface CartProps extends ProductsProps {
@@ -61,6 +64,9 @@ function ProviderContext({ children }: ProviderProps) {
   const [profileDetail, setProfileDetail] = useState<ProfileProps | null>(null);
   const { toasts, addToast, removeToast } = useToastState();
   const [activeTheme, setActiveTheme] = useState<boolean>(true);
+  const [openSideBar, setOpenSideBar] = useState(false);
+  const sideBarRef = useRef<HTMLDivElement | null>(null);
+
 
 
   const [cart, setCart] = useState<CartProps[]>([]);
@@ -238,6 +244,22 @@ function ProviderContext({ children }: ProviderProps) {
     setActiveTheme(!activeTheme);
   }
 
+  function toggleSideBar() {
+    setOpenSideBar(!openSideBar);
+  }
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (sideBarRef.current && !sideBarRef.current.contains(event.target as Node)) {
+        setOpenSideBar(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, []);
+
 
   return (
     <Context
@@ -262,7 +284,10 @@ function ProviderContext({ children }: ProviderProps) {
         profileDetail,
         addToast,
         removeToast,
-        IsActiveTheme
+        IsActiveTheme,
+        toggleSideBar,
+        openSideBar,
+        sideBarRef
       }}
     >
       <ThemeLoader isDarkTheme={activeTheme} />
