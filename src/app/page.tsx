@@ -19,6 +19,9 @@ export const revalidate = 120; //renderizar dinamincamente
 
 export default async function Home() {
   const { data: featuredProducts } = await serverApi.get(`/products?endDate=true&isActive=true&featured=true&stock=true&emphasis=true`);
+  const { data: products1 } = await serverApi.get(`/products?limit=10&offset=0&stock=true&emphasis=true`);
+  // const { data: products2 } = await serverApi.get(`/products?limit=3&offset=3&stock=true&emphasis=true`);
+  // const { data: products3 } = await serverApi.get(`/products?limit=4&offset=4&stock=true&emphasis=true`);
   const { data: categoryMenu } = await serverApi.get(`/category?hasChildren=true&limit=6&offset=0`);
   const response = await serverApi.get('/site-content');
   const siteContent: SiteContentProps = response.data[0];
@@ -52,10 +55,10 @@ export default async function Home() {
       </section>
 
 
-      <section className="w-full flex flex-col gap-6  items-center justify-center mt-6">
-        {/* <CardProductCarousel products={response.data} />
-        <CardProductCarousel products={response.data} />
-        <CardProductCarousel products={response.data} /> */}
+      <section className="w-full flex flex-col gap-6  items-center justify-center mt-6 px-6">
+        {products1 && <CardProductCarousel products={products1} />}
+        {products1 && <CardProductCarousel products={products1} />}
+        {products1 && <CardProductCarousel products={products1} />}
       </section>
 
     </div>
