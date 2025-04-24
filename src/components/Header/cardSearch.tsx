@@ -1,10 +1,10 @@
 "use client"
 import Image from "next/image";
-import { StarRating } from "../starRating";
+import { StarRating } from "../ui/starRating";
 import { ProductsProps } from "@/types/product";
 import Link from "next/link";
 import { formatCurrency } from "@/utils/formatCurrency";
-import { Heart } from "lucide-react";
+import { Heart } from "../ui/heart";
 
 
 interface CardSearchProps {
@@ -36,7 +36,7 @@ export function CardSearch({ products }: CardSearchProps) {
             <div className="w-full flex flex-col justify-between ml-2">
               <div className="flex justify-between">
                 <StarRating rating={item.rating} />
-                <Heart className="text-primaryColor" />
+                <Heart heart={true} />
               </div>
               <p className="text-sm line-clamp-2 font-medium">{item.title}</p>
               <p className="text-price font-semibold">
