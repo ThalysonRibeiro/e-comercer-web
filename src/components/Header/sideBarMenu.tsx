@@ -32,17 +32,17 @@ export function SideBarMenu({ category }: MenuProps) {
           </button>
         </Flex>
         <div className="">
-          <Flex className="mx-1 mt-2 justify-between">
+          <Flex className="mx-1 mt-2 flex-col justify-between relative">
             <SwitchTheme />
             {userData === null ? (
-              <div className="flex items-center justify-between gap-4 w-full px-6">
+              <div className="flex items-center justify-between gap-4 w-full px-6 py-3">
                 <button onClick={openCloseModalLogin} className="transition duration-300 hover:text-hover cursor-pointer">Login</button>
                 <button onClick={openCloseModalRegister} className="transition duration-300 hover:text-hover cursor-pointer">Register</button>
               </div>
             ) : (
               <>
                 <div
-                  className="w-10 border-2 rounded-full"
+                  className="w-10 border-2 rounded-full absolute right-1"
                 >
                   <Image
                     src={userData?.avatar as string}
