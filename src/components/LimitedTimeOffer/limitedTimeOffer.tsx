@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { CountdownCard } from "./countdownCard";
-import { StarRating } from "../starRating";
+import { StarRating } from "../ui/starRating";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCreative } from 'swiper/modules';
 import 'swiper/css';
