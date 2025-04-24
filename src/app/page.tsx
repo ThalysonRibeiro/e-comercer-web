@@ -8,8 +8,6 @@ import { Flex } from "@/components/ui/flex";
 import { serverApi } from "./api/api";
 import { BgVideo } from "@/components/bgVideo";
 import { SiteContentProps } from "@/types/siteContent";
-import { SideBarMenu } from "@/components/Header/sideBarMenu";
-import { Review } from "@/components/ui/review";
 import { ReviewList } from "@/components/reviewList";
 
 
@@ -28,11 +26,6 @@ export default async function Home() {
   const response = await serverApi.get('/site-content');
   const siteContent: SiteContentProps = response.data[0];
   const { data: reviewData } = await serverApi.get('/review');
-  // const session = await getSession();
-
-  // if (!session) {
-  //   redirect("/")
-  // }
 
   return (
     <div className="w-full">

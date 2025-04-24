@@ -1,17 +1,15 @@
 "use client"
 import Image from "next/image";
-import { LayoutGrid, ChevronRight, Heart, User, ShoppingCart } from "lucide-react";
+import { LayoutGrid, ChevronRight, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 import { InputSearch } from "./inputSearch";
 import Link from "next/link";
 import { Flex } from "../ui/flex";
 import DropdownMenu, { MenuProps } from "./dropdown";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext } from "react";
 import { Context, ContextType } from "@/context/Context";
 import { UserDropdown } from "./userDropdown";
-import api from "@/lib/axios";
 import { WishList } from "./wishList";
-import { WishlistProps } from "@/types/user";
 import { SiteContentProps } from "@/types/siteContent";
 import { SwitchTheme } from "./switchTheme";
 import { SideBarMenu } from "./sideBarMenu";

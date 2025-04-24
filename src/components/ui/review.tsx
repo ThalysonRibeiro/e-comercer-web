@@ -1,11 +1,7 @@
 "use client"
-import { useContext } from "react";
 import { StarRating } from "./starRating";
-import { Context, ContextType } from "@/context/Context";
 import Image from "next/image";
 import { ReviewProps } from "@/types/review";
-import { startOfWeek, format } from 'date-fns';
-import { ptBR } from "date-fns/locale";
 import { formatDate } from "@/utils/formatDate";
 import { Flex } from "./flex";
 import no_image from "@/assets/no-image.png";

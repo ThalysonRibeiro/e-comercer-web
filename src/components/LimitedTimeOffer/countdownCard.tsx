@@ -82,7 +82,3 @@ export function CountdownCard({ endDate }: { endDate: string }) {
     </>
   )
 }
-
-// <>
-//   {countdown.days > 0 && ()}
-// </>

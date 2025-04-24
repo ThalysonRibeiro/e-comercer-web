@@ -2,7 +2,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css'
-import { HeroPromotioProps } from './hero';
 import { Flex } from '../ui/flex';
 import Link from 'next/link';
 import Image from 'next/image';

@@ -1,11 +1,9 @@
 "use client"
 import { UserData } from "@/app/api/auth/[...nextauth]/route";
-import { getServerAuthSession } from "@/lib/auth";
 import { ProductsProps } from "@/types/product";
 import { createContext, ReactNode, useEffect, useRef, useState } from "react";
-import { useSession } from "next-auth/react";
 import api from "@/lib/axios";
-import { ProfileProps, WishlistProps } from "@/types/user";
+import { ProfileProps } from "@/types/user";
 import { useToastState } from "@/app/hooks/toast/toast";
 import { ToastItem, ToastType } from "@/app/hooks/toast/toastItem";
 import ThemeLoader from "@/app/ThemeLoader";

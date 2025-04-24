@@ -1,5 +1,5 @@
 import React from 'react';
-import { Skull, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 

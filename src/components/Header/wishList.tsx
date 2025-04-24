@@ -19,10 +19,6 @@ export function WishList({ userid, addItem }: ListProps) {
   const wishListRef = useRef<HTMLDivElement>(null);
   const [wishList, setWishList] = useState<WishlistProps | null>(null);
 
-  // useEffect(() => {
-  // }, [wishList]);
-
-
   function wishToggleDropdown() {
     setOpenWishList(prev => !prev);
   }
@@ -75,8 +71,6 @@ export function WishList({ userid, addItem }: ListProps) {
       toast.error('Erro ao tentar remover item da lista de desejos');
     }
   }
-
-
 
   return (
 

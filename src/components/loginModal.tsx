@@ -3,7 +3,6 @@ import GoogleLoginButton from "@/components/GoogleLoginButton";
 import { Button } from "@/components/ui/button";
 import { Input, InputPassword } from "@/components/ui/input";
 import { signIn } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { z } from 'zod';
@@ -28,7 +27,6 @@ export function LoginModal() {
   const [country, setCountry] = useState<string>("+55");
   const [valuePhone, setValuePhone] = useState<string>("");
 
-  // Schema dinâmico baseado no método de login selecionado
   const schema = z.object({
     email: loginMethod === "email"
       ? z.string().email('Digite um email válido').min(5, 'O email é obrigatório')

@@ -1,4 +1,3 @@
-import { StarIcon } from "lucide-react";
 import { IoIosStar } from "react-icons/io";
 
 export function StarRating({ rating, size }: { rating: number, size?: number }) {

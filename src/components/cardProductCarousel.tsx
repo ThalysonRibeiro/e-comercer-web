@@ -10,7 +10,6 @@ import { ProductsProps } from "@/types/product";
 import { useContext } from 'react';
 import { Context, ContextType } from '@/context/Context';
 import Link from 'next/link';
-import { CardProduct } from './ui/cardProduct';
 import { useIsMobile } from '@/app/hooks/useIsMobile';
 import { Heart } from './ui/heart';
 import no_image from "@/assets/no-image.png";
@@ -33,26 +32,21 @@ export function CardProductCarousel({ products }: CardProductsProps) {
   const isMd = useIsMobile(768);
   const isMobile = useIsMobile();
   let responsive;
-  let width;
   let between;
   if (isXl) {
     responsive = 4;
-    // width = "1200";
     between = 10;
   }
   if (isLg) {
     responsive = 3;
-    // width = "960";
     between = 10
   }
   if (isMd) {
     responsive = 2;
-    // width = "960";
     between = 10
   }
   if (isMobile) {
     responsive = 1;
-    // width = "640";
     between = 0;
   }
 

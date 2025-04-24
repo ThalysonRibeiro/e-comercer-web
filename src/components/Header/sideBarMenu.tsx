@@ -1,12 +1,10 @@
 "use client"
 import { Heart, LogOut, Settings, ShoppingBag, User, X } from "lucide-react";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { MenuProps } from "./dropdown";
 import Link from "next/link";
 import { Flex } from "../ui/flex";
 import { Context, ContextType } from "@/context/Context";
-import { UserDropdown } from "./userDropdown";
-import { WishList } from "./wishList";
 import { SwitchTheme } from "./switchTheme";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
@@ -26,7 +24,6 @@ export function SideBarMenu({ category }: MenuProps) {
           <p>Menu</p>
           <button
             onClick={toggleSideBar}
-          // className="absolute top-1 right-1"
           >
             <X />
           </button>

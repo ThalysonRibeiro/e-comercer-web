@@ -6,8 +6,8 @@ export interface Category {
   description: string | null;
   image: string | null;
   parentId: string | null;
-  createdAt: string; // ISO date string
-  updatedAt: string; // ISO date string
+  createdAt: Date;
+  updatedAt: Date;
   children: Category[];
-  products: ProductsProps[]; // tipagem dos produtos você já tem, então deixei como unknown[]
+  products: ProductsProps[];
 }
