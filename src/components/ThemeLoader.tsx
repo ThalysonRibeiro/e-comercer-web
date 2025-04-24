@@ -1,7 +1,8 @@
 // src/app/ThemeLoader.tsx
 'use client'
 
-import useThemeColors from './hooks/useThemeColors'
+import useThemeColors from "@/app/hooks/useThemeColors"
+
 
 export default function ThemeLoader({ isDarkTheme }: { isDarkTheme: boolean }) {
   useThemeColors({ isDarkTheme: isDarkTheme })

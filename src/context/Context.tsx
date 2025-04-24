@@ -6,7 +6,7 @@ import api from "@/lib/axios";
 import { ProfileProps } from "@/types/user";
 import { useToastState } from "@/app/hooks/toast/toast";
 import { ToastItem, ToastType } from "@/app/hooks/toast/toastItem";
-import ThemeLoader from "@/app/ThemeLoader";
+import ThemeLoader from "@/components/ThemeLoader";
 
 export interface ContextType {
   cart: CartProps[];
