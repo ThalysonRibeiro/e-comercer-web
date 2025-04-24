@@ -9,6 +9,8 @@ import { serverApi } from "./api/api";
 import { BgVideo } from "@/components/bgVideo";
 import { SiteContentProps } from "@/types/siteContent";
 import { SideBarMenu } from "@/components/Header/sideBarMenu";
+import { Review } from "@/components/ui/review";
+import { ReviewList } from "@/components/reviewList";
 
 
 
@@ -25,6 +27,7 @@ export default async function Home() {
   const { data: categoryMenu } = await serverApi.get(`/category?hasChildren=true&limit=6&offset=0`);
   const response = await serverApi.get('/site-content');
   const siteContent: SiteContentProps = response.data[0];
+  const { data: reviewData } = await serverApi.get('/review');
   // const session = await getSession();
 
   // if (!session) {
@@ -55,10 +58,15 @@ export default async function Home() {
       </section>
 
 
+      <section className="w-full flex flex-col gap-3  items-center justify-center mt-6 px-6">
+        {products1 && <CardProductCarousel products={products1} />}
+        {products1 && <CardProductCarousel products={products1} />}
+        {products1 && <CardProductCarousel products={products1} />}
+      </section>
+
+
       <section className="w-full flex flex-col gap-6  items-center justify-center mt-6 px-6">
-        {products1 && <CardProductCarousel products={products1} />}
-        {products1 && <CardProductCarousel products={products1} />}
-        {products1 && <CardProductCarousel products={products1} />}
+        <ReviewList reviewData={reviewData} />
       </section>
 
     </div>
