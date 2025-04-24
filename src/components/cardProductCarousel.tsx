@@ -12,39 +12,55 @@ import { Context, ContextType } from '@/context/Context';
 import Link from 'next/link';
 import { CardProduct } from './ui/cardProduct';
 import { useIsMobile } from '@/app/hooks/useIsMobile';
+import { Heart } from './ui/heart';
+import no_image from "@/assets/no-image.png";
+import { formatCurrency } from '@/utils/formatCurrency';
 
 export interface CardProductsProps {
   products: ProductsProps[]
 }
 
 export function CardProductCarousel({ products }: CardProductsProps) {
-  const isMobile = useIsMobile();
+  const { addItemCart } = useContext(Context) as ContextType;
+
+
+  function handleAddCartItem(product: ProductsProps) {
+    addItemCart(product);
+  }
+
   const isXl = useIsMobile(1250);
   const isLg = useIsMobile(960);
+  const isMd = useIsMobile(768);
+  const isMobile = useIsMobile();
   let responsive;
   let width;
   let between;
   if (isXl) {
     responsive = 4;
-    width = "1200";
-    between = 310;
+    // width = "1200";
+    between = 10;
   }
   if (isLg) {
     responsive = 3;
-    width = "960";
-    between = 300
+    // width = "960";
+    between = 10
+  }
+  if (isMd) {
+    responsive = 2;
+    // width = "960";
+    between = 10
   }
   if (isMobile) {
-    responsive = 2;
-    width = "640";
-    between = 200;
+    responsive = 1;
+    // width = "640";
+    between = 0;
   }
 
 
   return (
-    <Flex className={`${width ? width : 'max-w-[1250]'} w-full items-center mt-6`}>
+    <Flex className='max-w-[1280] w-full items-center mt-6'>
       <Swiper
-        spaceBetween={between ? between : 100}
+        spaceBetween={between ? between : 30}
         slidesPerView={responsive ? responsive : 4}
         loop={true}
         modules={[Autoplay]}
@@ -56,8 +72,49 @@ export function CardProductCarousel({ products }: CardProductsProps) {
       >
         {products?.map(product => (
           <SwiperSlide key={product.id}>
-
-            <CardProduct product={product} />
+            <div key={product.id} className="relative overflow-hidden flex flex-col justify-between border border-borderColor min-w-50 h-125 bg-bgCard rounded-lg p-4">
+              <Link href={`/products/${product.id}`}>
+                {product.bigsale && (
+                  <div className="bg-primaryColor text-title font-semibold w-35 text-center absolute rotate-45 -right-8 top-7 z-10">Big sale</div>
+                )}
+                <Flex className="my-2">
+                  <StarRating rating={product.rating} />
+                  <p className="text-xs ml-1">({product.products_sold})</p>
+                  <div className="absolute z-10 top-70 left-6">
+                    <Heart heart={true} />
+                  </div>
+                  {product.stock === 1 && (
+                    <p className="font-bold capitalize w-full text-center text-title bg-primaryColor absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">ultimo disponível</p>
+                  )}
+                </Flex>
+                <div className='relative w-full min-h-65'>
+                  <Image
+                    src={product.images && product.images.length > 0 ? product.images[0].image : no_image}
+                    alt={product.title}
+                    fill
+                    className="object-cover rounded-lg"
+                  />
+                </div>
+                <h1 className="text-title font-semibold text-sm line-clamp-2 mb-2">
+                  {product.title}
+                </h1>
+                <Flex className="items-center justify-between">
+                  <span className="text-xl text-price font-semibold">
+                    {formatCurrency(product.price / 100)}
+                  </span>
+                  <span className="text-sm line-through text-oldPrice">
+                    {formatCurrency(product.old_price / 100)}
+                  </span>
+                </Flex>
+                <div className="mb-2">
+                  <p className="text-oldPrice text-sm">À vista no PIX</p>
+                  <p className="text-oldPrice text-sm">ou até <span className="font-semibold">10x de R$ {(Number((product.price / 100)) / 10).toFixed(2)}</span></p>
+                </div>
+              </Link>
+              <Button onClick={() => handleAddCartItem(product)}>
+                Add To Cart
+              </Button>
+            </div>
 
           </SwiperSlide>
         ))}
