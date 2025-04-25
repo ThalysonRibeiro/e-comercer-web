@@ -9,6 +9,7 @@ import { serverApi } from "./api/api";
 import { BgVideo } from "@/components/bgVideo";
 import { SiteContentProps } from "@/types/siteContent";
 import { ReviewList } from "@/components/reviewList";
+import { PromotionalAnnouncement } from "@/components/promotionalAnnouncement";
 
 
 
@@ -20,6 +21,7 @@ export const revalidate = 120; //renderizar dinamincamente
 export default async function Home() {
   const { data: featuredProducts } = await serverApi.get(`/products?endDate=true&isActive=true&featured=true&stock=true&emphasis=true`);
   const { data: promotionTop } = await serverApi.get(`/promotions?active=true&position=top`);
+  const { data: promotionBot } = await serverApi.get(`/promotions?active=true&position=bot`);
   const { data: products1 } = await serverApi.get(`/products?limit=10&offset=0&stock=true&emphasis=true`);
   // const { data: products2 } = await serverApi.get(`/products?limit=3&offset=3&stock=true&emphasis=true`);
   // const { data: products3 } = await serverApi.get(`/products?limit=4&offset=4&stock=true&emphasis=true`);
@@ -62,6 +64,10 @@ export default async function Home() {
 
       <section className="w-full flex flex-col gap-6  items-center justify-center mt-6 px-6">
         <ReviewList reviewData={reviewData} />
+      </section>
+
+      <section className="w-full flex flex-col gap-6  items-center justify-center mt-6 px-6 mb-10">
+        <PromotionalAnnouncement promotionBot={promotionBot} />
       </section>
 
     </div>

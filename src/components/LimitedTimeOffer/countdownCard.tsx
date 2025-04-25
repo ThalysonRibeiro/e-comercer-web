@@ -7,7 +7,7 @@ interface Countdown {
   seconds: number;
 }
 
-export function CountdownCard({ endDate, gap, title }: { endDate: string, gap?: string, title?: string }) {
+export function CountdownCard({ endDate, gap, title, style }: { endDate: string, gap?: string, title?: string, style?: string }) {
   const [countdown, setCountdown] = useState<Countdown>({
     days: 0,
     hours: 0,
@@ -60,19 +60,19 @@ export function CountdownCard({ endDate, gap, title }: { endDate: string, gap?: 
         <div>
           <p className="font-semibold text-sm my-2">{title && title}</p>
           <div className={`flex gap-2 md:gap-${gap ? gap : 4}`}>
-            <div className="flex flex-col items-center border border-borderColor text-primaryColor w-14 md:w-16 rounded-lg p-1">
+            <div className={`${style ? style : 'flex flex-col items-center border border-borderColor text-primaryColor w-14 md:w-16 rounded-lg p-1'}`}>
               <span className="font-semibold">{countdown.days}</span>
               <span className="text-xs">Dias</span>
             </div>
-            <div className="flex flex-col items-center border border-borderColor text-primaryColor w-14 md:w-16 rounded-lg p-1">
+            <div className={`${style ? style : 'flex flex-col items-center border border-borderColor text-primaryColor w-14 md:w-16 rounded-lg p-1'}`}>
               <span className="font-semibold">{countdown.hours}</span>
               <span className="text-xs">Horas</span>
             </div>
-            <div className="flex flex-col items-center border border-borderColor text-primaryColor w-14 md:w-16 rounded-lg p-1">
+            <div className={`${style ? style : 'flex flex-col items-center border border-borderColor text-primaryColor w-14 md:w-16 rounded-lg p-1'}`}>
               <span className="font-semibold">{countdown.minutes}</span>
               <span className="text-xs">Min</span>
             </div>
-            <div className="flex flex-col items-center border border-borderColor text-primaryColor w-14 md:w-16 rounded-lg p-1">
+            <div className={`${style ? style : 'flex flex-col items-center border border-borderColor text-primaryColor w-14 md:w-16 rounded-lg p-1'}`}>
               <span className="font-semibold">{countdown.seconds}</span>
               <span className="text-xs">Seg</span>
             </div>
