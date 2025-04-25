@@ -16,7 +16,7 @@ import 'swiper/css/effect-flip';
 
 export function CardAnnouncement({ promotionTop }: { promotionTop: PromotionsProps[] }) {
   return (
-    <div className="max-w-75 w-full h-112.5 border rounded-lg overflow-hidden">
+    <div className="max-w-75 w-full h-112.5 border border-borderColor rounded-lg overflow-hidden">
       <Swiper
         effect={'flip'}
         spaceBetween={30}
