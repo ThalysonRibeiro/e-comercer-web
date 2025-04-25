@@ -89,7 +89,7 @@ export default async function RootLayout({
               siteContent={siteContent}
             />
             {children}
-            <Footer />
+            <Footer footerData={siteContent} />
           </ProviderContext>
         </AuthProvider>
       </body>
