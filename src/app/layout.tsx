@@ -9,6 +9,8 @@ import { LoginModal } from "@/components/loginModal";
 import { FormeRegisterModal } from "@/components/registerModal/formeRegister";
 import { serverApi } from "./api/api";
 import { SiteContentProps } from "@/types/siteContent";
+import { Header } from "@/components/Header/header";
+import { Footer } from "@/components/footer";
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -52,11 +54,14 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { data: categoryMenu } = await serverApi.get(`/category?hasChildren=true&limit=6&offset=0`);
+  const response = await serverApi.get('/site-content');
+  const siteContent: SiteContentProps = response.data[0];
 
   return (
     <html lang="en" className={`${montserrat.variable} ${roboto.variable}`}>
@@ -79,7 +84,12 @@ export default function RootLayout({
               theme="light"
               transition={Flip}
             />
+            <Header
+              category={categoryMenu}
+              siteContent={siteContent}
+            />
             {children}
+            <Footer />
           </ProviderContext>
         </AuthProvider>
       </body>

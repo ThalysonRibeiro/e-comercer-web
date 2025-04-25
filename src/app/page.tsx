@@ -10,6 +10,7 @@ import { BgVideo } from "@/components/bgVideo";
 import { SiteContentProps } from "@/types/siteContent";
 import { ReviewList } from "@/components/reviewList";
 import { PromotionalAnnouncement } from "@/components/promotionalAnnouncement";
+import { Footer } from "@/components/footer";
 
 
 
@@ -25,7 +26,6 @@ export default async function Home() {
   const { data: products1 } = await serverApi.get(`/products?limit=10&offset=0&stock=true&emphasis=true`);
   // const { data: products2 } = await serverApi.get(`/products?limit=3&offset=3&stock=true&emphasis=true`);
   // const { data: products3 } = await serverApi.get(`/products?limit=4&offset=4&stock=true&emphasis=true`);
-  const { data: categoryMenu } = await serverApi.get(`/category?hasChildren=true&limit=6&offset=0`);
   const response = await serverApi.get('/site-content');
   const siteContent: SiteContentProps = response.data[0];
   const { data: reviewData } = await serverApi.get('/review');
@@ -37,10 +37,6 @@ export default async function Home() {
         <BgVideo videoUrl={siteContent.bg_video} />
       )}
 
-      <Header
-        category={categoryMenu}
-        siteContent={siteContent}
-      />
       <ButtonCart />
       <Hero
         hero={siteContent.promotionHero}
@@ -69,6 +65,7 @@ export default async function Home() {
       <section className="w-full flex flex-col gap-6  items-center justify-center mt-6 px-6 mb-10">
         <PromotionalAnnouncement promotionBot={promotionBot} />
       </section>
+
 
     </div>
   );
