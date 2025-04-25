@@ -19,6 +19,7 @@ export const revalidate = 120; //renderizar dinamincamente
 
 export default async function Home() {
   const { data: featuredProducts } = await serverApi.get(`/products?endDate=true&isActive=true&featured=true&stock=true&emphasis=true`);
+  const { data: promotionTop } = await serverApi.get(`/promotions?active=true&position=top`);
   const { data: products1 } = await serverApi.get(`/products?limit=10&offset=0&stock=true&emphasis=true`);
   // const { data: products2 } = await serverApi.get(`/products?limit=3&offset=3&stock=true&emphasis=true`);
   // const { data: products3 } = await serverApi.get(`/products?limit=4&offset=4&stock=true&emphasis=true`);
@@ -26,6 +27,7 @@ export default async function Home() {
   const response = await serverApi.get('/site-content');
   const siteContent: SiteContentProps = response.data[0];
   const { data: reviewData } = await serverApi.get('/review');
+
 
   return (
     <div className="w-full">
@@ -45,7 +47,7 @@ export default async function Home() {
 
       <section className="w-full flex items-center justify-center mt-6 px-6">
         <Flex className=" justify-around flex-row max-w-7xl w-full gap-2">
-          <CardAnnouncement />
+          <CardAnnouncement promotionTop={promotionTop} />
           <LimitedTimeOffer products={featuredProducts} />
         </Flex>
       </section>

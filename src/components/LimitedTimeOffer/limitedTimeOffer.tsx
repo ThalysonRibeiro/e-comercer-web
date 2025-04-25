@@ -77,7 +77,7 @@ export function LimitedTimeOffer({ products }: LimitedTimeOfferProps) {
                 <Button
                   onClick={() => addItemCart(item)}
                 >Add To Cart</Button>
-                <CountdownCard endDate={item.endDate} />
+                <CountdownCard endDate={item.endDate} title="APROVEITE! A OFERTA TERMINA EM:" />
               </div>
             </div>
           </SwiperSlide>

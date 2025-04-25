@@ -66,7 +66,7 @@ export function ToastItem({ id, type, message, onClose, duration = 3000 }: Toast
 
   return (
     <div className={`${toastStyle.bgClass} border px-4 py-3 rounded relative mb-2 flex items-center justify-between`}>
-      <span><toastStyle.icon />{message}</span>
+      <p className='inline-flex gap-3'><toastStyle.icon /><span>{message}</span></p>
       <button
         onClick={() => onClose(id)}
         className="ml-4 inline-flex"

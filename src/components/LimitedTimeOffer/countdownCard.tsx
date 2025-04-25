@@ -7,7 +7,7 @@ interface Countdown {
   seconds: number;
 }
 
-export function CountdownCard({ endDate }: { endDate: string }) {
+export function CountdownCard({ endDate, gap, title }: { endDate: string, gap?: string, title?: string }) {
   const [countdown, setCountdown] = useState<Countdown>({
     days: 0,
     hours: 0,
@@ -58,8 +58,8 @@ export function CountdownCard({ endDate }: { endDate: string }) {
     <>
       {countdown.days > 0 && (
         <div>
-          <p className="font-semibold text-sm my-2">APROVEITE! A OFERTA TERMINA EM:</p>
-          <div className="flex gap-2 md:gap-4">
+          <p className="font-semibold text-sm my-2">{title && title}</p>
+          <div className={`flex gap-2 md:gap-${gap ? gap : 4}`}>
             <div className="flex flex-col items-center border border-borderColor text-primaryColor w-14 md:w-16 rounded-lg p-1">
               <span className="font-semibold">{countdown.days}</span>
               <span className="text-xs">Dias</span>
