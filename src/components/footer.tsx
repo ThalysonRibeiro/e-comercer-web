@@ -67,9 +67,9 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
   };
   return (
     <Flex className="flex-col w-full items-center justify-center bg-bgCard">
-      <Grid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10 max-w-7xl w-full">
+      <Grid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10 md:px-10 lg:px-2.5  xl:px-0 max-w-7xl w-full">
 
-        <Flex className="max-h-75 h-full flex-col justify-between space-y-4 p-2">
+        <Flex className="max-h-75 h-full flex-col justify-between p-2">
           <h1 className="text-3xl font-bold uppercase text-title">
             {footerData.title}
           </h1>
@@ -124,18 +124,9 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
         <Flex className="flex-col itmes-center p-2 gap-1">
           <h2 className="font-semibold text-title">Institucional</h2>
 
-          <Link href="/" className="hover:text-hover capitalize md:text-sm">Sobre o {footerData.title}!</Link>
-          <Link href="/" className="hover:text-hover capitalize md:text-sm">{footerData.title}! ADS</Link>
-          <Link href="/" className="hover:text-hover capitalize md:text-sm">Políticas de Cookies</Link>
-          <Link href="/" className="hover:text-hover capitalize md:text-sm">Políticas de Privacidade</Link>
-          <Link href="/" className="hover:text-hover capitalize md:text-sm">Proteção de Marcas</Link>
-          <Link href="/" className="hover:text-hover capitalize md:text-sm">Código de Defesa do Consumidor</Link>
-          <Link href="/" className="hover:text-hover capitalize md:text-sm">Exerça seus Direitos de Privacidade</Link>
-          <Link href="/" className="hover:text-hover capitalize md:text-sm">Código de Conduta e Ética</Link>
-          <Link href="/" className="hover:text-hover capitalize md:text-sm">Canal Confidencial</Link>
-          <Link href="/" className="hover:text-hover capitalize md:text-sm">Segurança & Privacidade</Link>
-          <Link href="/" className="hover:text-hover capitalize md:text-sm">Relatórios</Link>
-
+          {footerData?.institutionalLink.map(item => (
+            <Link key={item.id} href={item.link} className="hover:text-hover capitalize md:text-sm">{item.name}</Link>
+          ))}
         </Flex>
 
         <Flex className="flex-col justify-between p-2">

@@ -1,5 +1,6 @@
 import { ThemeColorsProps } from "./themeColors";
 
+
 export interface SiteContentProps {
   id: string;
   banner: string;
@@ -23,6 +24,7 @@ export interface SiteContentProps {
   socialMedia: SocialMediaProps[];
   contactInfo: ContactInfoProps[];
   themeColors: ThemeColorsProps[];
+  institutionalLink: InstitutionalLinkProps[]
 }
 
 export interface PromotionsProps {
@@ -82,4 +84,13 @@ export interface ContactInfoProps {
   label: string;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface InstitutionalLinkProps {
+  id: string;
+  siteContentId: string;
+  name: string;
+  link: string;
+  createdAt: string;
+  updatedAt: string;
 }
