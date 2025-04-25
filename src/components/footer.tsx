@@ -13,17 +13,16 @@ import {
   FaFacebook,
   FaInstagram,
   FaLinkedin,
-  FaTwitter,
   FaYoutube,
   FaTiktok,
   FaGithub,
   FaLink,
-  FaVoicemail,
   FaWhatsapp,
   FaPhone
 
 } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
+import { FaXTwitter } from "react-icons/fa6";
 
 export function Footer({ footerData }: { footerData: SiteContentProps }) {
   const [departments, setDepartments] = useState<Category[] | null>(null);
@@ -45,13 +44,11 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
       case "linkedin":
         return <FaLinkedin />;
       case "twitter":
-        return <FaTwitter />;
+        return <FaXTwitter />;
       case "youtube":
         return <FaYoutube />;
       case "tiktok":
         return <FaTiktok />;
-      case "github":
-        return <FaGithub />;
       default:
         return <FaLink /> // ou um ícone padrão, tipo um globo ou interrogação
     }
@@ -69,7 +66,7 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
     }
   };
   return (
-    <Flex className="w-full items-center justify-center bg-bgCard py-4">
+    <Flex className="flex-col w-full items-center justify-center bg-bgCard">
       <Grid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10 max-w-7xl w-full">
 
         <Flex className="max-h-75 h-full flex-col justify-between space-y-4 p-2">
@@ -78,7 +75,6 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
           </h1>
           <p className="line-clamp-4 text-sm">
             {footerData.metaDescription}
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae placeat accusantium possimus aliquam fugiat voluptatibus sit sapiente, aspernatur ex delectus quis quas, reprehenderit, nostrum voluptas ad ratione porro architecto illum.
           </p>
           <h2 className="font-semibold text-title">Baixe os aplicativos</h2>
           <div className="relative w-35 h-10">
@@ -170,13 +166,8 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
 
 
           <h2 className="font-semibold text-title">Horário de atendimento:</h2>
-          <p className="md:text-sm max-w-55">
-            08:00 às 20:00 - Segunda a Sexta,
-            09:00 às 15:00 - Sabado,
-            horário de Brasília (Exceto domingo e feriados)
-            <span className="mx-1 font-semibold">Endereço:</span>
-            Rua Narnia, 123 - Centro
-            Fantasy/XX - CEP: 12345-000
+          <p className="md:text-sm">
+            {footerData.openingHours}
           </p>
           <Flex className="flex-col">
             <span className="font-semibold">Central SAC:</span>
@@ -187,6 +178,16 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
 
         </Flex>
       </Grid>
+
+      <Flex className="bg-themeColor w-full items-center justify-center px-4 border-t border-borderColor">
+        <p className="max-w-7xl w-full text-[11px] py-4">
+          {footerData.footerText}
+          <Link href="/" className="text-[11px] mx-3 hover:text-hover">
+            Clique aqui e veja as políticas de nossa empresa.
+          </Link>
+
+        </p>
+      </Flex>
     </Flex>
   )
 }

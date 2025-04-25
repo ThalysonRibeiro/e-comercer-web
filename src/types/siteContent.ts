@@ -14,6 +14,7 @@ export interface SiteContentProps {
   favicon: string;
   service: string[];
   footerText: string;
+  openingHours: string;
   themeColor: string;
   secondaryColor: string;
   isActive: boolean;
