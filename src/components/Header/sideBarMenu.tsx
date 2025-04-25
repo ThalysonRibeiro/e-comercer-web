@@ -17,6 +17,7 @@ export function SideBarMenu({ category }: MenuProps) {
     setOpenMenuIndex(openMenuIndex === index ? null : index);
   };
 
+
   return (
     <div ref={sideBarRef} className="absolute top-0 right-0 z-10 w-full">
       <Flex className={`w-60 h-screen flex-col bg-bgCard absolute top-0 border-l border-l-borderColor ${openSideBar ? 'right-0 flex' : '-right-60 hidden'}`}>
@@ -42,7 +43,7 @@ export function SideBarMenu({ category }: MenuProps) {
                   className="w-10 border-2 rounded-full absolute right-1"
                 >
                   <Image
-                    src={userData?.avatar as string}
+                    src={userData.image || ""}
                     alt="user"
                     width={40}
                     height={40}

@@ -14,7 +14,7 @@ export default function UserInfo() {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold">Perfil</h2>
         <button
-          onClick={() => signOut({ callbackUrl: "/login" })}
+          onClick={() => signOut({ callbackUrl: "/" })}
           className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
         >
           Sair
@@ -29,7 +29,7 @@ export default function UserInfo() {
           <div>
             <p><strong>Foto:</strong></p>
             <img
-              src={session.user.image}
+              src={session?.user?.image ? session?.user?.image : ""}
               alt="Foto do perfil"
               className="w-20 h-20 rounded-full"
             />

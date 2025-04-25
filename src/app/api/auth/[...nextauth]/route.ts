@@ -4,49 +4,25 @@ import axios from "axios";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-// Defina a interface para os dados do usuário retornados pela sua API
-export interface UserData {
-  accessToken: string;
-  id: string;
-  status: string;
-  type: string;
-  name: string;
-  cpf_or_cnpj: string;
-  genero: string;
-  dateOfBirth: string;
-  email: string;
-  phone: string;
-  resetPasswordToken: string | null;
-  resetPasswordExpires: string | null;
-  emailVerified: string | null;
-  emailVerificationToken: string;
-  googleId: string | null;
-  avatar: string | null;
-  createdAt: string;
-  updatedAt: string;
-}
-
 // Estenda os tipos padrão do NextAuth
 declare module "next-auth" {
   interface Session {
     accessToken?: string;
-    userData?: UserData;
     user: User;
   }
 
-  interface User {
-    access_token?: string;
-    userData?: UserData;
+  export interface User {
     id: string;
     name?: string;
     email?: string;
     image?: string | null;
-    status: string;
-    type: string;
-    cpf_or_cnpj: string;
-    genero: string;
-    dateOfBirth: string;
-    phone: string;
+    status?: string;
+    type?: string;
+    cpf_or_cnpj?: string;
+    genero?: string;
+    dateOfBirth?: string;
+    phone?: string;
+    accessToken?: string;
   }
 }
 
@@ -54,7 +30,7 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     accessToken?: string;
-    userData?: UserData;
+    user?: any;
   }
 }
 
@@ -70,10 +46,9 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Senha", type: "password" }
       },
-      async authorize(credentials, req) {  // Adicionando o parâmetro req
+      async authorize(credentials) {
         try {
           if (!credentials?.email || !credentials?.password) {
-            console.error("Credenciais incompletas");
             return null;
           }
 
@@ -85,13 +60,26 @@ export const authOptions: NextAuthOptions = {
             }
           );
 
-          const userData = response.data;
+          const user = response.data;
 
-          // Garantir que o retorno seja compatível com o tipo User do NextAuth
+          if (!user || !user.accessToken) {
+            return null;
+          }
+
+          // Retorno compatível com o tipo User do NextAuth
           return {
-            userData,
-            accessToken: userData.accessToken
-          } as any;  // Usando 'as any' como solução temporária para o erro de tipagem
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            image: user.avatar,
+            status: user.status,
+            type: user.type,
+            cpf_or_cnpj: user.cpf_or_cnpj,
+            genero: user.genero,
+            dateOfBirth: user.dateOfBirth,
+            phone: user.phone,
+            accessToken: user.accessToken,
+          };
         } catch (error) {
           if (axios.isAxiosError(error) && error.response) {
             console.error("Erro da API:", {
@@ -107,15 +95,19 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async jwt({ token, account, profile, user }) {
-      // LOGIN COM GOOGLE
+    async jwt({ token, account, user }) {
+      if (user) {
+        token.accessToken = user.accessToken;
+        token.user = user;
+      }
+
+      // Handle Google login (only on first sign-in)
       if (account?.provider === "google" && account.id_token) {
         try {
           const response = await axios.post(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`,
             { token: account.id_token }
           );
-          console.log(response.data);
 
           token.accessToken = response.data.accessToken;
           token.user = response.data.user;
@@ -124,18 +116,13 @@ export const authOptions: NextAuthOptions = {
         }
       }
 
-      // LOGIN COM CREDENTIALS
-      if (user?.accessToken) {
-        token.accessToken = user.accessToken;
-        token.user = user;
-      }
-
       return token;
     },
 
     async session({ session, token }) {
       session.accessToken = token.accessToken;
       session.user = { ...session.user, ...token.user };
+
       return session;
     },
   },
@@ -143,6 +130,11 @@ export const authOptions: NextAuthOptions = {
     signIn: "/",  // Página de login customizada
     error: "/",   // Página de erro personalizada
   },
+  session: {
+    strategy: "jwt",  // Usar JWT para armazenar os dados da sessão
+    maxAge: 30 * 24 * 60 * 60, // 30 dias
+  },
+  // debug: process.env.NODE_ENV === "development",
 };
 
 const handler = NextAuth(authOptions);

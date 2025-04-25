@@ -60,7 +60,7 @@ export function Header({ category, siteContent }: HeaderProps) {
             ) : (
               <>
                 <div className="lg:flex gap-4 hidden">
-                  <UserDropdown avatar={userData?.avatar as string} />
+                  <UserDropdown avatar={userData?.image as string} />
                   <WishList userid={userData.id} addItem={addItemCart} />
                 </div>
 

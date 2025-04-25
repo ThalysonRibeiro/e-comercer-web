@@ -1,5 +1,5 @@
 "use client"
-import { UserData } from "@/app/api/auth/[...nextauth]/route";
+// import { UserData } from "@/app/api/auth/[...nextauth]/route";
 import { ProductsProps } from "@/types/product";
 import { createContext, ReactNode, useEffect, useRef, useState } from "react";
 import api from "@/lib/axios";
@@ -7,6 +7,7 @@ import { ProfileProps } from "@/types/user";
 import { useToastState } from "@/app/hooks/toast/toast";
 import { ToastItem, ToastType } from "@/app/hooks/toast/toastItem";
 import ThemeLoader from "@/components/ThemeLoader";
+import { User } from "next-auth";
 
 export interface ContextType {
   cart: CartProps[];
@@ -21,7 +22,7 @@ export interface ContextType {
   isOpenModalLogin: boolean;
   isOpenModalRegister: boolean;
   closeModalRegisterScrollY: () => void;
-  userData: UserData | null; // Pode ser null quando não há usuário logado
+  userData: User | null; // Pode ser null quando não há usuário logado
   loading: boolean;
   openModalCartRef: React.RefObject<HTMLDivElement | null>;
   openModalLoginRef: React.RefObject<HTMLDivElement | null>;
@@ -45,13 +46,13 @@ interface ProviderProps {
 }
 
 interface UserProps {
-  user: UserData
+  user: User
 }
 
 export const Context = createContext({} as ContextType);
 
 function ProviderContext({ children }: ProviderProps) {
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const [userData, setUserData] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [isOpenModalCart, setIsOpenModalCart] = useState<boolean>(false);
   const [isOpenModalLogin, setIsOpenModalLogin] = useState<boolean>(false);
@@ -64,6 +65,7 @@ function ProviderContext({ children }: ProviderProps) {
   const [activeTheme, setActiveTheme] = useState<boolean>(true);
   const [openSideBar, setOpenSideBar] = useState(false);
   const sideBarRef = useRef<HTMLDivElement | null>(null);
+
 
 
 

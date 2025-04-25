@@ -12,6 +12,7 @@ import { extractPhoneNumber, formatPhone } from "@/utils/formatPhone";
 import { Context, ContextType } from "@/context/Context";
 import { X } from "lucide-react";
 import { InputPhone } from "./ui/input-phone";
+import { LoadingButton } from "./ui/loadingButton";
 
 export function LoginModal() {
   const {
@@ -68,11 +69,12 @@ export function LoginModal() {
       const credentials = {
         ...(loginMethod === "email" ? { email: data.email } : { email: extractPhoneNumber(country + data.phone) }),
         password: data.password,
-        // loginMethod, // Adiciona o método de login para o backend saber como processar
-        redirect: false,
+        redirect: true,
       };
 
       const result = await signIn("credentials", credentials);
+      setLoading(false);
+      openCloseModalLogin();
 
       if (result?.error) {
         setError(loginMethod === "email"
@@ -84,8 +86,6 @@ export function LoginModal() {
     } catch (error) {
       console.error("Erro ao tentar login:", error);
       setError("Ocorreu um erro ao fazer login");
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -156,7 +156,7 @@ export function LoginModal() {
             }
 
             <Button type="submit" disabled={loading} className="w-full">
-              {loading ? "Entrando..." : "Entrar"}
+              {loading ? <LoadingButton /> : "Entrar"}
             </Button>
 
             {error && <p className="text-danger">{error}</p>}

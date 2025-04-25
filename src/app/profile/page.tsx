@@ -7,7 +7,7 @@ export default async function Profile() {
   const session = await getServerAuthSession();
 
   if (!session) {
-    redirect("/login");
+    redirect("/");
   }
 
   return (
@@ -22,7 +22,7 @@ export default async function Profile() {
             {JSON.stringify(
               {
                 user: session.user,
-                accessToken: session.accessToken ? "••••••" : null
+                // accessToken: session.accessToken ? "••••••" : null
               },
               null,
               2
