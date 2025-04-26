@@ -10,7 +10,7 @@ export function ListItems() {
 
   useEffect(() => {
     async function getProducts() {
-      const response = await api.get('/products');
+      const response = await api.get('/products?limit=20&offset=0');
       setProducts(response.data)
     }
     getProducts();
