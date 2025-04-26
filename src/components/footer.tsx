@@ -66,7 +66,7 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
     }
   };
   return (
-    <Flex className="flex-col w-full items-center justify-center bg-bgCard">
+    <Flex className="flex-col w-full items-center justify-center bg-bgCard mt-10">
       <Grid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10 md:px-10 lg:px-2.5  xl:px-0 max-w-7xl w-full">
 
         <Flex className="max-h-75 h-full flex-col justify-between p-2">
