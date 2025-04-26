@@ -16,7 +16,7 @@ export function InputSearch() {
     async function fetchProducts() {
       try {
         const response = await api.get('/products');
-        setProducts(response.data);
+        setProducts(response.data.products);
       } catch (error) {
         console.error("Failed to fetch products:", error);
       }
