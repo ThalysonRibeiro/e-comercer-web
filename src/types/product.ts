@@ -1,3 +1,7 @@
+export interface AllProductsProps {
+  total: number;
+  products: ProductsProps[];
+}
 export interface ProductsProps {
   id: string;
   title: string;
