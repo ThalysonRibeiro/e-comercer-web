@@ -1,41 +1,58 @@
 import { ButtonCart } from "@/components/buttonCart";
 import { CardProductCarousel } from "@/components/cardProductCarousel";
-import { Header } from "@/components/Header/header";
 import { Hero } from "@/components/Hero/hero";
 import { CardAnnouncement } from "@/components/LimitedTimeOffer/cardAnnouncement";
 import { LimitedTimeOffer } from "@/components/LimitedTimeOffer/limitedTimeOffer";
 import { Flex } from "@/components/ui/flex";
 import { serverApi } from "./api/api";
 import { BgVideo } from "@/components/bgVideo";
-import { SiteContentProps } from "@/types/siteContent";
 import { ReviewList } from "@/components/reviewList";
 import { PromotionalAnnouncement } from "@/components/promotionalAnnouncement";
-import { Footer } from "@/components/footer";
+import { fetchData } from "@/utils/fetchData";
+import { AllProductsProps, ProductsProps } from "@/types/product";
+import { PromotionsProps, SiteContentProps } from "@/types/siteContent";
+import { ReviewProps } from "@/types/review";
 
+export const revalidate = 120;
 
-
-
-
-export const revalidate = 120; //renderizar dinamincamente
 
 
 export default async function Home() {
-  const { data: featuredProducts } = await serverApi.get(`/products?endDate=true&isActive=true&featured=true&stock=true&emphasis=true`);
-  const { data: promotionTop } = await serverApi.get(`/promotions?active=true&position=top`);
-  const { data: promotionBot } = await serverApi.get(`/promotions?active=true&position=bot`);
-  const { data: products1 } = await serverApi.get(`/products?limit=10&offset=0&stock=true&emphasis=true`);
-  // const { data: products2 } = await serverApi.get(`/products?limit=3&offset=3&stock=true&emphasis=true`);
-  // const { data: products3 } = await serverApi.get(`/products?limit=4&offset=4&stock=true&emphasis=true`);
-  const response = await serverApi.get('/site-content');
-  const siteContent: SiteContentProps = response.data[0];
-  const { data: reviewData } = await serverApi.get('/review');
+  const totalProductsData = await fetchData<{ total: number }>('/products?stock=true&emphasis=true');
+  const total = totalProductsData.total;
 
+  const maxCarousels = 3;
+  const limit = total <= 5 ? total : Math.ceil(total / maxCarousels);
+  const carousels = Math.ceil(total / limit);
 
+  const featuredProductsPromise = fetchData<AllProductsProps>('/products?endDate=true&isActive=true&featured=true&stock=true&emphasis=true');
+  const promotionTopPromise = fetchData<PromotionsProps[]>('/promotions?active=true&position=top');
+  const promotionBotPromise = fetchData<PromotionsProps[]>('/promotions?active=true&position=bot');
+  const siteContentPromise = fetchData<SiteContentProps[]>('/site-content').then(data => data[0]);
+  const reviewDataPromise = fetchData<ReviewProps[]>('/review');
+
+  const productsPagesPromises = Array.from({ length: carousels }, (_, pageIndex) =>
+    fetchData<{ products: ProductsProps[] }>(`/products?limit=${limit}&offset=${pageIndex * limit}&stock=true&emphasis=true`).then(data => data.products)
+  );
+
+  const [
+    featuredProducts,
+    promotionTop,
+    promotionBot,
+    siteContent,
+    reviewData,
+    ...productsGroups
+  ] = await Promise.all([
+    featuredProductsPromise,
+    promotionTopPromise,
+    promotionBotPromise,
+    siteContentPromise,
+    reviewDataPromise,
+    ...productsPagesPromises
+  ]);
   return (
     <div className="w-full">
-      {siteContent.bg_video && (
-        <BgVideo videoUrl={siteContent.bg_video} />
-      )}
+      {siteContent.bg_video && <BgVideo videoUrl={siteContent.bg_video} />}
 
       <ButtonCart />
       <Hero
@@ -44,29 +61,29 @@ export default async function Home() {
       />
 
       <section className="w-full flex items-center justify-center mt-6 px-6">
-        <Flex className=" justify-around flex-row max-w-7xl w-full gap-2">
+        <Flex className="justify-around flex-row max-w-7xl w-full gap-2">
           <CardAnnouncement promotionTop={promotionTop} />
-          <LimitedTimeOffer products={featuredProducts} />
+          <LimitedTimeOffer products={featuredProducts.products} />
         </Flex>
       </section>
 
-
-      <section className="w-full flex flex-col gap-3  items-center justify-center mt-6 px-6">
-        {products1 && <CardProductCarousel products={products1} />}
-        {products1 && <CardProductCarousel products={products1} />}
-        {products1 && <CardProductCarousel products={products1} />}
+      <section className="w-full flex flex-col gap-3 items-center justify-center mt-6 px-6">
+        {total === 0 ? (
+          <div className="w-full text-center p-6">Nenhum produto disponível.</div>
+        ) : (
+          productsGroups.map((products, index) => (
+            <CardProductCarousel key={index} products={products} />
+          ))
+        )}
       </section>
 
-
-      <section className="w-full flex flex-col gap-6  items-center justify-center mt-6 px-6">
+      <section className="w-full flex flex-col gap-6 items-center justify-center mt-6 px-6">
         <ReviewList reviewData={reviewData} />
       </section>
 
-      <section className="w-full flex flex-col gap-6  items-center justify-center mt-6 px-6 mb-10">
+      <section className="w-full flex flex-col gap-6 items-center justify-center mt-6 px-6 mb-10">
         <PromotionalAnnouncement promotionBot={promotionBot} />
       </section>
-
-
     </div>
   );
 }
