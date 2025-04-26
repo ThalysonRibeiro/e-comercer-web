@@ -2,12 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { formatCurrency } from "@/utils/formatCurrency";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { WishlistProps } from "@/types/user";
 import { Heart, ShoppingCart } from "lucide-react";
 import { ProductsProps } from "@/types/product";
 import api from "@/lib/axios";
 import { toast } from "react-toastify";
+import { Context, ContextType } from "@/context/Context";
 
 interface ListProps {
   userid: string;
@@ -15,9 +16,9 @@ interface ListProps {
 }
 
 export function WishList({ userid, addItem }: ListProps) {
+  const { wishList, addItemWishlist, removeFromWishlist } = useContext(Context) as ContextType;
   const [openWishList, setOpenWishList] = useState<boolean>(false);
   const wishListRef = useRef<HTMLDivElement>(null);
-  const [wishList, setWishList] = useState<WishlistProps | null>(null);
 
   function wishToggleDropdown() {
     setOpenWishList(prev => !prev);
@@ -47,30 +48,6 @@ export function WishList({ userid, addItem }: ListProps) {
     }
   }, [openWishList]);
 
-  useEffect(() => {
-    async function getWishList() {
-      const { data } = await api.get(`/wishlist/user/${userid}`)
-      setWishList(data);
-    }
-    getWishList();
-  }, []);
-
-  async function handleRemoveFromWishlist(itemId: string) {
-    try {
-      const { data } = await api.delete(`/wishlist/${itemId}`);
-
-      setWishList(prev => ({
-        ...prev!,
-        items: prev!.items.filter(item => item.id !== itemId)
-      }));
-      console.log(data);
-
-      return toast.success(`${data.message}`)
-    } catch (error) {
-      console.log(error);
-      toast.error('Erro ao tentar remover item da lista de desejos');
-    }
-  }
 
   return (
 
@@ -105,33 +82,33 @@ export function WishList({ userid, addItem }: ListProps) {
                 <p> Adicione produtos!</p>
               </div>
             ) : (
-              wishList.items.map(item => (
+              wishList?.items.map(item => (
                 <div
-                  key={item.id}
+                  key={item?.id}
                   className="w-full h-25 flex justify-between p-2 rounded-lg border border-textButton hover:bg-themeColor transition-colors"
                 >
                   <div className="max-h-25 max-w-24 w-full relative rounded-lg overflow-hidden">
                     <Image
-                      src={item.product.images[0].image}
-                      alt={`Imagem do ${item.product.title}`}
+                      src={item?.product?.images[0]?.image}
+                      alt={`Imagem do ${item?.product?.title}`}
                       fill
                       className="object-cover"
                     />
                   </div>
                   <div className="w-full flex flex-col justify-between ml-2 pl-2 border-l border-l-textButton">
-                    <p className="line-clamp-1 text-sm font-medium">{item.product.title}</p>
+                    <p className="line-clamp-1 text-sm font-medium">{item?.product?.title}</p>
                     <p className="text-price font-semibold">
-                      {formatCurrency((item.product.price / 100))}
+                      {formatCurrency((item?.product?.price / 100))}
                     </p>
                     <div className="flex justify-between text-sm ">
                       <button
-                        onClick={() => addItem(item.product)}
+                        onClick={() => addItem(item?.product)}
                         className="inline-flex items-center gap-2 cursor-pointer hover:text-hover">
                         <ShoppingCart className="size-6" />
                         Adicionar
                       </button>
                       <button
-                        onClick={() => handleRemoveFromWishlist(item.id)}
+                        onClick={() => removeFromWishlist(item?.id)}
                         className="cursor-pointer hover:text-hover"
                       >
                         Excluir

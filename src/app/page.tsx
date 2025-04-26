@@ -1,10 +1,8 @@
 import { ButtonCart } from "@/components/buttonCart";
-import { CardProductCarousel } from "@/components/cardProductCarousel";
 import { Hero } from "@/components/Hero/hero";
 import { CardAnnouncement } from "@/components/LimitedTimeOffer/cardAnnouncement";
 import { LimitedTimeOffer } from "@/components/LimitedTimeOffer/limitedTimeOffer";
 import { Flex } from "@/components/ui/flex";
-import { serverApi } from "./api/api";
 import { BgVideo } from "@/components/bgVideo";
 import { ReviewList } from "@/components/reviewList";
 import { PromotionalAnnouncement } from "@/components/promotionalAnnouncement";
@@ -12,6 +10,7 @@ import { fetchData } from "@/utils/fetchData";
 import { AllProductsProps, ProductsProps } from "@/types/product";
 import { PromotionsProps, SiteContentProps } from "@/types/siteContent";
 import { ReviewProps } from "@/types/review";
+import { ProductsClient } from "@/components/ProductsClient";
 
 export const revalidate = 120;
 
@@ -67,15 +66,7 @@ export default async function Home() {
         </Flex>
       </section>
 
-      <section className="w-full flex flex-col gap-3 items-center justify-center mt-6 px-6">
-        {total === 0 ? (
-          <div className="w-full text-center p-6">Nenhum produto disponível.</div>
-        ) : (
-          productsGroups.map((products, index) => (
-            <CardProductCarousel key={index} products={products} />
-          ))
-        )}
-      </section>
+      <ProductsClient productsGroups={productsGroups} />
 
       <section className="w-full flex flex-col gap-6 items-center justify-center mt-6 px-6">
         <ReviewList reviewData={reviewData} />

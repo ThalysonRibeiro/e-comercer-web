@@ -1,6 +1,4 @@
 "use client"
-// import { api } from "@/api/api";
-import { Header } from "@/components/Header/header";
 import { Button } from "@/components/ui/button";
 import { Context, ContextType } from "@/context/Context";
 import { ProductsProps } from "@/types/product";

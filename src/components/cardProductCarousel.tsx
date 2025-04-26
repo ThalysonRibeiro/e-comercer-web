@@ -11,17 +11,20 @@ import { useContext } from 'react';
 import { Context, ContextType } from '@/context/Context';
 import Link from 'next/link';
 import { useIsMobile } from '@/app/hooks/useIsMobile';
-import { Heart } from './ui/heart';
 import no_image from "@/assets/no-image.png";
 import { formatCurrency } from '@/utils/formatCurrency';
+import WishButton from './ui/wishButton';
 
 export interface CardProductsProps {
   products: ProductsProps[]
 }
 
 export function CardProductCarousel({ products }: CardProductsProps) {
-  const { addItemCart } = useContext(Context) as ContextType;
+  const { addItemCart, addItemWishlist, removeFromWishlist } = useContext(Context) as ContextType;
 
+  function handleItemWishList(productId: string) {
+    addItemWishlist(productId)
+  }
 
   function handleAddCartItem(product: ProductsProps) {
     addItemCart(product);
@@ -74,9 +77,7 @@ export function CardProductCarousel({ products }: CardProductsProps) {
                 <Flex className="my-2">
                   <StarRating rating={product.rating} />
                   <p className="text-xs ml-1">({product.products_sold})</p>
-                  <div className="absolute z-10 top-70 left-6">
-                    <Heart heart={true} />
-                  </div>
+
                   {product.stock === 1 && (
                     <p className="font-bold capitalize w-full text-center text-title bg-primaryColor absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">ultimo disponível</p>
                   )}
@@ -105,9 +106,16 @@ export function CardProductCarousel({ products }: CardProductsProps) {
                   <p className="text-oldPrice text-sm">ou até <span className="font-semibold">10x de R$ {(Number((product.price / 100)) / 10).toFixed(2)}</span></p>
                 </div>
               </Link>
-              <Button onClick={() => handleAddCartItem(product)}>
-                Add To Cart
-              </Button>
+              <Flex className='gap-2.5'>
+                <Button onClick={() => handleAddCartItem(product)}>
+                  Adicionar ao carrinho
+                </Button>
+                <button
+                  onClick={() => handleItemWishList(product.id)}
+                  className="flex items-center justify-center cursor-pointer w-fit h-10 rounded-lg border border-primaryColor text-primaryColor">
+                  <WishButton animate={product.isLiked ? true : false} liked={product.isLiked ? true : false} />
+                </button>
+              </Flex>
             </div>
 
           </SwiperSlide>

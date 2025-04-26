@@ -3,7 +3,7 @@
 import { ProductsProps } from "@/types/product";
 import { createContext, ReactNode, useEffect, useRef, useState } from "react";
 import api from "@/lib/axios";
-import { ProfileProps } from "@/types/user";
+import { ProfileProps, WishlistProps } from "@/types/user";
 import { useToastState } from "@/app/hooks/toast/toast";
 import { ToastItem, ToastType } from "@/app/hooks/toast/toastItem";
 import ThemeLoader from "@/components/ThemeLoader";
@@ -34,6 +34,9 @@ export interface ContextType {
   toggleSideBar: () => void;
   openSideBar: boolean;
   sideBarRef: React.RefObject<HTMLDivElement | null>;
+  wishList: WishlistProps | null;
+  addItemWishlist: (productId: string) => void;
+  removeFromWishlist: (itemId: string) => void;
 }
 
 interface CartProps extends ProductsProps {
@@ -65,6 +68,8 @@ function ProviderContext({ children }: ProviderProps) {
   const [activeTheme, setActiveTheme] = useState<boolean>(true);
   const [openSideBar, setOpenSideBar] = useState(false);
   const sideBarRef = useRef<HTMLDivElement | null>(null);
+  const [wishList, setWishList] = useState<WishlistProps | null>(null);
+  const [reloadWishList, setReloadWishList] = useState<Boolean>(false);
 
 
 
@@ -222,7 +227,6 @@ function ProviderContext({ children }: ProviderProps) {
     setIsOpenModalRegister(false);
   }
 
-
   useEffect(() => {
     async function getFullUserDetails() {
 
@@ -261,6 +265,54 @@ function ProviderContext({ children }: ProviderProps) {
   }, []);
 
 
+  useEffect(() => {
+    async function getWishList() {
+      try {
+        const { data } = await api.get(`/wishlist/user/${userData?.id}`)
+        setWishList(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getWishList();
+  }, [userData?.id, reloadWishList]);
+
+  function reloadWish() {
+    setReloadWishList(!reloadWishList)
+  }
+
+  async function addItemWishlist(productId: string) {
+    try {
+      const response = await api.post('/wishlist', {
+        userId: userData?.id,
+        productId
+      });
+      reloadWish();
+
+      // Opcional: adicionar um toast de sucesso
+      addToast('success', 'Item adicionado à lista de desejos');
+    } catch (error) {
+      console.error('Erro ao adicionar à lista de desejos:', error);
+      addToast('error', 'Erro ao adicionar à lista de desejos');
+    }
+  }
+
+  async function removeFromWishlist(itemId: string) {
+    try {
+      const { data } = await api.delete(`/wishlist/${itemId}`);
+
+      setWishList(prev => ({
+        ...prev!,
+        items: prev!.items.filter(item => item.id !== itemId)
+      }));
+
+      return addToast('success', `${data.message}`)
+    } catch (error) {
+      console.log(error);
+      addToast('error', 'Erro ao tentar remover item da lista de desejos');
+    }
+  }
+
   return (
     <Context
       value={{
@@ -287,7 +339,10 @@ function ProviderContext({ children }: ProviderProps) {
         IsActiveTheme,
         toggleSideBar,
         openSideBar,
-        sideBarRef
+        sideBarRef,
+        wishList,
+        addItemWishlist,
+        removeFromWishlist
       }}
     >
       <ThemeLoader isDarkTheme={activeTheme} />

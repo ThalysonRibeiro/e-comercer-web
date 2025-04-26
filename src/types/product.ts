@@ -31,6 +31,7 @@ export interface ProductsProps {
   createdAt: Date;
   updatedAt: Date;
   images: ImageCardPrps[];
+  isLiked?: boolean;
 }
 
 interface ImageCardPrps {

@@ -9,7 +9,8 @@ import { Context, ContextType } from "@/context/Context";
 import Link from "next/link";
 import { formatCurrency } from "@/utils/formatCurrency";
 import no_image from "@/assets/no-image.png";
-import { Heart } from "./heart";
+import { Heart } from "lucide-react";
+
 
 
 export function CardProduct({ product }: { product: ProductsProps }) {
@@ -31,7 +32,7 @@ export function CardProduct({ product }: { product: ProductsProps }) {
             <StarRating rating={product.rating} />
             <p className="text-xs ml-1">({product.products_sold})</p>
             <div className="absolute z-10 top-70 left-6">
-              <Heart heart={true} />
+              <Heart />
             </div>
             {product.stock === 1 && (
               <p className="font-bold capitalize w-full text-center text-title bg-primaryColor absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">ultimo disponível</p>

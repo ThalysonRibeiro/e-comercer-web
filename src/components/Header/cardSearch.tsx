@@ -4,7 +4,11 @@ import { StarRating } from "../ui/starRating";
 import { ProductsProps } from "@/types/product";
 import Link from "next/link";
 import { formatCurrency } from "@/utils/formatCurrency";
-import { Heart } from "../ui/heart";
+import { Heart } from "lucide-react";
+import { Button } from "../ui/button";
+import WishButton from "../ui/wishButton";
+import { useContext } from "react";
+import { Context, ContextType } from "@/context/Context";
 
 
 interface CardSearchProps {
@@ -12,6 +16,12 @@ interface CardSearchProps {
 }
 
 export function CardSearch({ products }: CardSearchProps) {
+  const { addItemCart, addItemWishlist, removeFromWishlist } = useContext(Context) as ContextType;
+
+  function handleItemWishList(productId: string) {
+    addItemWishlist(productId)
+  }
+
   return (
     <div className="w-full max-h-150 overflow-auto p-3 bg-bgCard border border-textButton rounded-lg relative grid grid-cols-1 md:grid-cols-2 gap-4">
       {(!products || products.length === 0) ? (
@@ -36,7 +46,11 @@ export function CardSearch({ products }: CardSearchProps) {
             <div className="w-full flex flex-col justify-between ml-2">
               <div className="flex justify-between">
                 <StarRating rating={item.rating} />
-                <Heart heart={true} />
+                <button
+                  onClick={() => handleItemWishList(item.id)}
+                  className='flex items-center w-7 h-7 text-primaryColor'>
+                  <WishButton animate={item.isLiked ? true : false} liked={item.isLiked ? true : false} />
+                </button>
               </div>
               <p className="text-sm line-clamp-2 font-medium">{item.title}</p>
               <p className="text-price font-semibold">
