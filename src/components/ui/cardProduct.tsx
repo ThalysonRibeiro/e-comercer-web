@@ -25,7 +25,7 @@ export function CardProduct({ product }: { product: ProductsProps }) {
       <div key={product.id} className="relative overflow-hidden flex flex-col justify-between border border-borderColor w-75 h-125 bg-bgCard rounded-lg p-4">
         <Link href={`/products/${product.id}`}>
           {product.bigsale && (
-            <div className="bg-primaryColor text-title font-semibold w-35 text-center absolute rotate-45 -right-8 top-7 z-10">Big sale</div>
+            <div className="bg-primaryColor text-title font-semibold w-35 text-center absolute rotate-45 -right-8 top-7 z-5">Big sale</div>
           )}
           <Flex className="my-2">
             <StarRating rating={product.rating} />
