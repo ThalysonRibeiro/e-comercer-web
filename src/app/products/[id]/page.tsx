@@ -95,7 +95,9 @@ export default function ProductId() {
             <div className="w-1/2 p-3 flex flex-col">
               <h1 className="mb-6 text-title text-2xl font-semibold">{product?.title}</h1>
 
-              <p className="line-clamp-3">{product?.description}</p>
+              <div className="line-clamp-3">
+                <div dangerouslySetInnerHTML={{ __html: product?.description }} />
+              </div>
 
               <div className="flex w-full mt-6">
 
@@ -133,7 +135,7 @@ export default function ProductId() {
 
         {product && (
           <div className="p1 mt-6">
-            <p>{product?.description}</p>
+            <div dangerouslySetInnerHTML={{ __html: product?.description }} />
           </div>
         )}
       </div>
