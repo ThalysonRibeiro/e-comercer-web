@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import { LayoutGrid, ChevronRight, ShoppingCart } from "lucide-react";
+import { LayoutGrid, ChevronRight, ShoppingCart, Bell } from "lucide-react";
 import { Button } from "../ui/button";
 import { InputSearch } from "./inputSearch";
 import Link from "next/link";
@@ -62,6 +62,9 @@ export function Header({ category, siteContent }: HeaderProps) {
                 <div className="lg:flex gap-4 hidden">
                   <UserDropdown avatar={userData?.image as string} />
                   <WishList userid={userData.id} addItem={addItemCart} />
+                  <Flex className="items-center">
+                    <Bell />
+                  </Flex>
                 </div>
 
 
