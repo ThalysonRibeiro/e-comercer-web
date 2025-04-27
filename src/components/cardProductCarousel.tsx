@@ -13,7 +13,7 @@ import { useIsMobile } from '@/app/hooks/useIsMobile';
 import no_image from "@/assets/no-image.png";
 import { formatCurrency } from '@/utils/formatCurrency';
 import WishButton from './ui/wishButton';
-import { Share, Share2, ShoppingCart } from 'lucide-react';
+import { Share, Share2, ShoppingBag, ShoppingCart } from 'lucide-react';
 
 export interface CardProductsProps {
   products: ProductsProps[]
@@ -70,7 +70,7 @@ export function CardProductCarousel({ products }: CardProductsProps) {
       >
         {products?.map(product => (
           <SwiperSlide key={product.id}>
-            <div key={product.id} className="relative group overflow-hidden flex flex-col justify-between border border-borderColor min-w-50 h-113 bg-bgCard rounded-lg p-4">
+            <div key={product.id} className="relative overflow-hidden flex flex-col justify-between border border-borderColor min-w-50 h-125 bg-bgCard rounded-lg p-4">
               <Link href={`/products/${product.id}`}>
                 {product.bigsale && (
                   <div className="bg-primaryColor text-title font-semibold w-35 text-center absolute rotate-45 -right-8 top-7 z-10">Big sale</div>
@@ -108,12 +108,10 @@ export function CardProductCarousel({ products }: CardProductsProps) {
                   <p className="text-oldPrice text-sm">ou até <span className="font-semibold">10x de R$ {(Number((product.price / 100)) / 10).toFixed(2)}</span></p>
                 </div>
               </Link>
-              <Flex className='mt-60 justify-center gap-2.5 z-10 absolute inset-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-                <Button onClick={() => handleAddCartItem(product)} className='w-10 border border-borderColor'>
+              <Flex className='justify-center gap-2.5'>
+                <Button onClick={() => handleAddCartItem(product)} className='border border-borderColor'>
+                  <span className="text-sm">Adicionar</span>
                   <ShoppingCart className="size-6" />
-                </Button>
-                <Button className='w-10 border border-borderColor'>
-                  <Share2 className="size-6" />
                 </Button>
                 {userData && (
                   <Button

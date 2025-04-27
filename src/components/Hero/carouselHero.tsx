@@ -11,7 +11,6 @@ import { LinkBUtton } from '../ui/link';
 
 
 export function CarouselHero({ promotionHero }: { promotionHero: PromotionHeroProps[] }) {
-  console.log(promotionHero[0].promotionLink);
 
   return (
     <>
