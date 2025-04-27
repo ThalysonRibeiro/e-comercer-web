@@ -1,11 +1,11 @@
 "use client"
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { ShoppingCart, Plus } from 'lucide-react';
-import { Context, ContextType } from '@/context/Context';
+import { useAppContext } from '@/context/AppContext';
 
 
 export function ButtonCart() {
-  const { openCloseModalCart, cartAmount } = useContext(Context) as ContextType;
+  const { openCloseModalCart, cartAmount } = useAppContext();
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {

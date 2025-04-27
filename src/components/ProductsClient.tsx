@@ -1,9 +1,8 @@
 "use client";
 
-import { useContext } from "react";
 import { CardProductCarousel } from "@/components/cardProductCarousel";
 import { ProductsProps } from "@/types/product";
-import { Context, ContextType } from "@/context/Context";
+import { useAppContext } from "@/context/AppContext";
 import { useMemo } from "react";
 
 interface ProductsClientProps {
@@ -11,7 +10,7 @@ interface ProductsClientProps {
 }
 
 export function ProductsClient({ productsGroups }: ProductsClientProps) {
-  const { wishList } = useContext(Context) as ContextType;
+  const { wishList } = useAppContext();
 
   const groups = useMemo(() => {
     if (!wishList?.items || wishList.items.length === 0) return productsGroups;

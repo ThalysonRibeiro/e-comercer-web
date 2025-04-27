@@ -3,14 +3,13 @@ import { Roboto, Montserrat } from "next/font/google";
 import "./globals.css";
 import { ModalCartItemsAdded } from "@/components/modalCartItemsAdded";
 import AuthProvider from "@/providers/auth";
-import ProviderContext from "@/context/Context";
-import { Flip, ToastContainer } from 'react-toastify';
 import { LoginModal } from "@/components/loginModal";
 import { FormeRegisterModal } from "@/components/registerModal/formeRegister";
 import { serverApi } from "./api/api";
 import { SiteContentProps } from "@/types/siteContent";
 import { Header } from "@/components/Header/header";
 import { Footer } from "@/components/footer";
+import AppProvider from "@/context/AppProvider";
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -67,30 +66,17 @@ export default async function RootLayout({
     <html lang="en" className={`${montserrat.variable} ${roboto.variable}`}>
       <body className="bg-themeColor text-textColor ">
         <AuthProvider>
-          <ProviderContext>
+          <AppProvider>
             <ModalCartItemsAdded />
             <FormeRegisterModal />
             <LoginModal />
-            <ToastContainer
-              position="top-right"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick={false}
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-              transition={Flip}
-            />
             <Header
               category={categoryMenu}
               siteContent={siteContent}
             />
             {children}
             <Footer footerData={siteContent} />
-          </ProviderContext>
+          </AppProvider>
         </AuthProvider>
       </body>
     </html>

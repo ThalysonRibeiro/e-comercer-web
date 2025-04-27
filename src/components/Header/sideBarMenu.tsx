@@ -1,16 +1,16 @@
 "use client"
 import { Heart, LogOut, Settings, ShoppingBag, User, X } from "lucide-react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { MenuProps } from "./dropdown";
 import Link from "next/link";
 import { Flex } from "../ui/flex";
-import { Context, ContextType } from "@/context/Context";
+import { useAppContext } from "@/context/AppContext";
 import { SwitchTheme } from "./switchTheme";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 
 export function SideBarMenu({ category }: MenuProps) {
-  const { userData, toggleSideBar, openSideBar, sideBarRef, openCloseModalLogin, openCloseModalRegister } = useContext(Context) as ContextType;
+  const { userData, toggleSideBar, openSideBar, sideBarRef, openCloseModalLogin, openCloseModalRegister } = useAppContext();
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
 
   const toggleDropdown = (index: number) => {

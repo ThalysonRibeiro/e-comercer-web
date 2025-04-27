@@ -1,6 +1,5 @@
 "use client"
-import { Context, ContextType } from '@/context/Context';
-import { useContext, useState } from 'react';
+import { useAppContext } from '@/context/AppContext';
 
 interface CopyCouponProps {
   couponCode: string;
@@ -8,7 +7,7 @@ interface CopyCouponProps {
 }
 
 export default function CopyCoupon({ couponCode, discountText }: CopyCouponProps) {
-  const { addToast } = useContext(Context) as ContextType;
+  const { addToast } = useAppContext();
 
 
   const copyToClipboard = () => {

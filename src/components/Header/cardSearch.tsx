@@ -4,11 +4,8 @@ import { StarRating } from "../ui/starRating";
 import { ProductsProps } from "@/types/product";
 import Link from "next/link";
 import { formatCurrency } from "@/utils/formatCurrency";
-import { Heart } from "lucide-react";
-import { Button } from "../ui/button";
 import WishButton from "../ui/wishButton";
-import { useContext } from "react";
-import { Context, ContextType } from "@/context/Context";
+import { useAppContext } from "@/context/AppContext";
 
 
 interface CardSearchProps {
@@ -16,7 +13,7 @@ interface CardSearchProps {
 }
 
 export function CardSearch({ products }: CardSearchProps) {
-  const { addItemCart, addItemWishlist, removeFromWishlist } = useContext(Context) as ContextType;
+  const { addItemCart, addItemWishlist, removeFromWishlist } = useAppContext();
 
   function handleItemWishList(productId: string) {
     addItemWishlist(productId)

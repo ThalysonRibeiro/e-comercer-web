@@ -7,8 +7,7 @@ import { Button } from "./ui/button";
 import { Flex } from "./ui/flex";
 import { StarRating } from "./ui/starRating";
 import { ProductsProps } from "@/types/product";
-import { useContext } from 'react';
-import { Context, ContextType } from '@/context/Context';
+import { useAppContext } from '@/context/AppContext';
 import Link from 'next/link';
 import { useIsMobile } from '@/app/hooks/useIsMobile';
 import no_image from "@/assets/no-image.png";
@@ -20,7 +19,7 @@ export interface CardProductsProps {
 }
 
 export function CardProductCarousel({ products }: CardProductsProps) {
-  const { addItemCart, addItemWishlist, removeFromWishlist, userData } = useContext(Context) as ContextType;
+  const { addItemCart, addItemWishlist, removeFromWishlist, userData } = useAppContext();
 
   function handleItemWishList(productId: string) {
     addItemWishlist(productId)

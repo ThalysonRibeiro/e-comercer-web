@@ -2,7 +2,6 @@
 import Image from "next/image";
 import no_image from "@/assets/no-image.png";
 import { PromotionsProps } from "@/types/siteContent";
-import { ArrowRight } from "lucide-react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import CopyButton from "@/components/LimitedTimeOffer//buttonCopy";

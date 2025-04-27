@@ -1,16 +1,16 @@
 "use client"
-import { Context, ContextType } from '@/context/Context';
+import { useAppContext } from '@/context/AppContext';
 import { Category } from '@/types/category';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
-import React, { useState, useRef, useContext, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 export interface MenuProps {
   category: Category[];
 }
 
 function DropdownMenu({ category }: MenuProps) {
-  const { toggleSideBar } = useContext(Context) as ContextType;
+  const { toggleSideBar } = useAppContext();
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [openMenuCategory, setOpenMenuCategory] = useState<boolean>(false);

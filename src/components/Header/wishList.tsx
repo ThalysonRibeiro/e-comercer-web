@@ -2,13 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { formatCurrency } from "@/utils/formatCurrency";
-import { useContext, useEffect, useRef, useState } from "react";
-import { WishlistProps } from "@/types/user";
+import { useEffect, useRef, useState } from "react";
 import { Heart, ShoppingCart } from "lucide-react";
 import { ProductsProps } from "@/types/product";
-import api from "@/lib/axios";
-import { toast } from "react-toastify";
-import { Context, ContextType } from "@/context/Context";
+import { useAppContext } from "@/context/AppContext";
 
 interface ListProps {
   userid: string;
@@ -16,7 +13,7 @@ interface ListProps {
 }
 
 export function WishList({ userid, addItem }: ListProps) {
-  const { wishList, addItemWishlist, removeFromWishlist } = useContext(Context) as ContextType;
+  const { wishList, addItemWishlist, removeFromWishlist } = useAppContext();
   const [openWishList, setOpenWishList] = useState<boolean>(false);
   const wishListRef = useRef<HTMLDivElement>(null);
 

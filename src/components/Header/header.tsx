@@ -6,8 +6,7 @@ import { InputSearch } from "./inputSearch";
 import Link from "next/link";
 import { Flex } from "../ui/flex";
 import DropdownMenu, { MenuProps } from "./dropdown";
-import { useContext } from "react";
-import { Context, ContextType } from "@/context/Context";
+import { useAppContext } from "@/context/AppContext";
 import { UserDropdown } from "./userDropdown";
 import { WishList } from "./wishList";
 import { SiteContentProps } from "@/types/siteContent";
@@ -20,7 +19,7 @@ interface HeaderProps extends MenuProps {
 
 
 export function Header({ category, siteContent }: HeaderProps) {
-  const { userData, openCloseModalCart, openCloseModalLogin, openCloseModalRegister, cartAmount, addItemCart, openSideBar } = useContext(Context) as ContextType;
+  const { userData, openCloseModalCart, openCloseModalLogin, openCloseModalRegister, cartAmount, addItemCart, openSideBar } = useAppContext();
 
   return (
     <header className="w-full min-h-40 px-6 flex items-center justify-center border-b border-b-borderColor">

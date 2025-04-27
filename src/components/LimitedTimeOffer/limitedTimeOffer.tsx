@@ -7,8 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCreative } from 'swiper/modules';
 import 'swiper/css';
 import { ProductsProps } from "@/types/product";
-import { useContext } from "react";
-import { Context, ContextType } from "@/context/Context";
+import { useAppContext } from "@/context/AppContext";
 import Link from "next/link";
 import { formatCurrency } from "@/utils/formatCurrency";
 
@@ -18,7 +17,7 @@ export interface LimitedTimeOfferProps {
 
 
 export function LimitedTimeOffer({ products }: LimitedTimeOfferProps) {
-  const { addItemCart } = useContext(Context) as ContextType;
+  const { addItemCart } = useAppContext();
 
 
   return (

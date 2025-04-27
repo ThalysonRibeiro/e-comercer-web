@@ -1,7 +1,6 @@
 "use client"
-import { Context, ContextType } from "@/context/Context"
+import { useAppContext } from "@/context/AppContext"
 import Image from "next/image"
-import { useContext } from "react"
 import { Button } from "./ui/button"
 import { X } from "lucide-react"
 
@@ -15,7 +14,7 @@ export function ModalCartItemsAdded() {
     openCloseModalCart,
     isOpenModalCart,
     openModalCartRef
-  } = useContext(Context) as ContextType;
+  } = useAppContext();
 
 
   return (

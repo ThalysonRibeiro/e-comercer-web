@@ -1,11 +1,10 @@
 "use client"
 import { Button } from "@/components/ui/button";
-import { Context, ContextType } from "@/context/Context";
 import { ProductsProps } from "@/types/product";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useParams, redirect } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductSuggestion } from "../components/productSuggestion";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
@@ -14,10 +13,11 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import api from "@/lib/axios";
+import { useAppContext } from "@/context/AppContext";
 
 
 export default function ProductId() {
-  const { addItemCart } = useContext(Context) as ContextType;
+  const { addItemCart } = useAppContext()
   const { id } = useParams();
   const [product, setProduct] = useState<ProductsProps>();
   const [thumbsSwiper, setThumbsSwiper] = useState<any | null>(null);

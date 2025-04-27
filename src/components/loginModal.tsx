@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input, InputPassword } from "@/components/ui/input";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { extractPhoneNumber, formatPhone } from "@/utils/formatPhone";
-import { Context, ContextType } from "@/context/Context";
+import { useAppContext } from "@/context/AppContext";
 import { X } from "lucide-react";
 import { InputPhone } from "./ui/input-phone";
 import { LoadingButton } from "./ui/loadingButton";
@@ -20,7 +20,7 @@ export function LoginModal() {
     isOpenModalLogin,
     openModalLoginRef,
     openCloseModalRegister
-  } = useContext(Context) as ContextType;
+  } = useAppContext();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

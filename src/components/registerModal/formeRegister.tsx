@@ -3,7 +3,7 @@ import GoogleLoginButton from "@/components/GoogleLoginButton";
 import { Input, InputPassword } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { z } from "zod";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 import { validateCPF } from "@/utils/validateCNPJ";
 import { validateCNPJ } from "@/utils/validateCPF";
 import { CPForCNPJ } from "./select-cpf-cnpj";
-import { Context, ContextType } from "@/context/Context";
+import { useAppContext } from "@/context/AppContext";
 import { X } from "lucide-react";
 import { LoadingButton } from "../ui/loadingButton";
 
@@ -51,7 +51,7 @@ export function FormeRegisterModal() {
     openModalRegisterRef,
     openCloseModalLogin,
     closeModalRegisterScrollY
-  } = useContext(Context) as ContextType;
+  } = useAppContext();
   const [typeValue, setTypeValue] = useState<string>("cpf");
   const [cpfOCnpj, setCpfOCnpj] = useState<string>("");
   const [country, setCountry] = useState<string>("+55");

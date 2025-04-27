@@ -1,10 +1,10 @@
 "use client"
-import { Context, ContextType } from "@/context/Context";
+import { useAppContext } from "@/context/AppContext";
 import { Moon, Sun } from "lucide-react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 export function SwitchTheme() {
-  const { IsActiveTheme } = useContext(Context) as ContextType;
+  const { IsActiveTheme } = useAppContext();
   const [isDark, setIsDark] = useState(false);
 
   const toggleTheme = () => {

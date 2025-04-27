@@ -4,8 +4,7 @@ import { ProductsProps } from "@/types/product";
 import { StarRating } from './starRating';
 import { Flex } from './flex';
 import { Button } from './button';
-import { useContext } from "react";
-import { Context, ContextType } from "@/context/Context";
+import { useAppContext } from "@/context/AppContext";
 import Link from "next/link";
 import { formatCurrency } from "@/utils/formatCurrency";
 import no_image from "@/assets/no-image.png";
@@ -14,7 +13,7 @@ import { Heart } from "lucide-react";
 
 
 export function CardProduct({ product }: { product: ProductsProps }) {
-  const { addItemCart } = useContext(Context) as ContextType;
+  const { addItemCart } = useAppContext();
 
 
   function handleAddCartItem(product: ProductsProps) {
