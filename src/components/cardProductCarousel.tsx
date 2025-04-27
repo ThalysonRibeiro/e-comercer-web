@@ -20,7 +20,7 @@ export interface CardProductsProps {
 }
 
 export function CardProductCarousel({ products }: CardProductsProps) {
-  const { addItemCart, addItemWishlist, removeFromWishlist } = useContext(Context) as ContextType;
+  const { addItemCart, addItemWishlist, removeFromWishlist, userData } = useContext(Context) as ContextType;
 
   function handleItemWishList(productId: string) {
     addItemWishlist(productId)
@@ -110,11 +110,13 @@ export function CardProductCarousel({ products }: CardProductsProps) {
                 <Button onClick={() => handleAddCartItem(product)}>
                   Adicionar ao carrinho
                 </Button>
-                <button
-                  onClick={() => handleItemWishList(product.id)}
-                  className="flex items-center justify-center cursor-pointer w-fit h-10 rounded-lg border border-primaryColor text-primaryColor">
-                  <WishButton animate={product.isLiked ? true : false} liked={product.isLiked ? true : false} />
-                </button>
+                {userData && (
+                  <button
+                    onClick={() => handleItemWishList(product.id)}
+                    className="flex items-center justify-center cursor-pointer w-fit h-10 rounded-lg border border-primaryColor text-primaryColor">
+                    <WishButton animate={!!product.isLiked} liked={!!product.isLiked} />
+                  </button>
+                )}
               </Flex>
             </div>
 
