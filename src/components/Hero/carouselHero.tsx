@@ -54,7 +54,7 @@ export function CarouselHero({ promotionHero }: { promotionHero: PromotionHeroPr
                     alt="imagem promotion"
                     src={item.image as string}
                     fill
-                    // sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="w-full h-full object-cover"
                   />
                 </Link>

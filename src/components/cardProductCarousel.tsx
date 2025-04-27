@@ -86,6 +86,7 @@ export function CardProductCarousel({ products }: CardProductsProps) {
                     src={product.images && product.images.length > 0 ? product.images[0].image : no_image}
                     alt={product.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover rounded-lg"
                   />
                 </div>

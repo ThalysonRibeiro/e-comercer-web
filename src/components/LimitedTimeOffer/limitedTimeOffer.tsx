@@ -51,6 +51,7 @@ export function LimitedTimeOffer({ products }: LimitedTimeOfferProps) {
                   src={item.images[0]?.image}
                   alt={item.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-contain"
                 />
               </Link>

@@ -37,6 +37,7 @@ export function CardSearch({ products }: CardSearchProps) {
                 src={item.images[0].image}
                 alt={`Image of ${item.title}`}
                 fill
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover"
               />
             </div>

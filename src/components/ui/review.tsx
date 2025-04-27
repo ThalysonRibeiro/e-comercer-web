@@ -28,6 +28,7 @@ export function Review({ reviewData }: { reviewData: ReviewProps }) {
               src={reviewData.user.avatar ? reviewData.user.avatar : no_image}
               alt="user"
               fill
+              sizes="(max-width: 768px) 100vw, 33vw"
               className="rounded-full"
             />
           </div>

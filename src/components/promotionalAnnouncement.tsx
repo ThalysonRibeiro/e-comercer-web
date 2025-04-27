@@ -54,6 +54,7 @@ export function PromotionalAnnouncement({ promotionBot }: { promotionBot: Promot
                 src={item?.banner ? item?.banner : no_image}
                 alt={item.title}
                 fill
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover rounded-lg"
               />
             </div>

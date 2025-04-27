@@ -89,6 +89,7 @@ export function WishList({ userid, addItem }: ListProps) {
                       src={item?.product?.images[0]?.image}
                       alt={`Imagem do ${item?.product?.title}`}
                       fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover"
                     />
                   </div>

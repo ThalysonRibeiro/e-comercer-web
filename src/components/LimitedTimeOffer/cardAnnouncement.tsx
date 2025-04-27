@@ -37,6 +37,7 @@ export function CardAnnouncement({ promotionTop }: { promotionTop: PromotionsPro
                 src={item?.banner ? item?.banner : no_image}
                 alt="imagem anuncio"
                 fill
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="w-full h-full bg-cover bg-no-repeat object-cover"
               />
             </div>

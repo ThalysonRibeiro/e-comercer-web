@@ -82,6 +82,7 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
               src={playStore}
               alt="playstore"
               fill
+              sizes="(max-width: 768px) 100vw, 33vw"
               className="object-cover"
             />
           </div>
@@ -90,6 +91,7 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
               src={apleStory}
               alt="playstore"
               fill
+              sizes="(max-width: 768px) 100vw, 33vw"
               className="object-cover"
             />
           </div>
