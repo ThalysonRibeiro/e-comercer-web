@@ -11,6 +11,7 @@ import { LinkBUtton } from '../ui/link';
 
 
 export function CarouselHero({ promotionHero }: { promotionHero: PromotionHeroProps[] }) {
+  console.log(promotionHero[0].promotionLink);
 
   return (
     <>
@@ -28,32 +29,20 @@ export function CarouselHero({ promotionHero }: { promotionHero: PromotionHeroPr
 
         {promotionHero.map(item => (
           <SwiperSlide key={item.id}>
-            <Flex className="flex-col-reverse md:flex-row w-full md:h-110 h-150 backdrop-blur-lg bg-transparent rounded-lg overflow-auto border border-borderColor">
+            <Flex className="relative flex-col-reverse md:flex-row w-full h-45 md:h-70 lg:h-125 backdrop-blur-lg bg-transparent rounded-lg overflow-auto border border-borderColor">
 
-              <Flex className="flex-col lg:w-2/5 md:w-1/3 w-full gap-3 p-5 justify-center">
-                <h1 className="font-semibold text-4xl text-title uppercase">{item.title}</h1>
-                <h2 className="font-semibold text-3xl text-primaryColor capitalize">{item.subTitle}</h2>
-                <h3 className="font-semibold text-xl text-title">{item.sale}</h3>
-                <p className='line-clamp-4'>{item.description}</p>
-                {item.buttonLink && (
-                  <LinkBUtton
-                    link={item.buttonLink as string}
-                    className='w-fit px-4'
-                  >
-                    {item.buttonText}
-                  </LinkBUtton>
-                )}
-              </Flex>
-
-              <Flex className="lg:w-3/5 md:w-2/3 w-full h-full  ">
+              <Flex className="w-full h-full">
+                {/* lg:w-3/5 md:w-2/3 */}
                 <Link
-                  href="/"
+                  href={item.promotionLink ?? "/"}
                   className='relative w-full'
                 >
                   <Image
                     alt="imagem promotion"
-                    src={item.image as string}
+                    src={item.image}
                     fill
+                    quality={100}
+                    priority
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="w-full h-full object-cover"
                   />

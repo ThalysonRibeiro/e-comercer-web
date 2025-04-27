@@ -21,6 +21,7 @@ export interface SiteContentProps {
   isActive: boolean;
   promotions: PromotionsProps[];
   promotionHero: PromotionHeroProps[];
+  movingTextHero: MovingTextHeroProps[];
   socialMedia: SocialMediaProps[];
   contactInfo: ContactInfoProps[];
   themeColors: ThemeColorsProps[];
@@ -50,13 +51,8 @@ export interface PromotionsProps {
 
 export interface PromotionHeroProps {
   id: string;
-  title: string;
-  subTitle: string;
-  sale: string;
-  description: string;
   image: string;
-  buttonText: string;
-  buttonLink: string;
+  promotionLink: string;
   position: string;
   isActive: boolean;
   order: number;
@@ -65,6 +61,16 @@ export interface PromotionHeroProps {
   createdAt: Date;
   updatedAt: Date;
   siteContentId: string;
+}
+
+export interface MovingTextHeroProps {
+  id: string
+  title: string
+  description: string
+  siteContentId: string
+  isActive: boolean
+  createdAt: Date
+  updatedAt: Date
 }
 
 export interface SocialMediaProps {
