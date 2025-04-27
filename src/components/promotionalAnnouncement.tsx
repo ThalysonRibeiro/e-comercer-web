@@ -44,6 +44,7 @@ export function PromotionalAnnouncement({ promotionBot }: { promotionBot: Promot
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
+          pauseOnMouseEnter: true
         }}
         className='w-[1280px]'
       >

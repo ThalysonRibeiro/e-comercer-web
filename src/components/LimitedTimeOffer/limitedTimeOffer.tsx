@@ -39,24 +39,27 @@ export function LimitedTimeOffer({ products }: LimitedTimeOfferProps) {
         }}
         autoplay={{
           delay: 4000,
+          waitForTransition: true,
           disableOnInteraction: false,
+          reverseDirection: true,
+          pauseOnMouseEnter: true
         }}
-        className='w-[95%] md:h-[450px]'
+        className='w-full md:h-[450px]'
       >
         {products.map(item => (
           <SwiperSlide key={item.id}>
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-borderColor w-full h-full bg-bgCard rounded-lg overflow-hidden">
-              <Link href={`/products/${item.id}`} className="w-100 md:h-full h-100 relative p-0">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-borderColor w-full h-full bg-bgCard rounded-lg overflow-hidden p-4">
+              <Link href={`/products/${item.id}`} className="w-100  h-105 relative rounded-lg overflow-hidden">
                 <Image
                   src={item.images[0]?.image}
                   alt={item.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-contain"
+                  className="object-cover"
                 />
               </Link>
 
-              <div className="flex-1 flex flex-col justify-between h-full p-4">
+              <div className="flex-1 flex flex-col justify-between h-full">
                 <StarRating rating={item.rating} />
                 <h1 className="text-title font-semibold text-xl line-clamp-2 mb-2">
                   {item.title}
@@ -76,7 +79,9 @@ export function LimitedTimeOffer({ products }: LimitedTimeOfferProps) {
                 </div>
                 <Button
                   onClick={() => addItemCart(item)}
-                >Add To Cart</Button>
+                >
+                  Adicionar ao carrinho
+                </Button>
                 <CountdownCard endDate={item.endDate} title="APROVEITE! A OFERTA TERMINA EM:" />
               </div>
             </div>

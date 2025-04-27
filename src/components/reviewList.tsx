@@ -32,6 +32,7 @@ export function ReviewList({ reviewData }: { reviewData: ReviewProps[] }) {
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
+          pauseOnMouseEnter: true
         }}
         className='w-[1280px]'
       >

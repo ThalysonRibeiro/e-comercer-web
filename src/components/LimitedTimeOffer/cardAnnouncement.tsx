@@ -16,7 +16,7 @@ import 'swiper/css/effect-flip';
 
 export function CardAnnouncement({ promotionTop }: { promotionTop: PromotionsProps[] }) {
   return (
-    <div className="max-w-75 w-full h-112.5 border border-borderColor rounded-lg overflow-hidden">
+    <div className="max-w-75 w-full h-112.5 border border-borderColor rounded-lg overflow-hidden hidden lg:block">
       <Swiper
         effect={'flip'}
         spaceBetween={30}
@@ -26,9 +26,9 @@ export function CardAnnouncement({ promotionTop }: { promotionTop: PromotionsPro
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
+          pauseOnMouseEnter: true
         }}
         className="mySwiper"
-      // className='w-[900px]'
       >
         {promotionTop.map(item => (
           <SwiperSlide key={item.id} className="relative group">
