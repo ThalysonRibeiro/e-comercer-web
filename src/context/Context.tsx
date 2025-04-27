@@ -37,6 +37,7 @@ export interface ContextType {
   wishList: WishlistProps | null;
   addItemWishlist: (productId: string) => void;
   removeFromWishlist: (itemId: string) => void;
+  reloadWishList: boolean;
 }
 
 interface CartProps extends ProductsProps {
@@ -69,7 +70,7 @@ function ProviderContext({ children }: ProviderProps) {
   const [openSideBar, setOpenSideBar] = useState(false);
   const sideBarRef = useRef<HTMLDivElement | null>(null);
   const [wishList, setWishList] = useState<WishlistProps | null>(null);
-  const [reloadWishList, setReloadWishList] = useState<Boolean>(false);
+  const [reloadWishList, setReloadWishList] = useState<boolean>(false);
 
 
 
@@ -342,7 +343,8 @@ function ProviderContext({ children }: ProviderProps) {
         sideBarRef,
         wishList,
         addItemWishlist,
-        removeFromWishlist
+        removeFromWishlist,
+        reloadWishList
       }}
     >
       <ThemeLoader isDarkTheme={activeTheme} />
