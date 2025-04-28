@@ -60,6 +60,7 @@ export function FiltersProducts({ products }: { products: AllProductsProps }) {
           <option value="topRated">Melhor avaliado</option>
           <option value="priceAsc">Preço crescente</option>
           <option value="priceDesc">Preço decrescente</option>
+          <option value="bestSelling">Mais vendido</option>
         </select>
       </div>
 
