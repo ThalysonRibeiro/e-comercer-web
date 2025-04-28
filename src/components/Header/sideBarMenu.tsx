@@ -126,7 +126,7 @@ export function SideBarMenu({ category }: MenuProps) {
                       {item.children.map(subItem => (
                         <Link
                           key={subItem.id}
-                          href={`/categoria/${subItem.id}`}
+                          href={`?category=${subItem.name}`}
                           onClick={() => {
                             setOpenMenuIndex(null);
                             toggleSideBar();

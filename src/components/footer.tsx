@@ -108,11 +108,12 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
                   .replace(/[\u0300-\u036f]/g, "") // remove marcas restantes
                   .replace(/\s+/g, "-") // troca espaços por hífens
                   .replace(/[^\w-]+/g, ""); // remove caracteres especiais
+
                 return (
                   <Link
                     key={item.id}
                     className="hover:text-hover capitalize md:text-sm"
-                    href={`/produtos/${slug}`}
+                    href={`?category=${item.name}`}
                   >
                     {item.name}
                   </Link>
