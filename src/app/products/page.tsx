@@ -5,54 +5,79 @@ import { fetchData } from "@/utils/fetchData";
 import { PromotionHeroProps } from "@/types/siteContent";
 import { AllProductsProps, } from "@/types/product";
 import { Category } from "@/types/category";
-import { Flex } from "@/components/ui/flex";
+import { FiltersProducts } from "./components/filters";
+import { buildQueryString } from "@/utils/buildQueryString";
+import ReloadOnParamChange from "@/components/reloadOnParamChange";
+import { CardSpecialPromotion } from "@/components/Hero/cardSpecialPromotion";
 
-export default async function Products() {
+
+
+interface Props {
+  searchParams: {
+    category?: string;
+    priceMin?: string;
+    priceMax?: string;
+    brand?: string;
+    tags?: string;
+    sort?: string;
+    limit?: string; // 👈 adicionei aqui
+  };
+}
+export default async function Products({ searchParams }: Props) {
+  const { category, priceMin, priceMax, brand, tags, sort, limit } = await searchParams;
+
+  // Build the filters object
+  const filters: any = {};
+  if (category) filters.category = category;
+  if (priceMin) filters.price = priceMin;
+  if (priceMax) filters['-price'] = priceMax;
+  if (brand) filters.brand = brand;
+  if (tags) filters.tags = tags;
+  if (sort) filters.sort = sort;
+  if (limit) filters.limit = limit;
+
+  // Clean the object to remove undefined or empty values
+  function cleanObject(obj: any) {
+    return Object.fromEntries(
+      Object.entries(obj).filter(([_, value]) => value !== undefined && value !== '')
+    );
+  }
+
+  // Build the query string
+  const queryString = buildQueryString(cleanObject(filters));
+
+  const productsPromise = fetchData<AllProductsProps>(`/products?offset=0${queryString}`);
   const promotionHeroPromise = fetchData<PromotionHeroProps[]>(`/promotion-hero?active=true&limit=5&offset=0&position=top`);
-  const productsPromise = fetchData<AllProductsProps>(`/products`);
   const categoryPromise = fetchData<Category[]>(`/category?hasChildren=true&limit=6&offset=0`);
+
+
   const [
     promotionHero,
     products,
-    category
+    menucategory
   ] = await Promise.all([
     promotionHeroPromise,
     productsPromise,
     categoryPromise
-  ])
+  ]);
+
+
+
   return (
     <main className="max-w-7xl w-full mx-auto">
+      <ReloadOnParamChange />
       <section className=" w-full mx-auto flex mt-6">
-        <CarouselHero promotionHero={promotionHero} />
+        {/* <CarouselHero promotionHero={promotionHero} /> */}
       </section>
       <section className=" w-full mx-auto flex mt-6">
-        <MenuCategory allCategory={category}>
+        <MenuCategory allCategory={menucategory}>
           <div className="w-full">
-            <Flex className="w-fit h-10 justify-between items-center gap-4 mb-4">
-              <span className="text-title">Ordenar:</span>
-              <div className="bg-bgCard h-10 rounded-lg flex px-1 border border-borderColor">
-                <select name="" id="" className="bg-bgCard outline-0">
-                  <option value="" className="w-50 px-4">De A á Z</option>
-                  <option value="" className="w-50 px-4">Melhor avaliado</option>
-                  <option value="" className="w-50 px-4">Preço crescente</option>
-                  <option value="" className="w-50 px-4">Preço decrescente</option>
-                </select>
-              </div>
-              <span className="text-title">Exibir:</span>
-              <div className="bg-bgCard h-10 rounded-lg flex px-1 border border-borderColor">
-                <select name="" id="" className="bg-bgCard outline-0">
-                  <option value="">20 por página</option>
-                  <option value="">30 por página</option>
-                  <option value="">40 por página</option>
-                  <option value="">50 por página</option>
-                </select>
-              </div>
-              <span className="text-title">{products.total} Produtos</span>
-            </Flex>
+            <FiltersProducts products={products} />
             <ListItems AllProducts={products.products} />
           </div>
         </MenuCategory>
       </section>
     </main>
-  )
+  );
 }
+
