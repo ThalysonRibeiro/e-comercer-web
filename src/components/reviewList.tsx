@@ -14,25 +14,26 @@ export function ReviewList({ reviewData }: { reviewData: ReviewProps[] }) {
   const isLg = useIsMobile(960);
   let responsive;
   if (isXl) {
-    responsive = 3;
+    responsive = 4;
   }
   if (isLg) {
-    responsive = 2;
+    responsive = 3;
   }
   if (isMobile) {
-    responsive = 1;
+    responsive = 2;
   }
   return (
     <Flex className='w-full'>
       <Swiper
         spaceBetween={30}
-        slidesPerView={responsive ? responsive : 3}
+        slidesPerView={responsive ? responsive : 5}
         loop={true}
         modules={[Autoplay]}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
-          pauseOnMouseEnter: true
+          pauseOnMouseEnter: true,
+          reverseDirection: true
         }}
         className='w-[1280px]'
       >

@@ -11,12 +11,12 @@ export function Review({ reviewData }: { reviewData: ReviewProps }) {
 
   return (
 
-    <div className="border border-borderColor rounded-lg bg-bgCard space-y-2.5 p-6">
-      <StarRating rating={reviewData.rating * 10} size={22} />
-      <p className="line-clamp-1 text-title">
+    <div className="border border-borderColor rounded-lg bg-bgCard space-y-2.5 p-3">
+      <StarRating rating={reviewData.rating * 10} />
+      <p className="line-clamp-1 text-title text-sm">
         {reviewData.title}
       </p>
-      <p className="line-clamp-2 text-textColor">
+      <p className="line-clamp-2 text-textColor text-sm">
         {reviewData.comment}
       </p>
       {reviewData.user && (
@@ -33,10 +33,10 @@ export function Review({ reviewData }: { reviewData: ReviewProps }) {
             />
           </div>
           <div>
-            <h2 className="text-title">
+            <h2 className="text-title text-sm">
               {reviewData.user.name}
             </h2>
-            <span className="text-textColor">
+            <span className="text-textColor text-sm">
               {formatDate(reviewData.createdAt)}
             </span>
           </div>
