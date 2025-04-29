@@ -18,7 +18,7 @@ export function MenuCategory({
   };
   return (
     <div className="max-w-7xl w-full mx-auto flex gap-4">
-      <div className="w-100 min-h-100 h-125 border border-borderColor rounded-lg p-3">
+      <div className="w-80 min-h-105 h-fit border border-borderColor rounded-lg p-3 hidden lg:block">
         <h1 className="text-title font-bold text-2xl mb-2">Categorias</h1>
         <div>
           {allCategory.map((item, index) => (

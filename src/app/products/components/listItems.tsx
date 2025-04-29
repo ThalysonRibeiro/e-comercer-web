@@ -68,7 +68,7 @@ export function ListItems({ AllProducts }: { AllProducts: ProductsProps[] }) {
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-6 w-full">
+      <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
         {currentProducts.map(item => (
           <CardProduct key={item.id} product={item} />
         ))}

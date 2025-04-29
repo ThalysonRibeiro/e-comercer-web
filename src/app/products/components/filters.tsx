@@ -5,8 +5,12 @@ import { Flex } from "@/components/ui/flex";
 import { AllProductsProps } from "@/types/product";
 import { useState, useEffect, useTransition } from 'react';
 import { Button } from '@/components/ui/button';
+import { FaArrowsSpin } from 'react-icons/fa6';
+import { useIsMobile } from '@/app/hooks/useIsMobile';
+import { RefreshCcw } from 'lucide-react';
 
 export function FiltersProducts({ products }: { products: AllProductsProps }) {
+  const isMobile = useIsMobile(500);
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
@@ -46,47 +50,55 @@ export function FiltersProducts({ products }: { products: AllProductsProps }) {
   }
 
   return (
-    <Flex className="w-fit h-10 justify-between items-center gap-4 mb-4">
-      <span className="text-title">Ordenar:</span>
-      <div className="bg-bgCard h-10 rounded-lg flex px-1 border border-borderColor">
-        <select
-          className="bg-bgCard outline-0"
-          value={currentSort}
-          onChange={(e) => handleSortChange(e.target.value)}
-          disabled={isPending}
+    <Flex className="flex-row items-end w-fit min-h-10  gap-4 mb-4">
+      <Flex className='flex-col md:flex-row md:items-center md:gap-2'>
+        <span className="text-title text-[10px] md:text-base">Ordenar:</span>
+        <div className="bg-bgCard h-10 rounded-lg flex px-1 border border-borderColor">
+          <select
+            className="bg-bgCard outline-0 text-[12px] md:text-base"
+            value={currentSort}
+            onChange={(e) => handleSortChange(e.target.value)}
+            disabled={isPending}
+          >
+            <option value="az">De A pra Z</option>
+            <option value="za">De Z pra A</option>
+            <option value="topRated">Melhor avaliado</option>
+            <option value="priceAsc">Preço crescente</option>
+            <option value="priceDesc">Preço decrescente</option>
+            <option value="bestSelling">Mais vendido</option>
+          </select>
+        </div>
+      </Flex>
+
+      <Flex className='flex-col md:flex-row md:items-center md:gap-2'>
+        <span className="text-title text-[10px] md:text-base">Exibir:</span>
+        <div className="bg-bgCard h-10 rounded-lg flex px-1 border border-borderColor">
+          <select
+            className="bg-bgCard outline-0 w-full text-[12px] md:text-base"
+            value={currentLimit}
+            onChange={(e) => handleLimitChange(e.target.value)}
+            disabled={isPending}
+          >
+            <option value="20">20 por página</option>
+            <option value="30">30 por página</option>
+            <option value="40">40 por página</option>
+            <option value="50">50 por página</option>
+          </select>
+        </div>
+      </Flex>
+
+
+      <Flex className='flex-col md:flex-row md:items-center md:gap-2'>
+        <span className="text-title text-[10px] md:text-base">{isPending ? '...' : products.total} Produtos</span>
+        <Button
+          onClick={handleClearFilters}
+          className={` ${isMobile ? 'w-full' : 'w-fit'} px-4 text-sm md:text-base`}
         >
-          <option value="az">De A a Z</option>
-          <option value="za">De Z a A</option>
-          <option value="topRated">Melhor avaliado</option>
-          <option value="priceAsc">Preço crescente</option>
-          <option value="priceDesc">Preço decrescente</option>
-          <option value="bestSelling">Mais vendido</option>
-        </select>
-      </div>
-
-      <span className="text-title">Exibir:</span>
-      <div className="bg-bgCard h-10 rounded-lg flex px-1 border border-borderColor">
-        <select
-          className="bg-bgCard outline-0"
-          value={currentLimit}
-          onChange={(e) => handleLimitChange(e.target.value)}
-          disabled={isPending}
-        >
-          <option value="20">20 por página</option>
-          <option value="30">30 por página</option>
-          <option value="40">40 por página</option>
-          <option value="50">50 por página</option>
-        </select>
-      </div>
+          {isMobile ? <RefreshCcw /> : "Limpar filtros"}
 
 
-      <span className="text-title">{isPending ? '...' : products.total} Produtos</span>
-      <Button
-        onClick={handleClearFilters}
-        className='w-fit px-4'
-      >
-        Limpar filtros
-      </Button>
+        </Button>
+      </Flex>
     </Flex>
   );
 }

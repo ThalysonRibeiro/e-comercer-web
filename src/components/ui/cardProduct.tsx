@@ -39,7 +39,7 @@ export function CardProduct({ product }: { product: ProductsProps }) {
               <p className="font-bold capitalize w-full text-center text-title bg-primaryColor absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">ultimo disponível</p>
             )}
           </Flex>
-          <div className='relative min-w-45 min-h-45'>
+          <div className='relative min-w-45 min-h-45 mb-1'>
             <Image
               src={product.images && product.images.length > 0 ? product.images[0].image : no_image}
               alt={product.title}

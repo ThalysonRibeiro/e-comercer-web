@@ -64,12 +64,12 @@ export default async function Products({ searchParams }: Props) {
 
 
   return (
-    <main className="max-w-7xl w-full mx-auto">
+    <main className="w-full">
       <ReloadOnParamChange />
-      <section className=" w-full mx-auto flex mt-6">
+      <section className=" w-full mx-auto flex mt-6 px-6">
         {/* <CarouselHero promotionHero={promotionHero} /> */}
       </section>
-      <section className=" w-full mx-auto flex mt-6">
+      <section className=" w-full mx-auto flex mt-6 px-6">
         <MenuCategory allCategory={menucategory}>
           <div className="w-full">
             <FiltersProducts products={products} />

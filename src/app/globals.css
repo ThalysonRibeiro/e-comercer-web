@@ -27,6 +27,7 @@
   --color-blue: blue;
 
   --font-sans: var(--font-roboto);
+  --breakpoint-xs: 31.2rem;
 }
 
 h1,
