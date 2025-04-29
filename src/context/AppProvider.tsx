@@ -1,8 +1,6 @@
 
 "use client"
 import { ProviderProps } from "@/types/appContextType";
-import { useToastState } from "@/app/hooks/toast/toast";
-import { ToastItem } from "@/app/hooks/toast/toastItem";
 import ThemeLoader from "@/components/ThemeLoader";
 import { AppContext } from "./AppContext";
 import { useCart } from "./hooks/useCart";
@@ -11,7 +9,6 @@ import { useWishlist } from "./hooks/useWishlist";
 import { useUI } from "./hooks/useUI";
 
 function AppProvider({ children }: ProviderProps) {
-  const { toasts, addToast, removeToast } = useToastState();
   const {
     userData,
     loading,
@@ -72,8 +69,6 @@ function AppProvider({ children }: ProviderProps) {
         isOpenModalRegister,
         closeModalRegisterScrollY,
         profileDetail,
-        addToast,
-        removeToast,
         IsActiveTheme,
         toggleSideBar,
         openSideBar,
@@ -86,18 +81,6 @@ function AppProvider({ children }: ProviderProps) {
     >
       <ThemeLoader isDarkTheme={activeTheme} />
       {children}
-      <div className="fixed top-4 right-4 w-64 z-50">
-        {toasts.map((toast) => (
-          <ToastItem
-            key={toast.id}
-            id={toast.id}
-            type={toast.type}
-            message={toast.message}
-            duration={toast.duration}
-            onClose={removeToast}
-          />
-        ))}
-      </div>
     </AppContext>
   );
 }

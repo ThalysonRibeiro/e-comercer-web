@@ -10,6 +10,7 @@ import { SiteContentProps } from "@/types/siteContent";
 import { Header } from "@/components/Header/header";
 import { Footer } from "@/components/footer";
 import AppProvider from "@/context/AppProvider";
+import { Bounce, ToastContainer } from "react-toastify";
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -73,6 +74,19 @@ export default async function RootLayout({
             <Header
               category={categoryMenu}
               siteContent={siteContent}
+            />
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+              transition={Bounce}
             />
             {children}
             <Footer footerData={siteContent} />

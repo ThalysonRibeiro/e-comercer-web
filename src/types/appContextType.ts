@@ -1,7 +1,6 @@
 import { ProductsProps } from "@/types/product";
 import { ReactNode } from "react";
 import { ProfileProps, WishlistProps } from "@/types/user";
-import { ToastType } from "@/app/hooks/toast/toastItem";
 import { User } from "next-auth";
 
 export interface AppContextType {
@@ -17,14 +16,12 @@ export interface AppContextType {
   isOpenModalLogin: boolean;
   isOpenModalRegister: boolean;
   closeModalRegisterScrollY: () => void;
-  userData: User | null; // Pode ser null quando não há usuário logado
+  userData: User | null;
   loading: boolean;
   openModalCartRef: React.RefObject<HTMLDivElement | null>;
   openModalLoginRef: React.RefObject<HTMLDivElement | null>;
   openModalRegisterRef: React.RefObject<HTMLDivElement | null>;
   profileDetail: ProfileProps | null;
-  addToast: (type: ToastType, message: string, duration?: number) => string;
-  removeToast: (id: string) => void;
   IsActiveTheme: () => void;
   toggleSideBar: () => void;
   openSideBar: boolean;

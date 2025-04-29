@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import axios from "axios";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { serverApi } from "../../api";
 
 // Estenda os tipos padrão do NextAuth
 declare module "next-auth" {
@@ -52,7 +53,7 @@ export const authOptions: NextAuthOptions = {
             return null;
           }
 
-          const response = await axios.post(
+          const response = await serverApi.post(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
             {
               login: credentials.email,
@@ -104,7 +105,7 @@ export const authOptions: NextAuthOptions = {
       // Handle Google login (only on first sign-in)
       if (account?.provider === "google" && account.id_token) {
         try {
-          const response = await axios.post(
+          const response = await serverApi.post(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`,
             { token: account.id_token }
           );

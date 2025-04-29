@@ -65,7 +65,7 @@ function DropdownMenu({ category }: MenuProps) {
                   {item.children.map(subItem => (
                     <Link
                       key={subItem.id}
-                      href={`?category=${subItem.name}`}
+                      href={`/products?category=${subItem.name}`}
                       onClick={() => setOpenMenuIndex(null)}
                       className="block w-full px-4 py-2 capitalize text-xs text-textColor hover:bg-hover hover:text-textButton"
                     >
