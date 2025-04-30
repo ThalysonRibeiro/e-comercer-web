@@ -2,12 +2,14 @@
 
 import { CardProduct } from "@/components/ui/cardProduct";
 import { ProductsProps } from "@/types/product";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Flex } from "@/components/ui/flex";
 import { useSearchParams, useRouter } from "next/navigation";
+import { useAppContext } from "@/context/AppContext";
 
 export function ListItems({ AllProducts }: { AllProducts: ProductsProps[] }) {
+  const { wishList } = useAppContext();
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -66,11 +68,21 @@ export function ListItems({ AllProducts }: { AllProducts: ProductsProps[] }) {
 
   const pageNumbers = getPageNumbers();
 
+  const currentProductsGroups = useMemo(() => {
+    if (!wishList?.items || wishList.items.length === 0) return AllProducts;
+
+    return AllProducts.map(product => ({
+      ...product,
+      isLiked: wishList.items.some(item => item.product.id.toString() === product.id.toString()),
+    })
+    );
+  }, [AllProducts, wishList]);
+
   return (
     <>
       <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
-        {currentProducts.map(item => (
-          <CardProduct key={item.id} product={item} />
+        {currentProductsGroups.map((products, index) => (
+          <CardProduct key={index} product={products} />
         ))}
       </div>
 
