@@ -71,7 +71,7 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
 
         <Flex className="max-h-75 h-full flex-col justify-between p-2">
           <h1 className="text-3xl font-bold uppercase text-title">
-            {footerData.title}
+            {footerData.title || "e-commerce"}
           </h1>
           <p className="line-clamp-4 text-sm">
             {footerData.metaDescription}

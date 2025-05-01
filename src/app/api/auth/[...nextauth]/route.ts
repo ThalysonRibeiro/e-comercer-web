@@ -107,7 +107,7 @@ export const authOptions: NextAuthOptions = {
         try {
           const response = await serverApi.post(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`,
-            { token: account.id_token }
+            { token: account.id_token },
           );
 
           token.accessToken = response.data.accessToken;

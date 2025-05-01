@@ -182,9 +182,9 @@ export function MenuCategory({
           <p className="text-textColor/50 font-bold my-2">Preço</p>
           <Flex className="items-center gap-2">
             <span>R$</span>
-            <Input type="number" placeholder="min" />
+            <Input type="number" placeholder="min" className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
             <span>-</span>
-            <Input type="number" placeholder="max" />
+            <Input type="number" placeholder="max" className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
           </Flex>
         </div>
 

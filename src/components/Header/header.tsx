@@ -12,6 +12,7 @@ import { WishList } from "./wishList";
 import { SiteContentProps } from "@/types/siteContent";
 import { SwitchTheme } from "./switchTheme";
 import { SideBarMenu } from "./sideBarMenu";
+import no_image from "@/assets/no-image.png";
 
 interface HeaderProps extends MenuProps {
   siteContent: SiteContentProps;
@@ -27,18 +28,18 @@ export function Header({ category, siteContent }: HeaderProps) {
         <div className="flex gap-3 justify-between items-center">
           <Link href="/">
             <Flex className="items-center gap-3">
-              {siteContent.image_logo !== ""
+              {siteContent?.image_logo === null
                 ? (<div className="w-15 h-15 bg-cover">
                   <Image
                     width={320}
                     height={100}
-                    src={siteContent.image_logo}
+                    src={!siteContent?.image_logo ? no_image : siteContent.image_logo}
                     alt="logo do site"
                   />
                 </div>
                 )
                 : (<p className="font-semibold text-xl text-title capitalize">
-                  {siteContent.title}
+                  {siteContent?.title === null ? "e-commerce" : siteContent?.title}
                 </p>
                 )
               }
