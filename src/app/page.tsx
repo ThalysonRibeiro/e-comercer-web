@@ -3,7 +3,6 @@ import { Hero } from "@/components/Hero/hero";
 import { CardAnnouncement } from "@/components/LimitedTimeOffer/cardAnnouncement";
 import { LimitedTimeOffer } from "@/components/LimitedTimeOffer/limitedTimeOffer";
 import { Flex } from "@/components/ui/flex";
-import { BgVideo } from "@/components/bgVideo";
 import { ReviewList } from "@/components/reviewList";
 import { PromotionalAnnouncement } from "@/components/promotionalAnnouncement";
 import { fetchData } from "@/utils/fetchData";
@@ -57,7 +56,6 @@ export default async function Home() {
   ]);
   return (
     <div className="w-full">
-      {siteContent.bg_video && <BgVideo videoUrl={siteContent.bg_video} />}
 
       <ButtonCart />
       <Hero
