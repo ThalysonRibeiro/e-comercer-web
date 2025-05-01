@@ -11,6 +11,8 @@ import { AllProductsProps, ProductsProps } from "@/types/product";
 import { PromotionsProps, SiteContentProps } from "@/types/siteContent";
 import { ReviewProps } from "@/types/review";
 import { ProductsClient } from "@/components/ProductsClient";
+import { CardBrands } from "@/components/cardBrands";
+import { BrandsProps } from "@/types/brands";
 
 export const revalidate = 120;
 
@@ -34,12 +36,15 @@ export default async function Home() {
     fetchData<{ products: ProductsProps[] }>(`/products?limit=${limit}&offset=${pageIndex * limit}&stock=true&emphasis=true`).then(data => data.products)
   );
 
+  const brandsPromisse = fetchData<BrandsProps[]>('/brands');
+
   const [
     featuredProducts,
     promotionTop,
     promotionBot,
     siteContent,
     reviewData,
+    brands,
     ...productsGroups
   ] = await Promise.all([
     featuredProductsPromise,
@@ -47,7 +52,8 @@ export default async function Home() {
     promotionBotPromise,
     siteContentPromise,
     reviewDataPromise,
-    ...productsPagesPromises
+    brandsPromisse,
+    ...productsPagesPromises,
   ]);
   return (
     <div className="w-full">
@@ -70,6 +76,10 @@ export default async function Home() {
 
       <section className="w-full flex flex-col gap-6 items-center justify-center mt-6 px-6">
         <ReviewList reviewData={reviewData} />
+      </section>
+
+      <section className="w-full flex flex-col gap-6 items-center justify-center mt-6 px-6">
+        <CardBrands brands={brands} />
       </section>
 
       <section className="w-full flex flex-col gap-6 items-center justify-center mt-6 px-6 mb-10">
