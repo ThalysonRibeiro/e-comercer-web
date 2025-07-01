@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
+import api from '@/lib/axios';
 
 export function ConfirmEmailConmponent() {
   const searchParams = useSearchParams();
@@ -14,7 +15,7 @@ export function ConfirmEmailConmponent() {
 
     if (token) {
       // Faz a requisição POST para o back-end com o token
-      axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/email-verification/confirm-email`, { token })
+      api.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/email-verification/confirm-email`, { token })
         .then(response => {
           setMessage('Email confirmado com sucesso!');
         })
