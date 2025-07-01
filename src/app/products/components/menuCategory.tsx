@@ -131,9 +131,9 @@ export function MenuCategory({
   }, [updateURLWithBrands]);
 
   return (
-    <div className="max-w-7xl w-full mx-auto flex gap-4">
-      <div className="w-80 min-h-105 h-fit border border-borderColor rounded-lg p-3 hidden lg:block">
-        <h1 className="text-title font-bold text-2xl mb-2">Categorias</h1>
+    <div className="w-full mx-auto flex gap-4">
+      <div className="sticky top-6 w-80 min-h-105 h-fit border border-borderColor rounded-lg p-3 hidden lg:block">
+        <h2 className="text-title font-bold text-2xl mb-2">Categorias</h2>
 
         <div>
           {allCategory.map((item, index) => (
@@ -176,7 +176,7 @@ export function MenuCategory({
           ))}
         </div>
 
-        <h2 className="font-bold text-xl my-2">Filtros</h2>
+        <h3 className="font-bold text-xl my-2">Filtros</h3>
 
         <div>
           <p className="text-textColor/50 font-bold my-2">Preço</p>
