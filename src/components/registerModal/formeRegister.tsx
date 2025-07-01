@@ -27,7 +27,7 @@ const passwordSchema = z
   .regex(/[A-Z]/, "A senha deve conter pelo menos uma letra maiúscula")
   .regex(/[a-z]/, "A senha deve conter pelo menos uma letra minúscula")
   .regex(/[0-9]/, "A senha deve conter pelo menos um número")
-  .regex(/[\W_]/, "A senha deve conter pelo menos um caractere especial");
+  .regex(/[^a-zA-Z0-9]/, "A senha deve conter pelo menos um caractere especial");
 
 type FormData = {
   name: string;
@@ -219,10 +219,10 @@ export function FormeRegisterModal() {
     <>
       {isOpenModalRegister && (
         <div className="flex items-center w-full justify-center absolute">
-          <main ref={openModalRegisterRef} className="z-99 relative bg-bgCard max-w-125 md:max-w-230 w-full flex flex-col items-center justify-center m-4 space-y-2 px-10 py-5 text-center border border-borderColor rounded-lg overflow-auto">
+          <main ref={openModalRegisterRef} className="z-99 relative bg-card max-w-125 md:max-w-230 w-full flex flex-col items-center justify-center m-4 space-y-2 px-10 py-5 text-center border border-border rounded-lg overflow-auto">
             <button
               onClick={openCloseModalRegister}
-              className="text-primaryColor hover:text-hover absolute top-2 right-2">
+              className="text-primary hover:text-accent absolute top-2 right-2">
               <X />
             </button>
             <h1 className="text-2xl font-bold">Faça o cadastro</h1>
@@ -231,7 +231,7 @@ export function FormeRegisterModal() {
                 {/* Nome */}
                 <div className="flex flex-col items-start">
                   <Label
-                    className={errors.name ? "text-danger" : ""}
+                    className={errors.name ? "text-destructive" : ""}
                   >
                     Nome:
                   </Label>
@@ -239,15 +239,15 @@ export function FormeRegisterModal() {
                     type="text"
                     placeholder="Nome completo"
                     {...register('name')}
-                    className={errors.name ? "border-danger" : ""}
+                    className={errors.name ? "border-destructive" : ""}
                   />
-                  {errors.name && <span className="text-danger text-xs mt-1 text-left">{errors.name.message}</span>}
+                  {errors.name && <span className="text-destructive text-xs mt-1 text-left">{errors.name.message}</span>}
                 </div>
 
                 {/* CPF/CNPJ */}
                 <div className="flex flex-col items-start">
                   <Label
-                    className={errors.document ? "text-danger" : ""}
+                    className={errors.document ? "text-destructive" : ""}
                   >
                     CPF ou CNPJ:
                   </Label>
@@ -256,11 +256,11 @@ export function FormeRegisterModal() {
                     onChangeType={setTypeValue}
                     cpfCnpj={cpfOCnpj}
                     setCpfCnpj={handleInputChange}
-                    className={errors.document ? "border-danger" : ""}
+                    className={errors.document ? "border-destructive" : ""}
                   />
-                  {errors.document && <span className="text-danger text-xs mt-1 text-left">{errors.document.message}</span>}
+                  {errors.document && <span className="text-destructive text-xs mt-1 text-left">{errors.document.message}</span>}
                   {cpfOCnpj && !errors.document && (
-                    <span className={`text-xs mt-1 text-left ${isDocumentValid ? "text-price" : "text-amber-500"}`}>
+                    <span className={`text-xs mt-1 text-left ${isDocumentValid ? "text-success" : "text-amber-500"}`}>
                       {isDocumentValid ? "Documento válido" : "Verificando documento..."}
                     </span>
                   )}
@@ -269,7 +269,7 @@ export function FormeRegisterModal() {
                 {/* Email */}
                 <div className="flex flex-col items-start">
                   <Label
-                    className={errors.email ? "text-danger" : ""}
+                    className={errors.email ? "text-destructive" : ""}
                   >
                     Email:
                   </Label>
@@ -277,15 +277,15 @@ export function FormeRegisterModal() {
                     type="text"
                     placeholder="Email"
                     {...register('email')}
-                    className={errors.email ? "border-danger" : ""}
+                    className={errors.email ? "border-destructive" : ""}
                   />
-                  {errors.email && <span className="text-danger text-xs mt-1 text-left">{errors.email.message}</span>}
+                  {errors.email && <span className="text-destructive text-xs mt-1 text-left">{errors.email.message}</span>}
                 </div>
 
                 {/* Telefone */}
                 <div className="flex flex-col items-start">
                   <Label
-                    className={errors.phone ? "text-danger" : ""}
+                    className={errors.phone ? "text-destructive" : ""}
                   >
                     Celular:
                   </Label>
@@ -294,15 +294,15 @@ export function FormeRegisterModal() {
                     onChangeCountry={setCountry}
                     phone={valuePhone || ''}
                     setPhone={handlePhone}
-                    className={errors.phone ? "border-danger" : ""}
+                    className={errors.phone ? "border-destructive" : ""}
                   />
-                  {errors.phone && <span className="text-danger text-xs mt-1 text-left">{errors.phone.message}</span>}
+                  {errors.phone && <span className="text-destructive text-xs mt-1 text-left">{errors.phone.message}</span>}
                 </div>
 
                 {/* Data de nascimento */}
                 <div className="flex flex-col items-start">
                   <Label
-                    className={errors.dateOfBirth ? "text-danger" : ""}
+                    className={errors.dateOfBirth ? "text-destructive" : ""}
                   >
                     Data de nascimento:
                   </Label>
@@ -310,34 +310,34 @@ export function FormeRegisterModal() {
                     type="date"
                     placeholder="Data de nascimento"
                     {...register('dateOfBirth')}
-                    className={errors.dateOfBirth ? "border-danger" : ""}
+                    className={errors.dateOfBirth ? "border-destructive" : ""}
                   />
-                  {errors.dateOfBirth && <span className="text-danger text-xs mt-1 text-left">{errors.dateOfBirth.message}</span>}
+                  {errors.dateOfBirth && <span className="text-destructive text-xs mt-1 text-left">{errors.dateOfBirth.message}</span>}
                 </div>
 
                 {/* Gênero */}
                 <div className="flex flex-col items-start">
                   <Label
-                    className={errors.gender ? "text-danger" : ""}
+                    className={errors.gender ? "text-destructive" : ""}
                   >
                     Genero:
                   </Label>
                   <select
                     {...register('gender')}
-                    className={`outline-0 border border-borderColor rounded-lg px-1 w-full h-10 ${errors.gender ? "border-danger" : ""} focus-within:border-primaryColor`}
+                    className={`outline-0 border border-border rounded-lg px-1 w-full h-10 ${errors.gender ? "border-destructive" : ""} focus-within:border-primary`}
                   >
                     <option className="bg-bgCard" value="masculino">Masculino</option>
                     <option className="bg-bgCard" value="feminino">Feminino</option>
                     <option className="bg-bgCard" value="outro">Outro</option>
                     <option className="bg-bgCard" value="prefiro_nao_dizer">Prefiro não dizer</option>
                   </select>
-                  {errors.gender && <span className="text-danger text-xs mt-1 text-left">{errors.gender.message}</span>}
+                  {errors.gender && <span className="text-destructive text-xs mt-1 text-left">{errors.gender.message}</span>}
                 </div>
 
                 {/* Senha */}
                 <div className="flex flex-col items-start">
                   <Label
-                    className={errors.password ? "text-danger" : ""}
+                    className={errors.password ? "text-destructive" : ""}
                   >
                     Senha:
                   </Label>
@@ -349,17 +349,17 @@ export function FormeRegisterModal() {
                         placeholder="Senha"
                         value={field.value || ''}
                         onChange={field.onChange}
-                        className={errors.password ? "border-danger" : ""}
+                        className={errors.password ? "border-destructive" : ""}
                       />
                     )}
                   />
-                  {errors.password && <span className="text-danger text-xs mt-1 text-left">{errors.password.message}</span>}
+                  {errors.password && <span className="text-destructive text-xs mt-1 text-left">{errors.password.message}</span>}
                 </div>
 
                 {/* Confirmar senha */}
                 <div className="flex flex-col items-start">
                   <Label
-                    className={errors.confirmPassword ? "text-danger" : ""}
+                    className={errors.confirmPassword ? "text-destructive" : ""}
                   >
                     Confirmar senha:
                   </Label>
@@ -371,15 +371,15 @@ export function FormeRegisterModal() {
                         placeholder="Confirmar senha"
                         value={field.value || ''}
                         onChange={field.onChange}
-                        className={errors.confirmPassword ? "border-danger" : ""}
+                        className={errors.confirmPassword ? "border-destructive" : ""}
                       />
                     )}
                   />
-                  {errors.confirmPassword && <span className="text-danger text-xs mt-1 text-left">{errors.confirmPassword.message}</span>}
+                  {errors.confirmPassword && <span className="text-destructive text-xs mt-1 text-left">{errors.confirmPassword.message}</span>}
                 </div>
               </div>
 
-              {responseError && (<p className="text-danger">{responseError}</p>)}
+              {responseError && (<p className="text-destructive">{responseError}</p>)}
 
               <div className="w-full space-y-4">
                 <div className="space-y-4 w-full">
@@ -388,7 +388,7 @@ export function FormeRegisterModal() {
                     <input
                       type="checkbox"
                       {...register('acceptOffers')}
-                      className="p-2 appearance-none border border-primaryColor checked:bg-primaryColor checked:border-borderColor focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain cursor-pointer"
+                      className="p-2 appearance-none border border-primary checked:bg-primary checked:border-border focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain cursor-pointer"
                     />
                     <p className="text-sm">Quero receber ofertas e novidades por e-mail, SMS, WhatsApp ou mensagens nos App's POWERGADGET!</p>
                   </div>
@@ -398,19 +398,19 @@ export function FormeRegisterModal() {
                     <input
                       type="checkbox"
                       {...register('acceptTerms')}
-                      className={`p-2 appearance-none border ${errors.acceptTerms ? "border-danger" : "border-primaryColor"} checked:bg-primaryColor checked:border-borderColor focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain cursor-pointer`}
+                      className={`p-2 appearance-none border ${errors.acceptTerms ? "border-destructive" : "border-primary"} checked:bg-primary checked:border-borderColor focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain cursor-pointer`}
                     />
                     <span className="text-sm">Li e estou de acordo com as{' '}
-                      <Link href="/terms" className="text-primaryColor underline">
+                      <Link href="/terms" className="text-primary underline">
                         políticas da empresa
                       </Link>
                       {' e '}
-                      <Link href="/policies" className="text-primaryColor underline">
+                      <Link href="/policies" className="text-primary underline">
                         políticas de privacidade
                       </Link>.
                     </span>
                   </div>
-                  {errors.acceptTerms && <span className="text-danger text-xs mt-1 text-left">{errors.acceptTerms.message}</span>}
+                  {errors.acceptTerms && <span className="text-destructive text-xs mt-1 text-left">{errors.acceptTerms.message}</span>}
                 </div>
 
                 {/* Botão de submit com estado de loading */}
@@ -436,7 +436,7 @@ export function FormeRegisterModal() {
 
             <p className="text-center">
               Já tem uma conta?{' '}
-              <button onClick={openLogin} className="text-primaryColor hover:text-hover">
+              <button onClick={openLogin} className="text-primary hover:text-accent">
                 Conecte-se.
               </button>
             </p>
