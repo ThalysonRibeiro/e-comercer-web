@@ -16,12 +16,12 @@ export default function GoogleLoginButton({ name }: { name: string }) {
   return (
     <button
       onClick={loginGoogle}
-      className="w-full flex items-center justify-center gap-2 rounded-md border border-oldPrice bg-white px-4 py-2 text-sm font-medium text-themeColor shadow-sm hover:bg-gray-50 cursor-pointer"
+      className="w-full flex items-center justify-center gap-2 rounded-md border border-oldPrice bg-white px-4 py-2 text-sm font-medium shadow-sm hover:bg-gray-50 cursor-pointer"
     >
       {!loading ?
         <LoadingButton />
         : <Flex className="gap-2.5">
-          <FcGoogle className="h-5 w-5" /> <span className="text-title">{name}</span>
+          <FcGoogle className="h-5 w-5" /> <span>{name}</span>
         </Flex>}
     </button>
   );

@@ -4,6 +4,7 @@ import { Category } from '@/types/category';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
+import { Button } from '../ui/button';
 
 export interface MenuProps {
   category: Category[];
@@ -46,7 +47,7 @@ function DropdownMenu({ category }: MenuProps) {
           <div key={item.id} className="relative">
             <button
               onClick={() => toggleDropdown(index)}
-              className="cursor-pointer capitalize text-sm text-title transition duration-300 hover:text-hover flex items-center justify-between px-1 py-1 rounded-md focus:outline-none focus:ring-1 focus:ring-hover"
+              className="cursor-pointer capitalize text-sm transition duration-300 hover:text-accent flex items-center justify-between px-1 py-1 rounded-md focus:outline-none"
             >
               <span>{item.name}</span>
               <svg
@@ -60,14 +61,14 @@ function DropdownMenu({ category }: MenuProps) {
             </button>
 
             {item.children && item.children.length > 0 && openMenuIndex === index && (
-              <div className="absolute -left-10 min-w-40 mt-2 origin-top-left bg-bgCard rounded-md shadow-lg ring-1 ring-borderColor ring-opacity-5 focus:outline-none z-10">
+              <div className="absolute -left-10 min-w-40 mt-2 origin-top-left bg-card rounded-md shadow-lg ring-1 ring-border ring-opacity-5 focus:outline-none z-10">
                 <div className="py-1">
                   {item.children.map(subItem => (
                     <Link
                       key={subItem.id}
                       href={`/products?category=${subItem.name}`}
                       onClick={() => setOpenMenuIndex(null)}
-                      className="block w-full px-4 py-2 capitalize text-xs text-textColor hover:bg-hover hover:text-textButton"
+                      className="block w-full px-4 py-2 capitalize text-xs hover:text-accent"
                     >
                       {subItem.name}
                     </Link>
@@ -80,13 +81,15 @@ function DropdownMenu({ category }: MenuProps) {
       </div>
 
       <div className="lg:hidden">
-        <button
+        <Button
+          variant='ghost'
+          size='icon'
           onClick={toggleSideBar}
-          className="text-title hover:text-hover focus:outline-none border rounded-sm w-9 h-9 flex items-center justify-center"
+          className="cursor-pointer"
           aria-label="Menu"
         >
           <Menu size={30} />
-        </button>
+        </Button>
       </div>
     </div>
   );

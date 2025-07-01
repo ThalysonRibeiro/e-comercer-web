@@ -50,7 +50,7 @@ export function WishList({ userid, addItem }: ListProps) {
 
     <div ref={wishListRef} className="relative flex items-center">
       <button
-        className="transition duration-300 hover:text-hover cursor-pointer"
+        className="transition duration-300 hover:text-accent cursor-pointer"
         onClick={wishToggleDropdown}
         aria-haspopup="true"
         aria-expanded={openWishList}
@@ -60,21 +60,21 @@ export function WishList({ userid, addItem }: ListProps) {
       </button>
       {openWishList && (
         <div className="absolute top-15 -right-15 z-10">
-          <div className="absolute z-10 -top-2.5 right-16 w-0 h-0 border-textButton border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-black animate-bounce" />
-          <div className="w-90 max-h-120 overflow-auto space-y-4 p-3 bg-bgCard border border-textButton rounded-lg relative">
+          <div className="absolute z-10 -top-2.5 right-16 w-0 h-0 border-card border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-black animate-bounce" />
+          <div className="w-90 max-h-120 overflow-auto space-y-4 p-3 bg-card border border-border rounded-lg relative">
             <div className="inline-flex justify-between w-full">
               <h1 className="text-lg font-semibold">
                 Lista de desejos
               </h1>
               <Link
                 href="/"
-                className="text-primaryColor transition-colors duration-300 hover:text-hover"
+                className="text-primary transition-colors duration-300 hover:text-accent"
               >
                 Lista completa
               </Link>
             </div>
             {(!wishList?.items || wishList.items.length === 0) ? (
-              <div className="text-center py-4 text-oldPrice">
+              <div className="text-center py-4">
                 <p> Sua lista de desejos está vazia</p>
                 <p> Adicione produtos!</p>
               </div>
@@ -82,7 +82,7 @@ export function WishList({ userid, addItem }: ListProps) {
               wishList?.items.map(item => (
                 <div
                   key={item?.id}
-                  className="w-full h-25 flex justify-between p-2 rounded-lg border border-textButton hover:bg-themeColor transition-colors"
+                  className="w-full h-25 flex justify-between p-2 rounded-lg border border-border hover:bg-background transition-colors"
                 >
                   <div className="max-h-25 max-w-24 w-full relative rounded-lg overflow-hidden">
                     <Image
@@ -93,7 +93,7 @@ export function WishList({ userid, addItem }: ListProps) {
                       className="object-cover"
                     />
                   </div>
-                  <div className="w-full flex flex-col justify-between ml-2 pl-2 border-l border-l-textButton">
+                  <div className="w-full flex flex-col justify-between ml-2 pl-2 border-l border-l-border">
                     <p className="line-clamp-1 text-sm font-medium">{item?.product?.title}</p>
                     <p className="text-price font-semibold">
                       {formatCurrency((item?.product?.price / 100))}
@@ -101,13 +101,13 @@ export function WishList({ userid, addItem }: ListProps) {
                     <div className="flex justify-between text-sm ">
                       <button
                         onClick={() => addItem(item?.product)}
-                        className="inline-flex items-center gap-2 cursor-pointer hover:text-hover">
+                        className="inline-flex items-center gap-2 cursor-pointer hover:text-accent">
                         <ShoppingCart className="size-6" />
                         Adicionar
                       </button>
                       <button
                         onClick={() => removeFromWishlist(item?.id)}
-                        className="cursor-pointer hover:text-hover"
+                        className="cursor-pointer hover:text-accent"
                       >
                         Excluir
                       </button>

@@ -27,10 +27,9 @@ export function ServiceHero({ service }: { service: string[] }) {
           delay: 2500,
           disableOnInteraction: false,
         }}
-        className='w-[1280]'
       >
         {service.map(item => (
-          <SwiperSlide key={item} className='cursor-default backdrop-blur-lg bg-transparent rounded-lg py-2 border border-borderColor flex items-center justify-center border-r uppercase text-center text-sm text-primaryColor'>
+          <SwiperSlide key={item} className='cursor-default backdrop-blur-lg bg-transparent rounded-lg py-2 border border-border flex items-center justify-center border-r uppercase text-center text-sm text-primary'>
             {item}
           </SwiperSlide>
         ))}

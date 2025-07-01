@@ -20,9 +20,9 @@ export function CardSearch({ products }: CardSearchProps) {
   }
 
   return (
-    <div className="w-full max-h-150 overflow-auto p-3 bg-bgCard border border-textButton rounded-lg relative grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="w-full max-h-150 overflow-auto p-3 bg-card border border-border rounded-lg relative grid grid-cols-1 md:grid-cols-2 gap-4">
       {(!products || products.length === 0) ? (
-        <div className="text-center py-4 text-oldPrice">
+        <div className="text-center py-4 text-muted-foreground">
           No products found
         </div>
       ) : (
@@ -30,7 +30,7 @@ export function CardSearch({ products }: CardSearchProps) {
           <Link
             href={`/products/${item.id}`}
             key={item.id}
-            className="w-full h-30 flex justify-between p-2 rounded-lg border border-textButton hover:bg-themeColor transition-colors"
+            className="w-full h-30 flex justify-between p-2 rounded-lg border border-border hover:bg-background transition-colors"
           >
             <div className="max-h-30 max-w-25 w-full relative rounded-lg overflow-hidden">
               <Image
@@ -46,7 +46,7 @@ export function CardSearch({ products }: CardSearchProps) {
                 <StarRating rating={item.rating} />
                 <button
                   onClick={() => handleItemWishList(item.id)}
-                  className='flex items-center w-7 h-7 text-primaryColor'>
+                  className='flex items-center w-7 h-7 text-primary'>
                   <WishButton animate={item.isLiked ? true : false} liked={item.isLiked ? true : false} />
                 </button>
               </div>

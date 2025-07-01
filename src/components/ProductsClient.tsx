@@ -25,7 +25,7 @@ export function ProductsClient({ productsGroups }: ProductsClientProps) {
 
 
   return (
-    <div className="w-full flex flex-col gap-3 items-center justify-center mt-6 px-6">
+    <section className="container mx-auto w-full flex flex-col gap-3 items-center justify-center px-6">
       {groups.length === 0 ? (
         <div className="w-full text-center p-6">Nenhum produto disponível.</div>
       ) : (
@@ -33,6 +33,6 @@ export function ProductsClient({ productsGroups }: ProductsClientProps) {
           <CardProductCarousel key={index} products={products} />
         ))
       )}
-    </div>
+    </section>
   );
 }

@@ -97,10 +97,10 @@ export function LoginModal() {
   return (
     <>
       {isOpenModalLogin && (
-        <div ref={openModalLoginRef} className="min-w-115 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-99 bg-bgCard border border-borderColor rounded-lg p-10 space-y-4">
+        <div ref={openModalLoginRef} className="min-w-115 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-99 bg-card border border-borderColor rounded-lg p-10 space-y-4">
           <button
             onClick={openCloseModalLogin}
-            className="text-primaryColor hover:text-hover absolute top-2 right-2">
+            className="text-primary hover:text-accent absolute top-2 right-2">
             <X />
           </button>
           <form
@@ -113,10 +113,10 @@ export function LoginModal() {
               <select
                 value={loginMethod}
                 onChange={(e) => setLoginMethod(e.target.value as "email" | "phone")}
-                className=" border border-borderColor rounded-lg p-2"
+                className=" border border-border rounded-lg p-2"
               >
-                <option className="bg-bgCard" value="email">Email</option>
-                <option className="bg-bgCard" value="phone">Telefone</option>
+                <option className="bg-card" value="email">Email</option>
+                <option className="bg-card" value="phone">Telefone</option>
               </select>
 
               {loginMethod === "email" ? (
@@ -124,7 +124,7 @@ export function LoginModal() {
                   type="email"
                   placeholder="Seu email"
                   {...register('email')}
-                  className={errors.email ? "border-danger" : ""}
+                  className={errors.email ? "border-destructive" : ""}
                 />
               ) : (
                 <InputPhone
@@ -132,46 +132,46 @@ export function LoginModal() {
                   onChangeCountry={setCountry}
                   phone={valuePhone}
                   setPhone={handlePhone}
-                  className={errors.phone ? "border-danger" : ""}
+                  className={errors.phone ? "border-destructive" : ""}
                 />
               )}
             </div>
 
             {loginMethod === "email" && errors.email &&
-              <p className="text-danger w-full text-left">{errors.email.message}</p>
+              <p className="text-destructive w-full text-left">{errors.email.message}</p>
             }
 
             {loginMethod === "phone" && errors.phone &&
-              <p className="text-danger w-full text-left">{errors.phone.message}</p>
+              <p className="text-destructive w-full text-left">{errors.phone.message}</p>
             }
 
             <InputPassword
               placeholder="Senha"
               {...register('password')}
-              className={errors.password ? "border-danger" : ""}
+              className={errors.password ? "border-destructive" : ""}
             />
 
             {errors.password &&
-              <p className="text-danger w-full text-left">{errors.password.message}</p>
+              <p className="text-destructive w-full text-left">{errors.password.message}</p>
             }
 
             <Button type="submit" disabled={loading} className="w-full">
               {loading ? <LoadingButton /> : "Entrar"}
             </Button>
 
-            {error && <p className="text-danger">{error}</p>}
+            {error && <p className="text-destructive">{error}</p>}
 
             <div className="w-full flex items-center gap-3 my-2">
-              <hr className="border border-borderColor w-full" />
+              <hr className="border border-border w-full" />
               <span>ou</span>
-              <hr className="border border-borderColor w-full" />
+              <hr className="border border-border w-full" />
             </div>
 
           </form>
           <GoogleLoginButton name="Entrar com Google" />
           <p className="text-center">
             Não tem uma conta?{' '}
-            <button onClick={openRegister} className="text-primaryColor hover:text-hover">
+            <button onClick={openRegister} className="text-primary hover:text-accent">
               Cadastre-se.
             </button>
           </p>

@@ -35,7 +35,7 @@ export function ReviewList({ reviewData }: { reviewData: ReviewProps[] }) {
           pauseOnMouseEnter: true,
           reverseDirection: true
         }}
-        className='w-[1280px]'
+      // className='w-[1280px]'
       >
         {reviewData.map(item => (
           <SwiperSlide key={item.id}>

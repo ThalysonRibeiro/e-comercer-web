@@ -7,12 +7,12 @@ export function CardSpecialPromotion() {
   return (
     <Flex className="w-full mt-6 justify-between">
       <span
-        className="w-2/5 flex justify-center items-center uppercase text-title lg:text-3xl md:text-xl text-sm font-semibold bg-primaryColor h-15  rounded-l-lg pr-3"
+        className="w-2/5 flex justify-center items-center uppercase  lg:text-3xl md:text-xl text-sm font-semibold bg-primary h-15  rounded-l-lg pr-3"
       >
         mega promoção!
       </span>
       <div
-        className="w-3/4 text-title text-2xl bg-bgCard border border-borderColor rounded-r-lg text-center marquee"
+        className="w-3/4 text-2xl bg-card border border-border rounded-r-lg text-center marquee"
         style={{
           clipPath: "polygon(30px 0, 100% 0, 100% 100%, 0 100%)",
           marginLeft: "-30px",

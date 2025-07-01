@@ -5,7 +5,6 @@ import { MenuProps } from "./dropdown";
 import Link from "next/link";
 import { Flex } from "../ui/flex";
 import { useAppContext } from "@/context/AppContext";
-import { SwitchTheme } from "./switchTheme";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 
@@ -20,7 +19,7 @@ export function SideBarMenu({ category }: MenuProps) {
 
   return (
     <div ref={sideBarRef} className="absolute top-0 right-0 z-10 w-full">
-      <Flex className={`w-60 h-screen flex-col bg-bgCard absolute top-0 border-l border-l-borderColor ${openSideBar ? 'right-0 flex' : '-right-60 hidden'}`}>
+      <Flex className={`w-60 h-screen flex-col bg-card absolute top-0 border-l border-l-border floatingMenu ${openSideBar ? 'right-0 flex' : '-right-60 hidden'}`}>
         <Flex className="justify-between p-1">
           <p>Menu</p>
           <button
@@ -31,11 +30,10 @@ export function SideBarMenu({ category }: MenuProps) {
         </Flex>
         <div className="">
           <Flex className="mx-1 mt-2 flex-col justify-between relative">
-            <SwitchTheme />
             {userData === null ? (
               <div className="flex items-center justify-between gap-4 w-full px-6 py-3">
-                <button onClick={openCloseModalLogin} className="transition duration-300 hover:text-hover cursor-pointer">Login</button>
-                <button onClick={openCloseModalRegister} className="transition duration-300 hover:text-hover cursor-pointer">Register</button>
+                <button onClick={openCloseModalLogin} className="transition duration-300 hover:text-accent cursor-pointer">Login</button>
+                <button onClick={openCloseModalRegister} className="transition duration-300 hover:text-accent cursor-pointer">Register</button>
               </div>
             ) : (
               <>
@@ -54,7 +52,7 @@ export function SideBarMenu({ category }: MenuProps) {
                 <div className="py-1 capitalize">
                   <Link
                     href={`/profile`}
-                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
+                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs hover:text-accent"
                     role="menuitem"
                   >
                     <User size={22} />
@@ -62,7 +60,7 @@ export function SideBarMenu({ category }: MenuProps) {
                   </Link>
                   <Link
                     href={`/wishlist`}
-                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
+                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs hover:text-accent"
                     role="menuitem"
                   >
                     <Heart size={22} />
@@ -70,7 +68,7 @@ export function SideBarMenu({ category }: MenuProps) {
                   </Link>
                   <Link
                     href={`/`}
-                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
+                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs hover:text-accent"
                     role="menuitem"
                   >
                     <Settings size={22} />
@@ -78,7 +76,7 @@ export function SideBarMenu({ category }: MenuProps) {
                   </Link>
                   <Link
                     href={`/`}
-                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-textColor hover:bg-hover hover:text-textButton"
+                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs hover:text-accent"
                     role="menuitem"
                   >
                     <ShoppingBag size={22} />
@@ -86,7 +84,7 @@ export function SideBarMenu({ category }: MenuProps) {
                   </Link>
                   <button
                     onClick={() => signOut()}
-                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-start text-textColor hover:bg-hover hover:text-textButton cursor-pointer"
+                    className="inline-flex items-center gap-2.5 w-full px-2 py-2 text-xs text-start hover:text-accent cursor-pointer"
                     role="menuitem"
                   >
                     <LogOut size={22} />
@@ -105,7 +103,7 @@ export function SideBarMenu({ category }: MenuProps) {
                 <div key={item.name} className="block">
                   <button
                     onClick={() => toggleDropdown(index)}
-                    className="w-full capitalize text-left text-title hover:bg-hover px-3 py-2 text-base font-medium flex justify-between items-center"
+                    className="w-full capitalize text-left hover:text-accent px-3 py-2 text-base font-medium flex justify-between items-center"
                   >
                     <span>{item.name}</span>
                     {item.children && item.children.length > 0 && (
@@ -122,7 +120,7 @@ export function SideBarMenu({ category }: MenuProps) {
 
                   {/* Submenu para mobile */}
                   {item.children && item.children.length > 0 && openMenuIndex === index && (
-                    <div className="pl-4 bg-bgCard rounded-md mt-1">
+                    <div className="pl-4 bg-card rounded-md mt-1">
                       {item.children.map(subItem => (
                         <Link
                           key={subItem.id}
@@ -131,7 +129,7 @@ export function SideBarMenu({ category }: MenuProps) {
                             setOpenMenuIndex(null);
                             toggleSideBar();
                           }}
-                          className="block w-full px-3 py-2 capitalize text-sm text-textColor hover:bg-hover/70 rounded-s-md"
+                          className="block w-full px-3 py-2 capitalize text-sm hover:text-accent rounded-s-md"
                         >
                           {subItem.name}
                         </Link>

@@ -1,12 +1,13 @@
 "use client"
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css'
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import { Flex } from '../ui/flex';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PromotionHeroProps } from '@/types/siteContent';
-import { LinkBUtton } from '../ui/link';
 
 
 
@@ -17,8 +18,10 @@ export function CarouselHero({ promotionHero }: { promotionHero: PromotionHeroPr
       <Swiper
         spaceBetween={30}
         slidesPerView={1}
+        navigation={true}
+        pagination={true}
         loop={true}
-        modules={[Autoplay]}
+        modules={[Autoplay, Navigation, Pagination]}
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
@@ -28,7 +31,7 @@ export function CarouselHero({ promotionHero }: { promotionHero: PromotionHeroPr
 
         {promotionHero.map(item => (
           <SwiperSlide key={item.id}>
-            <Flex className="relative flex-col-reverse md:flex-row w-full h-45 md:h-70 lg:h-125 backdrop-blur-lg bg-transparent rounded-lg overflow-auto border border-borderColor">
+            <Flex className="relative flex-col-reverse md:flex-row w-full h-45 md:h-70 lg:h-125 backdrop-blur-lg bg-transparent rounded-lg overflow-auto border border-border">
 
               <Flex className="w-full h-full">
                 {/* lg:w-3/5 md:w-2/3 */}

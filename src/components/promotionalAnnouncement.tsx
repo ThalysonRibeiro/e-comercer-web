@@ -35,7 +35,7 @@ export function PromotionalAnnouncement({ promotionBot }: { promotionBot: Promot
     between = 0;
   }
   return (
-    <Flex className="max-w-[1280] w-full items-center">
+    <Flex className="w-full items-center">
       <Swiper
         spaceBetween={between ? between : 30}
         slidesPerView={responsive ? responsive : 4}
@@ -46,7 +46,7 @@ export function PromotionalAnnouncement({ promotionBot }: { promotionBot: Promot
           disableOnInteraction: false,
           pauseOnMouseEnter: true
         }}
-        className='w-[1280px]'
+      // className='w-[1280px]'
       >
         {promotionBot.map(item => (
           <SwiperSlide key={item.id} className="relative group rounded-lg overflow-hidden">
@@ -59,13 +59,13 @@ export function PromotionalAnnouncement({ promotionBot }: { promotionBot: Promot
                 className="object-cover rounded-lg"
               />
             </div>
-            <Flex className="absolute z-10 bottom-0 w-full items-center justify-center bg-bgCard/90">
+            <Flex className="absolute z-10 bottom-0 w-full items-center justify-center bg-card/90">
               <CountdownCard endDate={item.endDate} gap="1" style="flex flex-col items-center text-title" />
             </Flex>
 
             {/* Conteúdo que aparece no hover */}
-            <Flex className="flex-col gap-1 items-center justify-between z-10 absolute inset-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-bgCard/99">
-              <h2 className="text-sm font-semibold uppercase text-primaryColor">{item.title}</h2>
+            <Flex className="flex-col gap-1 items-center justify-between z-10 absolute inset-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-card/99">
+              <h2 className="text-sm font-semibold uppercase text-primary">{item.title}</h2>
               <p className="text-sm line-clamp-1 text-center">{item.description}</p>
 
               <CopyButton

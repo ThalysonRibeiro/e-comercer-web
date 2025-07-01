@@ -10,7 +10,6 @@ import { useAppContext } from "@/context/AppContext";
 import { UserDropdown } from "./userDropdown";
 import { WishList } from "./wishList";
 import { SiteContentProps } from "@/types/siteContent";
-import { SwitchTheme } from "./switchTheme";
 import { SideBarMenu } from "./sideBarMenu";
 import no_image from "@/assets/no-image.png";
 
@@ -23,12 +22,12 @@ export function Header({ category, siteContent }: HeaderProps) {
   const { userData, openCloseModalCart, openCloseModalLogin, openCloseModalRegister, cartAmount, addItemCart, openSideBar } = useAppContext();
 
   return (
-    <header className="w-full min-h-40 px-6 flex items-center justify-center border-b border-b-borderColor">
-      <div className="max-w-7xl w-full">
+    <header className="container mx-auto w-full min-h-40 px-6 flex items-center justify-center border-b border-b-border">
+      <div className="w-full">
         <div className="flex gap-3 justify-between items-center">
           <Link href="/">
             <Flex className="items-center gap-3">
-              {siteContent?.image_logo === null
+              {siteContent?.image_logo
                 ? (<div className="w-15 h-15 bg-cover">
                   <Image
                     width={320}
@@ -38,7 +37,7 @@ export function Header({ category, siteContent }: HeaderProps) {
                   />
                 </div>
                 )
-                : (<p className="font-semibold text-xl text-title capitalize">
+                : (<p className="font-semibold text-xl capitalize">
                   {siteContent?.title === null ? "e-commerce" : siteContent?.title}
                 </p>
                 )
@@ -48,14 +47,11 @@ export function Header({ category, siteContent }: HeaderProps) {
           <InputSearch />
           <SideBarMenu category={category} />
 
-          <div className=" hidden md:flex items-center justify-center gap-4 text-title">
-            <div className="lg:flex hidden">
-              <SwitchTheme />
-            </div>
+          <div className=" hidden md:flex items-center justify-center gap-4">
             {userData === null ? (
               <>
-                <button onClick={openCloseModalLogin} className="transition duration-300 hover:text-hover cursor-pointer">Login</button>
-                <button onClick={openCloseModalRegister} className="transition duration-300 hover:text-hover cursor-pointer">Register</button>
+                <button onClick={openCloseModalLogin} className="transition duration-300 hover:text-accent cursor-pointer">Login</button>
+                <button onClick={openCloseModalRegister} className="transition duration-300 hover:text-accent cursor-pointer">Register</button>
               </>
             ) : (
               <>
@@ -68,12 +64,12 @@ export function Header({ category, siteContent }: HeaderProps) {
                 </div>
 
 
-                <button onClick={openCloseModalCart} className="transition duration-300 hover:text-hover cursor-pointer">
+                <button onClick={openCloseModalCart} className="transition duration-300 hover:text-accent cursor-pointer">
                   {cartAmount === 0 ? (
                     <ShoppingCart className="size-6" />
                   ) : (
                     <div className="flex flex-col items-center justify-center relative">
-                      <div className="text-xs text-textButton font-semibold bg-primaryColor rounded-full w-4 absolute -top-1 left-4.5">
+                      <div className="text-xs text-textButton font-semibold bg-primary rounded-full w-4 absolute -top-1 left-4.5">
                         {cartAmount}
                       </div>
                       <ShoppingCart className="size-6" />

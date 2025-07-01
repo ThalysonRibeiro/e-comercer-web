@@ -13,8 +13,8 @@ export function Hero({ hero, service }: HeroPromotioProps) {
 
 
   return (
-    <div className="w-full flex items-center justify-center relative pt-6 px-6">
-      <Flex className="max-w-7xl w-full flex-col ">
+    <div className="container mx-auto w-full flex items-center justify-center relative px-6">
+      <Flex className="w-full flex-col ">
 
         <CarouselHero promotionHero={hero} />
 
