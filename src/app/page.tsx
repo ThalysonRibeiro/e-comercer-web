@@ -12,6 +12,8 @@ import { ReviewProps } from "@/types/review";
 import { ProductsClient } from "@/components/ProductsClient";
 import { CardBrands } from "@/components/cardBrands";
 import { BrandsProps } from "@/types/brands";
+import { Button } from "@/components/ui/button";
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const revalidate = 120;
 
@@ -54,8 +56,15 @@ export default async function Home() {
     brandsPromisse,
     ...productsPagesPromises,
   ]);
+
+  if (!siteContent) {
+    return (
+      <p>site content não confugurado</p>
+    )
+  }
+
   return (
-    <div className="w-full">
+    <main className="w-full pt-6 space-y-6">
 
       <ButtonCart />
       <Hero
@@ -63,8 +72,8 @@ export default async function Home() {
         service={siteContent.service}
       />
 
-      <section className="w-full flex items-center justify-center mt-6 px-6">
-        <Flex className="justify-around flex-row max-w-7xl w-full gap-2">
+      <section className="container mx-auto w-full flex items-center justify-center px-6">
+        <Flex className="justify-around flex-row w-full gap-2">
           <CardAnnouncement promotionTop={promotionTop} />
           <LimitedTimeOffer products={featuredProducts.products} />
         </Flex>
@@ -72,17 +81,17 @@ export default async function Home() {
 
       <ProductsClient productsGroups={productsGroups} />
 
-      <section className="w-full flex flex-col gap-6 items-center justify-center mt-6 px-6">
+      <section className="container mx-auto w-full flex flex-col gap-6 items-center justify-center px-6">
         <ReviewList reviewData={reviewData} />
       </section>
 
-      <section className="w-full flex flex-col gap-6 items-center justify-center mt-6 px-6">
+      <section className="container mx-auto w-full flex flex-col gap-6 items-center justify-center px-6">
         <CardBrands brands={brands} />
       </section>
 
-      <section className="w-full flex flex-col gap-6 items-center justify-center mt-6 px-6 mb-10">
+      <section className="container mx-auto w-full flex flex-col gap-6 items-center justify-center px-6">
         <PromotionalAnnouncement promotionBot={promotionBot} />
       </section>
-    </div>
+    </main>
   );
 }
