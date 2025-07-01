@@ -1,7 +1,8 @@
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"; // Ajuste este caminho para onde seu authOptions está definido
+import { Session } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export async function getServerAuthSession() {
+export async function getServerAuthSession(): Promise<Session | null> {
   try {
     const session = await getServerSession(authOptions);
     return session;
