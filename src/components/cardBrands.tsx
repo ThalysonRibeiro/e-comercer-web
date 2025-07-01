@@ -36,7 +36,7 @@ export function CardBrands({ brands }: { brands: BrandsProps[] }) {
 
 
   return (
-    <Flex className='max-w-[1280] w-full items-center'>
+    <Flex className='w-full items-center'>
       <Swiper
         spaceBetween={between ? between : 30}
         slidesPerView={responsive ? responsive : 10}
@@ -52,7 +52,7 @@ export function CardBrands({ brands }: { brands: BrandsProps[] }) {
         {brands?.map(item => (
           <SwiperSlide key={item.id}>
             <Link href={`/products?brand=${item.name}`}>
-              <div className='relative w-25 h-25 bg-bgCard border border-borderColor overflow-hidden rounded-lg'>
+              <div className='relative w-25 h-25 bg-card border border-border overflow-hidden rounded-lg'>
                 <Image
                   src={item.image}
                   alt={item.name}
