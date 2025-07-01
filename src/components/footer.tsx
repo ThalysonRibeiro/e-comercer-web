@@ -65,18 +65,24 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
         return <FaLink />; // ou um ícone padrão, tipo um globo ou interrogação
     }
   };
+
+  if (!footerData) {
+    return (
+      <p>sem dados do footer</p>
+    )
+  }
   return (
-    <Flex className="flex-col w-full items-center justify-center bg-bgCard mt-10 border-t border-borderColor">
+    <Flex className="flex-col w-full items-center justify-center bg-bgFooterColor mt-10 border-t border-border">
       <Grid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-10 md:px-10 lg:px-2.5  xl:px-0 max-w-7xl w-full">
 
         <Flex className="max-h-75 h-full flex-col justify-between p-2">
-          <h1 className="text-3xl font-bold uppercase text-title">
-            {footerData.title || "e-commerce"}
+          <h1 className="text-3xl font-bold uppercase">
+            {footerData?.title || "e-commerce"}
           </h1>
           <p className="line-clamp-4 text-sm">
             {footerData.metaDescription}
           </p>
-          <h2 className="font-semibold text-title">Baixe os aplicativos</h2>
+          <h2 className="font-semibold">Baixe os aplicativos</h2>
           <div className="relative w-35 h-10">
             <Image
               src={playStore}
@@ -98,7 +104,7 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
         </Flex>
 
         <Flex className="flex-col itmes-center p-2">
-          <h2 className="font-semibold text-title">Departamentos</h2>
+          <h2 className="font-semibold">Departamentos</h2>
           <Flex className="flex-col flex-wrap md:max-h-90 max-h-70 gap-1">
             {departments?.map(category =>
               category.children.map(item => {
@@ -112,7 +118,7 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
                 return (
                   <Link
                     key={item.id}
-                    className="hover:text-hover capitalize md:text-sm"
+                    className="hover:text-accent capitalize md:text-sm"
                     href={`?category=${item.name}`}
                   >
                     {item.name}
@@ -125,22 +131,22 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
         </Flex>
 
         <Flex className="flex-col itmes-center p-2 gap-1">
-          <h2 className="font-semibold text-title">Institucional</h2>
+          <h2 className="font-semibold">Institucional</h2>
 
           {footerData?.institutionalLink.map(item => (
-            <Link key={item.id} href={item.link} className="hover:text-hover capitalize md:text-sm">{item.name}</Link>
+            <Link key={item.id} href={item.link} className="hover:text-accent capitalize md:text-sm">{item.name}</Link>
           ))}
         </Flex>
 
         <Flex className="flex-col justify-between p-2">
 
-          <h2 className="font-semibold text-title">Mídias Sociais</h2>
+          <h2 className="font-semibold">Mídias Sociais</h2>
           <Flex className="gap-2.5 my-2">
             {footerData.socialMedia.map(item => (
               <Link
                 key={item.id}
                 href={item.link}
-                className="hover:text-hover flex items-center gap-2.5"
+                className="hover:text-accent flex items-center gap-2.5"
               >
                 {getSocialIcon(item.name)}
               </Link>
@@ -148,9 +154,9 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
           </Flex>
 
           <Flex className="flex-col gap-1 my-2">
-            <h2 className="font-semibold text-title">Atendimento</h2>
+            <h2 className="font-semibold">Atendimento</h2>
             {footerData.contactInfo.map(item => (
-              <Flex key={item.id} className="hover:text-hover items-center gap-2.5 md:text-sm">
+              <Flex key={item.id} className="hover:text-accent items-center gap-2.5 md:text-sm">
                 {getContactInfo(item.type)}
                 {item.value}
               </Flex>
@@ -165,7 +171,7 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
           </p>
           <Flex className="flex-col">
             <span className="font-semibold">Central SAC:</span>
-            <Link href="/" className="hover:text-hover md:text-sm">
+            <Link href="/" className="hover:text-accent md:text-sm">
               Clique aqui
             </Link>
           </Flex>
@@ -173,10 +179,10 @@ export function Footer({ footerData }: { footerData: SiteContentProps }) {
         </Flex>
       </Grid>
 
-      <Flex className="bg-themeColor w-full items-center justify-center px-4 border-t border-borderColor">
+      <Flex className="bg-themeColor w-full items-center justify-center px-4 border-t border-border">
         <p className="max-w-7xl w-full text-[11px] py-4">
           {footerData.footerText}
-          <Link href="/" className="text-[11px] mx-3 hover:text-hover">
+          <Link href="/" className="text-[11px] mx-3 hover:text-accent">
             Clique aqui e veja as políticas de nossa empresa.
           </Link>
 
