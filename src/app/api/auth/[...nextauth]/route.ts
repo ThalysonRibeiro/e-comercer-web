@@ -12,7 +12,7 @@ declare module "next-auth" {
     user: User;
   }
 
-  export interface User {
+  interface User {
     id: string;
     name?: string;
     email?: string;
@@ -35,7 +35,7 @@ declare module "next-auth/jwt" {
   }
 }
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -50,7 +50,7 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         try {
           if (!credentials?.email || !credentials?.password) {
-            return null;
+            throw new Error("Email e senha são obrigatórios");
           }
 
           const response = await serverApi.post(
@@ -61,31 +61,32 @@ export const authOptions: NextAuthOptions = {
             }
           );
 
-          const user = response.data;
+          const userData = response.data;
 
-          if (!user || !user.accessToken) {
-            return null;
+          if (!userData || !userData.accessToken) {
+            throw new Error("Credenciais inválidas");
           }
 
           // Retorno compatível com o tipo User do NextAuth
           return {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            image: user.avatar,
-            status: user.status,
-            type: user.type,
-            cpf_or_cnpj: user.cpf_or_cnpj,
-            genero: user.genero,
-            dateOfBirth: user.dateOfBirth,
-            phone: user.phone,
-            accessToken: user.accessToken,
+            id: userData.id,
+            name: userData.name,
+            email: userData.email,
+            image: userData.avatar || null,
+            status: userData.status,
+            type: userData.type,
+            cpf_or_cnpj: userData.cpf_or_cnpj,
+            genero: userData.genero,
+            dateOfBirth: userData.dateOfBirth,
+            phone: userData.phone,
+            accessToken: userData.accessToken,
           };
         } catch (error) {
-          if (axios.isAxiosError(error) && error.response) {
+          if (axios.isAxiosError(error)) {
             console.error("Erro da API:", {
-              status: error.response.status,
-              data: error.response.data
+              status: error.response?.status,
+              data: error.response?.data,
+              message: error.message
             });
           } else {
             console.error("Erro ao fazer login:", error);
@@ -97,23 +98,30 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, account, user }) {
+      // Adicionar dados do usuário no primeiro login
       if (user) {
         token.accessToken = user.accessToken;
         token.user = user;
       }
 
-      // Handle Google login (only on first sign-in)
-      if (account?.provider === "google" && account.id_token) {
+      // Handle Google login (apenas no primeiro sign-in e se não tem token)
+      if (account?.provider === "google" && account.id_token && !token.accessToken) {
         try {
           const response = await serverApi.post(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`,
-            { token: account.id_token },
+            { token: account.id_token }
           );
 
-          token.accessToken = response.data.accessToken;
-          token.user = response.data.user;
+          if (response.data?.accessToken) {
+            token.accessToken = response.data.accessToken;
+            token.user = response.data.user;
+          } else {
+            console.error("Backend não retornou accessToken para Google login");
+          }
         } catch (error) {
           console.error("Erro ao autenticar com o backend (Google):", error);
+          // Você pode decidir se quer retornar null ou continuar sem o backend
+          // return null; // Uncomment para falhar o login se o backend falhar
         }
       }
 
@@ -121,23 +129,30 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ session, token }) {
-      session.accessToken = token.accessToken;
-      session.user = { ...session.user, ...token.user };
+      if (token.accessToken) {
+        session.accessToken = token.accessToken;
+      }
+
+      if (token.user) {
+        session.user = { ...session.user, ...token.user };
+      }
 
       return session;
     },
   },
   pages: {
-    signIn: "/",  // Página de login customizada
-    error: "/",   // Página de erro personalizada
+    signIn: "/",
+    error: "/",
   },
   session: {
-    strategy: "jwt",  // Usar JWT para armazenar os dados da sessão
+    strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 dias
   },
-  // debug: process.env.NODE_ENV === "development",
+  debug: process.env.NODE_ENV === "development",
 };
 
 const handler = NextAuth(authOptions);
 
+// Exportar authOptions para uso em getServerSession
+export { authOptions };
 export { handler as GET, handler as POST };
