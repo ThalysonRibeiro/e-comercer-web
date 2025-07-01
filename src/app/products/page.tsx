@@ -9,21 +9,9 @@ import ReloadOnParamChange from "@/components/reloadOnParamChange";
 import { BrandsProps } from "@/types/brands";
 
 
-
-interface Props {
-  searchParams: {
-    category?: string;
-    priceMin?: string;
-    priceMax?: string;
-    brand?: string;
-    tags?: string;
-    sort?: string;
-    limit?: string; // 👈 adicionei aqui
-    bigsale?: boolean;
-  };
-}
-export default async function Products({ searchParams }: Props) {
+export default async function Products({ searchParams }: { searchParams: Record<string, string | string[] | undefined> }) {
   const { category, priceMin, priceMax, brand, tags, sort, limit, bigsale } = await searchParams;
+
 
   // Build the filters object
   const filters: any = {};
@@ -52,9 +40,9 @@ export default async function Products({ searchParams }: Props) {
 
 
   const [
-    products,
-    menucategory,
-    brands
+    productsData,
+    menucategoryData,
+    brandsData
   ] = await Promise.all([
     productsPromise,
     categoryPromise,
@@ -64,17 +52,16 @@ export default async function Products({ searchParams }: Props) {
 
 
   return (
-    <main className="w-full">
+    <main className="w-full pt-6 space-y-6">
       <ReloadOnParamChange />
-      <section className=" w-full mx-auto flex mt-6 px-6">
-        <MenuCategory allCategory={menucategory} brands={brands}>
+      <section className="container mx-auto w-full flex px-6">
+        <MenuCategory allCategory={menucategoryData} brands={brandsData}>
           <div className="w-full">
-            <FiltersProducts products={products} />
-            <ListItems AllProducts={products.products} />
+            <FiltersProducts products={productsData} />
+            <ListItems AllProducts={productsData.products} />
           </div>
         </MenuCategory>
       </section>
     </main>
   );
 }
-
