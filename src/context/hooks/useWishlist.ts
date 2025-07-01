@@ -31,7 +31,10 @@ export function useWishlist(userId: string | undefined) {
       toast.error('Você precisa estar logado para adicionar à lista de desejos!');
       return;
     }
-    const existingItem = wishList?.items.find(item => item.productId === productId);
+    let existingItem;
+    if (Array.isArray(wishList?.items)) {
+      existingItem = wishList.items.find(item => item.productId === productId);
+    }
 
     if (existingItem) {
       await removeFromWishlist(existingItem.id); // Aqui usa o id correto do item
