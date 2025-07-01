@@ -20,7 +20,7 @@ export function FiltersProducts({ products }: { products: AllProductsProps }) {
   const currentLimit = searchParams.get('limit') || '20';
 
   function handleClearFilters() {
-    router.push('/products'); // navega para /products sem nenhum search param
+    router.push('/products', { scroll: false }); // navega para /products sem nenhum search param
   }
 
   // Handler for sort changes
