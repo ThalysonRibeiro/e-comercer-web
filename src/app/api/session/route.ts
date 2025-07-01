@@ -1,17 +1,34 @@
-"use server"
 import { NextResponse } from 'next/server';
 import { getServerAuthSession } from '@/lib/auth';
 
-export async function GET() {
+interface SessionResponse {
+  user: any | null;
+}
+
+interface ErrorResponse {
+  error: string;
+  details?: string;
+}
+
+export async function GET(): Promise<NextResponse<SessionResponse | ErrorResponse>> {
   try {
     const session = await getServerAuthSession();
 
-    if (!session) {
-      return NextResponse.json({ user: null });
-    }
-    return NextResponse.json({ user: session.user });
+    // Retorna sempre status 200 com user null ou com dados
+    return NextResponse.json({
+      user: session?.user || null
+    }, {
+      status: 200
+    });
+
   } catch (error) {
     console.error("Error fetching session:", error);
-    return NextResponse.json({ error: "Failed to fetch session" }, { status: 500 });
+
+    return NextResponse.json({
+      error: "Failed to fetch session",
+      details: process.env.NODE_ENV === 'development' ? String(error) : undefined
+    }, {
+      status: 500
+    });
   }
 }
