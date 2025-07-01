@@ -3,31 +3,78 @@
 @theme {
   --color-*: initial;
 
+  --color-background: var(--color-themeColor);
+  --color-foreground: var(--color-textColor);
 
-  --color-primaryColor: #C01A40;
-  --color-secondaryColor: #ff0055;
-  --color-hover: #AF5EFF;
-  --color-star: #FFD900;
-  --color-danger: #F05D6C;
-  --color-success: #00FF08;
-  --color-warning: #000;
-  --color-shadowColor: rgba(0, 0, 0, 0.092);
-  --color-price: #00AE2E;
-  --color-title: #C8D0DA;
-  --color-textColor: #95A1B1;
-  --color-textHover: #FFFFFF;
-  --color-oldPrice: #6F7D90;
-  --color-borderColor: #555E70;
-  --color-textButton: #2A313C;
-  --color-bgCard: #221F2F;
-  --color-themeColor: #0e0c1d;
+  --color-card: var(--color-bgCard);
+  --color-card-foreground: var(--color-textColor);
+
+  --color-popover: var(--color-bgCard);
+  --color-popover-foreground: var(--color-textColor);
+
+  --color-primary: var(--color-primaryColor);
+  --color-primary-foreground: var(--color-textButton);
+
+  --color-secondary: var(--color-secondaryColor);
+  --color-secondary-foreground: var(--color-textButton);
+
+  --color-muted: var(--color-bgCard);
+  --color-muted-foreground: var(--color-oldPrice);
+
+  --color-accent: var(--color-hover);
+  --color-accent-foreground: var(--color-textButton);
+
+  --color-destructive: var(--color-danger);
+  --color-destructive-foreground: var(--color-textButton);
+
+  --color-success-bg: var(--color-success);
+  --color-success-foreground: var(--color-textButton);
+
+  --color-warning-bg: var(--color-warning);
+  --color-warning-foreground: var(--color-textButton);
+
+  --color-border: var(--color-borderColor);
+  --color-input: var(--color-borderColor);
+  --color-ring: var(--color-primaryColor);
+
+  --color-chart-1: var(--color-primaryColor);
+  --color-chart-2: var(--color-secondaryColor);
+  --color-chart-3: var(--color-hover);
+  --color-chart-4: var(--color-success);
+  --color-chart-5: var(--color-warning);
+
+  --font-sans: var(--font-roboto);
+  --breakpoint-xs: 31.2rem;
+  --radius: 0.5rem;
+
+
+  --color-primaryColor: #3b82f6;
+  --color-secondaryColor: #64748b;
+  --color-hover: #2563eb;
+  --color-star: #fbbf24;
+  --color-danger: #ef4444;
+  --color-success: #10b981;
+  --color-warning: #FFB800;
+  --color-price: #059669;
+  --color-shadowColor: rgba(0, 0, 0, 0.01);
+
+  --color-title: #1f2937;
+  --color-textColor: #374151;
+
+  --color-textHover: #111827;
+
+  --color-oldPrice: #9ca3af;
+  --color-textButton: #ffffff;
+
+  --color-bgCard: #ffffff;
+  --color-themeColor: #f8fafc;
+  --color-bgFooterColor: #221F2F;
+  --color-borderColor: #1f2937;
+
   --color-green: green;
   --color-red: red;
   --color-yellow: yellow;
   --color-blue: blue;
-
-  --font-sans: var(--font-roboto);
-  --breakpoint-xs: 31.2rem;
 }
 
 h1,
@@ -78,6 +125,20 @@ h6 {
 
   100% {
     transform: translatey(calc(4vh - 20px));
+  }
+}
+
+.floatingMenu {
+  animation: reveal 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+@keyframes reveal {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0%);
   }
 }
 
