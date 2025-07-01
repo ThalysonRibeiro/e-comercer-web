@@ -19,4 +19,5 @@ export interface ThemeColorsProps {
   themeColor: string;
   themeSelected: boolean;
   textHover: string;
+  bgFooterColor: string;
 }
