@@ -3,44 +3,126 @@ import { useState, type ComponentProps } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
-interface InputProps extends ComponentProps<'input'> {
-  error?: boolean;
+// Tipos base
+type InputVariant = "default" | "error" | "success";
+type InputSize = "sm" | "default" | "lg";
+
+// Configuração de variantes para inputs
+const inputVariants = {
+  base: "outline-0 bg-transparent backdrop-blur-sm border rounded-lg transition-colors duration-200 focus:ring-2 focus:ring-offset-1 focus:ring-primary/20 disabled:opacity-50 disabled:cursor-not-allowed",
+
+  variants: {
+    variant: {
+      default: "border-border focus:border-primary",
+      error: "border-danger focus:border-danger focus:ring-danger/20",
+      success: "border-green-500 focus:border-green-500 focus:ring-green-500/20"
+    },
+    size: {
+      sm: "h-8 px-2 text-sm",
+      default: "h-10 px-3",
+      lg: "h-12 px-4 text-lg"
+    }
+  },
+
+  defaultVariants: {
+    variant: "default" as InputVariant,
+    size: "default" as InputSize
+  }
+};
+
+// Interface para Input simples
+interface InputProps extends Omit<ComponentProps<'input'>, 'size'> {
+  variant?: InputVariant;
+  size?: InputSize;
+  error?: boolean; // mantido para compatibilidade, mas usa variant internamente
 }
-export function Input({ error = false, className, ...props }: InputProps) {
+
+// Componente Input
+export function Input({
+  variant,
+  size = inputVariants.defaultVariants.size,
+  error = false,
+  className,
+  ...props
+}: InputProps) {
+  // Se error for true, força variant para "error"
+  const finalVariant = error ? "error" : (variant || inputVariants.defaultVariants.variant);
+
+  const variantStyles = inputVariants.variants.variant[finalVariant];
+  const sizeStyles = inputVariants.variants.size[size];
+
   return (
     <input
-      data-error={error}
-      className={twMerge("px-2 outline-0 bg-transparent backdrop-blur-sm border border-borderColor focus-within:border-primaryColor data-[error=true]:border-danger w-full h-10 rounded-lg input-date", className)}
+      className={twMerge(
+        inputVariants.base,
+        variantStyles,
+        sizeStyles,
+        "w-full input-date", // mantendo sua classe customizada
+        className
+      )}
       {...props}
     />
-  )
+  );
 }
 
-interface InputButtonPasswordProps extends ComponentProps<'input'> {
-  error?: boolean
+// Interface para Input Password
+interface InputPasswordProps extends Omit<ComponentProps<'input'>, 'type' | 'size'> {
+  variant?: InputVariant;
+  size?: InputSize;
+  error?: boolean;
 }
-export function InputPassword({ error, value, onChange, className, ...props }: InputButtonPasswordProps) {
-  const [showPassword, setShowpassword] = useState(false);
+
+// Componente Input Password
+export function InputPassword({
+  variant,
+  size = inputVariants.defaultVariants.size,
+  error = false,
+  className,
+  ...props
+}: InputPasswordProps) {
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Se error for true, força variant para "error"
+  const finalVariant = error ? "error" : (variant || inputVariants.defaultVariants.variant);
+
+  const variantStyles = inputVariants.variants.variant[finalVariant];
+  const sizeStyles = inputVariants.variants.size[size];
 
   function togglePassword() {
-    setShowpassword(!showPassword);
+    setShowPassword(!showPassword);
   }
 
   return (
-    <div
-      data-error={error}
-      className={twMerge("flex outline-0 bg-transparent backdrop-blur-sm border border-borderColor focus-within:border-primaryColor data-[error=true]:border-danger w-full rounded-lg", className)}
-    >
+    <div className="relative w-full">
       <input
         type={showPassword ? 'text' : 'password'}
-        className="outline-0 w-full h-10 rounded-lg px-2"
-        value={value}
-        onChange={onChange}
+        className={twMerge(
+          inputVariants.base,
+          variantStyles,
+          sizeStyles,
+          "w-full pr-10", // espaço para o botão
+          className
+        )}
         {...props}
       />
-      <button type="button" onClick={togglePassword} className="mr-2">
-        {showPassword ? <Eye /> : <EyeOff />}
+      <button
+        type="button"
+        onClick={togglePassword}
+        className={twMerge(
+          "absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-gray-100 transition-colors",
+          "text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary/20"
+        )}
+        tabIndex={-1} // não interfere na navegação por tab
+      >
+        {showPassword ? (
+          <EyeOff className="h-4 w-4" />
+        ) : (
+          <Eye className="h-4 w-4" />
+        )}
+        <span className="sr-only">
+          {showPassword ? "Ocultar senha" : "Mostrar senha"}
+        </span>
       </button>
     </div>
-  )
+  );
 }

@@ -17,6 +17,8 @@ export function CardProduct({ product }: { product: ProductsProps }) {
   const { addItemCart, userData, addItemWishlist } = useAppContext();
 
   function handleItemWishList(productId: string) {
+    console.log(productId);
+
     addItemWishlist(productId)
   }
 
@@ -26,17 +28,17 @@ export function CardProduct({ product }: { product: ProductsProps }) {
 
   return (
     <>
-      <div key={product.id} className="relative overflow-hidden flex flex-col justify-between border border-borderColor w-full h-105 bg-bgCard rounded-lg p-4">
+      <div key={product.id} className="relative overflow-hidden flex flex-col justify-between border border-border w-full h-105 bg-card rounded-lg p-4">
         <Link href={`/products/${product.id}`}>
           {product.bigsale && (
-            <div className="bg-primaryColor text-title font-semibold w-35 text-center absolute rotate-45 -right-8 top-7 z-5">Big sale</div>
+            <div className="bg-primary font-semibold w-35 text-center absolute rotate-45 -right-8 top-7 z-5">Big sale</div>
           )}
           <Flex className="my-2">
             <StarRating rating={product.rating} />
             <p className="text-xs ml-1">({product.products_sold})</p>
 
             {product.stock === 1 && (
-              <p className="font-bold capitalize w-full text-center text-title bg-primaryColor absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">ultimo disponível</p>
+              <p className="font-bold capitalize w-full text-center bg-primary absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">ultimo disponível</p>
             )}
           </Flex>
           <div className='relative min-w-45 min-h-45 mb-1'>
@@ -47,7 +49,7 @@ export function CardProduct({ product }: { product: ProductsProps }) {
               className="object-cover rounded-lg"
             />
           </div>
-          <h1 className="text-title font-semibold text-sm line-clamp-2 mb-2">
+          <h1 className="font-semibold text-sm line-clamp-2 mb-2">
             {product.title}
           </h1>
           <Flex className="items-center justify-between">
@@ -64,14 +66,14 @@ export function CardProduct({ product }: { product: ProductsProps }) {
           </div>
         </Link>
         <Flex className='justify-between gap-2.5'>
-          <Button onClick={() => handleAddCartItem(product)} className='gap-3 border border-borderColor'>
+          <Button onClick={() => handleAddCartItem(product)} className='gap-3 border border-border'>
             <span className="text-sm">Adicionar</span>
             <ShoppingCart className="size-6" />
           </Button>
           {userData && (
             <Button
               onClick={() => handleItemWishList(product.id)}
-              className="w-10 border border-borderColor bg-primaryColor">
+              className="w-10 border border-border bg-primary">
               <WishButton animate={!!product.isLiked} liked={!!product.isLiked} />
             </Button>
           )}

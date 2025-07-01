@@ -9,7 +9,7 @@ export function Label({ children, className, ...props }: LabelProps) {
   return (
     <label
       htmlFor=""
-      className={twMerge("", className)}
+      className={twMerge("font-semibold", className)}
       {...props}
     >
       {children}

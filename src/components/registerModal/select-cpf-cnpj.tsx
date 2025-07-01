@@ -11,14 +11,14 @@ interface CPForCNPJProps extends ComponentProps<'div'> {
 }
 export function CPForCNPJ({ selectedType, onChangeType, cpfCnpj, setCpfCnpj, className, ...props }: CPForCNPJProps) {
   return (
-    <div className={twMerge("h-10 w-full border border-borderColor rounded-lg flex items-center px-1 gap-2.5 focus-within:border-primaryColor", className)}{...props}>
+    <div className={twMerge("h-10 w-full border border-border rounded-lg flex items-center px-1 gap-2.5 focus-within:border-primary", className)}{...props}>
       <select
         value={selectedType}
         onChange={(e) => onChangeType(e.target.value)}
         className="outline-0 bg-transparent backdrop-blur-sm rounded-lg"
       >
-        <option className="bg-bgCard" value="cpf">CPF</option>
-        <option className="bg-bgCard" value="cnpj">CNPJ</option>
+        <option className="bg-card" value="cpf">CPF</option>
+        <option className="bg-card" value="cnpj">CNPJ</option>
       </select>
       <input
         type="text"

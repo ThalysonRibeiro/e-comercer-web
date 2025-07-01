@@ -1,7 +1,6 @@
 
 "use client"
 import { ProviderProps } from "@/types/appContextType";
-import ThemeLoader from "@/components/ThemeLoader";
 import { AppContext } from "./AppContext";
 import { useCart } from "./hooks/useCart";
 import { useAuth } from "./hooks/useAuth";
@@ -79,7 +78,6 @@ function AppProvider({ children }: ProviderProps) {
         reloadWishList
       }}
     >
-      <ThemeLoader isDarkTheme={activeTheme} />
       {children}
     </AppContext>
   );

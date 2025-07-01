@@ -10,6 +10,9 @@ import { ProductsProps } from "@/types/product";
 import { useAppContext } from "@/context/AppContext";
 import Link from "next/link";
 import { formatCurrency } from "@/utils/formatCurrency";
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useIsMobile } from "@/app/hooks/useIsMobile";
+
 
 export interface LimitedTimeOfferProps {
   products: ProductsProps[];
@@ -18,6 +21,7 @@ export interface LimitedTimeOfferProps {
 
 export function LimitedTimeOffer({ products }: LimitedTimeOfferProps) {
   const { addItemCart } = useAppContext();
+  const isMobile = useIsMobile();
 
 
   return (
@@ -48,7 +52,7 @@ export function LimitedTimeOffer({ products }: LimitedTimeOfferProps) {
       >
         {products.map(item => (
           <SwiperSlide key={item.id}>
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-borderColor w-full h-full bg-bgCard rounded-lg overflow-hidden p-4">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 border border-border w-full h-full bg-card rounded-lg overflow-hidden p-4">
               <Link href={`/products/${item.id}`} className="w-100  h-105 relative rounded-lg overflow-hidden">
                 <Image
                   src={item.images[0]?.image}

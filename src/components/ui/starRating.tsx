@@ -8,7 +8,7 @@ export function StarRating({ rating, size }: { rating: number, size?: number }) 
         <IoIosStar
           size={size}
           key={index}
-          className={index < numericRating ? "text-star" : "text-text-secundary"}
+          className={index < numericRating ? "text-star" : "secondary-foreground"}
         />
       ))}
     </div>

@@ -2,7 +2,6 @@
 import Image from "next/image";
 import no_image from "@/assets/no-image.png";
 import { PromotionsProps } from "@/types/siteContent";
-import { LinkBUtton } from "../ui/link";
 import { Flex } from "../ui/flex";
 import { CountdownCard } from "./countdownCard";
 import { ArrowRight } from "lucide-react";
@@ -11,12 +10,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFlip } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-flip';
+import Link from "next/link";
+import { Button } from "../ui/button";
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+
 
 
 
 export function CardAnnouncement({ promotionTop }: { promotionTop: PromotionsProps[] }) {
   return (
-    <div className="max-w-75 w-full h-112.5 border border-borderColor rounded-lg overflow-hidden hidden lg:block">
+    <div className="max-w-75 w-full h-112.5 border border-border rounded-lg overflow-hidden hidden lg:block">
       <Swiper
         effect={'flip'}
         spaceBetween={30}
@@ -43,19 +46,28 @@ export function CardAnnouncement({ promotionTop }: { promotionTop: PromotionsPro
             </div>
 
             {/* Conteúdo que aparece no hover */}
-            <Flex className="flex-col gap-2 items-center justify-between z-10 absolute inset-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-bgCard/99">
-              <h2 className="text-sm font-semibold uppercase text-primaryColor">{item.title}</h2>
-              <p className="text-sm line-clamp-3">{item.description}</p>
-
-              <CopyButton
-                couponCode={item.couponCode}
-                discountText={item.discountType}
-              />
-              <LinkBUtton link={item.buttonLink as string}>
-                {item.buttonText} <ArrowRight />
-              </LinkBUtton>
-              <CountdownCard endDate={item.endDate} gap="1" />
-            </Flex>
+            <Card className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <CardHeader>
+                <CardTitle>{item.title}</CardTitle>
+                <CardDescription className="line-clamp-3">
+                  {item.description}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <CopyButton
+                  couponCode={item.couponCode}
+                  discountText={item.discountType}
+                />
+                <Button>
+                  <Link href={item.buttonLink as string} className="inline-flex gap-1">
+                    {item.buttonText} <ArrowRight />
+                  </Link>
+                </Button>
+              </CardContent>
+              <CardFooter>
+                <CountdownCard endDate={item.endDate} gap="1" />
+              </CardFooter>
+            </Card>
           </SwiperSlide>
         ))}
       </Swiper>
