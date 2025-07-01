@@ -11,6 +11,10 @@ import { Header } from "@/components/Header/header";
 import { Footer } from "@/components/footer";
 import AppProvider from "@/context/AppProvider";
 import { Bounce, ToastContainer } from "react-toastify";
+import { Suspense } from "react";
+import ServerThemeLoader from "@/components/serverThemeLoader";
+import { fetchData } from "@/utils/fetchData";
+import { Category } from "@/types/category";
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -28,8 +32,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const data: SiteContentProps = response.data[0];
 
   return {
-    title: data?.metaTitle || "E-commerce TR",
-    description: data?.metaDescription || "E-commerce TR",
+    title: data?.metaTitle || "E-commerce",
+    description: data?.metaDescription || "E-commerce",
     icons: {
       icon: data?.favicon || "/default-favicon.ico",
     },
@@ -56,25 +60,38 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({
   children,
+  pathname,
 }: {
   children: React.ReactNode;
+  pathname: string;
 }) {
-  const { data: categoryMenu } = await serverApi.get(`/category?hasChildren=true&limit=6&offset=0`);
-  const response = await serverApi.get('/site-content');
-  const siteContent: SiteContentProps = response.data[0];
+  const siteContentPromise = fetchData<SiteContentProps[]>('/site-content');
+  const categoryMenuPromise = fetchData<Category[]>(`/category?hasChildren=true&limit=6&offset=0`);
+
+  const [
+    siteContentData,
+    categoryMenuData
+  ] = await Promise.all([
+    siteContentPromise,
+    categoryMenuPromise
+  ]);
+  const siteContent: SiteContentProps = siteContentData[0];
+
+  const noHeaderPages = ['/login', '/signup', '/checkout'];
+  const shouldShowHeader = !noHeaderPages.includes(pathname);
 
   return (
     <html lang="en" className={`${montserrat.variable} ${roboto.variable}`}>
-      <body className="bg-themeColor text-textColor ">
+      <body className="bg-background text-foreground ">
+        <Suspense fallback={null}>
+          <ServerThemeLoader />
+        </Suspense>
         <AuthProvider>
           <AppProvider>
             <ModalCartItemsAdded />
             <FormeRegisterModal />
             <LoginModal />
-            <Header
-              category={categoryMenu}
-              siteContent={siteContent}
-            />
+            {shouldShowHeader && (<Header category={categoryMenuData} siteContent={siteContent} />)}
             <ToastContainer
               position="top-right"
               autoClose={5000}
