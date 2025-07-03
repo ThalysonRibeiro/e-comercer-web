@@ -1,41 +1,30 @@
-// Função para validar CNPJ
-export function validateCNPJ(cnpj: string): boolean {
+export function validateCPF(cpf: string): boolean {
   // Remover caracteres não numéricos
-  const cleanCNPJ = cnpj.replace(/\D/g, '');
+  const cleanCPF = cpf.replace(/\D/g, '');
 
-  // Verificar se tem 14 dígitos
-  if (cleanCNPJ.length !== 14) return false;
+  // Verificar se tem 11 dígitos
+  if (cleanCPF.length !== 11) return false;
 
   // Verificar se todos os dígitos são iguais (caso inválido)
-  if (/^(\d)\1{13}$/.test(cleanCNPJ)) return false;
+  if (/^(\d)\1{10}$/.test(cleanCPF)) return false;
 
   // Validação do primeiro dígito verificador
-  let size = cleanCNPJ.length - 2;
-  let numbers = cleanCNPJ.substring(0, size);
-  const digits = cleanCNPJ.substring(size);
   let sum = 0;
-  let pos = size - 7;
-
-  for (let i = size; i >= 1; i--) {
-    sum += parseInt(numbers.charAt(size - i)) * pos--;
-    if (pos < 2) pos = 9;
+  for (let i = 0; i < 9; i++) {
+    sum += parseInt(cleanCPF.charAt(i)) * (10 - i);
   }
+  let remainder = 11 - (sum % 11);
+  let digit1 = remainder === 10 || remainder === 11 ? 0 : remainder;
 
-  let result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
-  if (result !== parseInt(digits.charAt(0))) return false;
+  if (digit1 !== parseInt(cleanCPF.charAt(9))) return false;
 
   // Validação do segundo dígito verificador
-  size = size + 1;
-  numbers = cleanCNPJ.substring(0, size);
   sum = 0;
-  pos = size - 7;
-
-  for (let i = size; i >= 1; i--) {
-    sum += parseInt(numbers.charAt(size - i)) * pos--;
-    if (pos < 2) pos = 9;
+  for (let i = 0; i < 10; i++) {
+    sum += parseInt(cleanCPF.charAt(i)) * (11 - i);
   }
+  remainder = 11 - (sum % 11);
+  let digit2 = remainder === 10 || remainder === 11 ? 0 : remainder;
 
-  result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
-
-  return result === parseInt(digits.charAt(1));
+  return digit2 === parseInt(cleanCPF.charAt(10));
 }

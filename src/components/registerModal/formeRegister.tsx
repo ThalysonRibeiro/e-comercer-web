@@ -14,12 +14,12 @@ import { extractPhoneNumber, formatPhone } from "@/utils/formatPhone";
 import { Label } from "@/components/ui/label";
 import api from "@/lib/axios";
 import { toast } from "react-toastify";
-import { validateCPF } from "@/utils/validateCNPJ";
-import { validateCNPJ } from "@/utils/validateCPF";
 import { CPForCNPJ } from "./select-cpf-cnpj";
 import { useAppContext } from "@/context/AppContext";
 import { X } from "lucide-react";
 import { LoadingButton } from "../ui/loadingButton";
+import { validateCPF } from "@/utils/validateCPF";
+import { validateCNPJ } from "@/utils/validateCNPJ";
 
 const passwordSchema = z
   .string()
