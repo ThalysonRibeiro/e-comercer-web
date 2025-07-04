@@ -181,7 +181,7 @@ export function FormeRegisterModal() {
         email: formData.email,
         name: formData.name,
         cpf_or_cnpj: formData.document,
-        genero: formData.gender,
+        gender: formData.gender,
         dateOfBirth: new Date(formData.dateOfBirth),
         phone: formData.phone,
         password: formData.password,
